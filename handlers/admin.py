@@ -11,25 +11,22 @@ class Admin(StatesGroup):
     add_admin = State()
 
 
-admin_markup = types.InlineKeyboardMarkup([
-    types.InlineKeyboardButton(
-        text="Добавить пользователя", callback_data="Добавить пользователя"),
-    types.InlineKeyboardButton(
-        text="Добавить администратора", callback_data="Добавить администратора"),
-    types.InlineKeyboardButton(
-        text="Назад", callback_data="Назад")
-]
-)
-add_user = types.InlineKeyboardMarkup(
-    [types.InlineKeyboardButton(text="Назад", callback_data="Назад")])
+admin_markup = types.InlineKeyboardMarkup()
+admin_markup.add(types.InlineKeyboardButton(
+    text="Добавить пользователя", callback_data="Добавить пользователя"))
+admin_markup.add(types.InlineKeyboardButton(
+    text="Добавить администратора", callback_data="Добавить администратора"))
+admin_markup.add(types.InlineKeyboardButton(
+    text="Назад", callback_data="Назад"))
 
-add_admin = types.InlineKeyboardMarkup([
-    types.InlineKeyboardButton(text="", callback_data=""),
-    types.InlineKeyboardButton(text="", callback_data=""),
-    types.InlineKeyboardButton(
-        text="Назад", callback_data="Назад")
-]
-)
+# add_user = types.InlineKeyboardMarkup(
+#     [types.InlineKeyboardButton(text="Назад", callback_data="Назад")])
+# add_admin = types.InlineKeyboardMarkup([
+# add_admin.add(types.InlineKeyboardButton(text="", callback_data=""),
+#     types.InlineKeyboardButton(text="", callback_data=""),
+#     types.InlineKeyboardButton(
+#         text="Назад", callback_data="Назад")
+# ])
 
 
 @ dp.message_handler(commands=["admin"])
