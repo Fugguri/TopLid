@@ -29,7 +29,7 @@ class Database:
         with self.connection.cursor() as cursor:
             """CREATE TABLE IF NOT EXISTS keywords
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    word TEXT UNIQUE NOT NULL
+                    word TEXT(255) UNIQUE NOT NULL
                     );
                 """
             cursor.execute(create)
@@ -38,7 +38,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS unex_words
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    word TEXT UNIQUE NOT NULL
+                    word TEXT(255) UNIQUE NOT NULL
                     );
                 """
             cursor.execute(create)
@@ -46,7 +46,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS chats
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    chat TEXT UNIQUE NOT NULL,
+                    chat TEXT(255) UNIQUE NOT NULL,
                     chat_num INT,
                     chat_title TEXT);
                 """
@@ -80,7 +80,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS users_unex_words
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    user_id INT  NOT NULL,
+                    user_id INT NOT NULL,
                     unex_word_id INT UNIQUE NOT NULL,
                     FOREIGN KEY(user_id) REFERENCES users(id),
                     FOREIGN KEY(unex_word_id) REFERENCES unex_words(id)
@@ -91,7 +91,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS admins
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    username TEXT UNIQUE NOT NULL
+                    username TEXT(255) UNIQUE NOT NULL
                     );
                     """
             cursor.execute(create)
