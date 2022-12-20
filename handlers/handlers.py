@@ -109,21 +109,6 @@ async def set_time(message: types.Message):
         await message.answer("Вы не администратор")
 
 
-@dp.message_handler(commands=["annul"])
-async def set_time(message: types.Message):
-    if db.is_admin(message.from_user.username) or message.from_user.username in ['son2421', "fugguri"]:
-        x = datetime.datetime.now()
-        user = str(message.get_args())
-        subscription_end = add_months(x, -1)
-        try:
-            db.pay(user, str(subscription_end))
-            await message.answer("Успешно!")
-        except:
-            await message.answer(
-                "Ошибка!\nПроверьте данные или обратитесь к администратору!")
-    else:
-        await message.answer("Вы не администратор")
-
 ''' Ключевые слова !!!'''
 
 
