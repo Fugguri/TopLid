@@ -59,7 +59,7 @@ async def back(callback: types.CallbackQuery):
 
 @dp.message_handler(state=Admin.pay)
 async def back(message: types.CallbackQuery):
-    if db.is_admin(message.from_user.username):
+    if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         x = datetime.now()
         user = str(message.get_args())
         subscription_end = add_months(x, 1)

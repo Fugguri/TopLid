@@ -110,5 +110,6 @@ async def save(client, message, url):
 
 
 if __name__ == "__main__":
+    print("клиент запущен")
     client.start()
     client.run_until_disconnected()
