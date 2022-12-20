@@ -3,7 +3,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
 from aiogram.dispatcher.filters import Text
 from aiogram import types
-from datetime import datetime
+import datetime
 import calendar
 
 
