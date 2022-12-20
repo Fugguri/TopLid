@@ -37,7 +37,7 @@ back_key.add(types.InlineKeyboardButton(
 @ dp.message_handler(commands=["admin"])
 async def admin_cab(message: types.Message):
     await Admin.ferify.set()
-    if message.from_user.username in ["fugguri", 'son2421']:
+    if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         await message.answer("Выберите команду", reply_markup=admin_markup)
     else:
         await message.answer(text="Введите пароль администратора")
@@ -82,7 +82,7 @@ async def back(callback: types.CallbackQuery):
 
 @dp.message_handler(state=Admin.add_admin)
 async def back(message: types.CallbackQuery):
-    if db.is_admin(message.from_user.username):
+    if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         admin = str(message.get_args())
         db.add_admin(admin)
         await message.answer("Успешно")
