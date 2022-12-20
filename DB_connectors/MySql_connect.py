@@ -27,7 +27,7 @@ class Database:
             self.connection.commit()
 
         with self.connection.cursor() as cursor:
-            """CREATE TABLE IF NOT EXISTS keywords
+            create = """CREATE TABLE IF NOT EXISTS keywords
                     (id INT PRIMARY KEY AUTO_INCREMENT,
                     word VARCHAR(512) UNIQUE NOT NULL
                     );
