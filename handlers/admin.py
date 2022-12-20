@@ -61,7 +61,7 @@ async def back(callback: types.CallbackQuery):
 async def back(message: types.CallbackQuery):
     if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         x = datetime.datetime.now()
-        user = str(message.get_args())
+        user = str(message.to_dict()['message'])
         subscription_end = add_months(x, 1)
         try:
             db.pay(user, str(subscription_end))
@@ -83,7 +83,7 @@ async def back(callback: types.CallbackQuery):
 @dp.message_handler(state=Admin.add_admin)
 async def back(message: types.CallbackQuery):
     if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
-        admin = str(message.get_args())
+        admin = str(message.to_dict()['message'])
         db.add_admin(admin)
         await message.answer("Успешно")
     else:
