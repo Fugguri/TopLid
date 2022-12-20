@@ -51,7 +51,7 @@ async def message(event):
                 final_unex_words == ['bcbcv', 'bvbcv']
 
         users = db.mailing_users(final_words, final_unex_words)
-
+        print("wer")
         for tele_id in users:
             if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
                 await bot.send_message(chat_id=tele_id,
@@ -86,7 +86,10 @@ async def connect_(event):
         url = message[1].replace(
             'https://t.me/', '').replace("+", "").replace('joinchat/', "")
         try:
+            print("some text")
             entity = await client.get_entity(message[1])
+            print("some text")
+
             await client(JoinChannelRequest(entity))
         except:
             await client(ImportChatInviteRequest(url))
