@@ -29,7 +29,7 @@ class Database:
         with self.connection.cursor() as cursor:
             """CREATE TABLE IF NOT EXISTS keywords
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    word TEXT(255) UNIQUE NOT NULL
+                    word VARCHAR(512) UNIQUE NOT NULL
                     );
                 """
             cursor.execute(create)
@@ -38,7 +38,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS unex_words
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    word TEXT(255) UNIQUE NOT NULL
+                    word VARCHAR(512) UNIQUE NOT NULL
                     );
                 """
             cursor.execute(create)
@@ -46,7 +46,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS chats
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    chat TEXT(255) UNIQUE NOT NULL,
+                    chat VARCHAR(512) UNIQUE NOT NULL,
                     chat_num INT,
                     chat_title TEXT);
                 """
@@ -91,7 +91,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """    CREATE TABLE IF NOT EXISTS admins
                     (id INT PRIMARY KEY AUTO_INCREMENT,
-                    username TEXT(255) UNIQUE NOT NULL
+                    username VARCHAR(512) UNIQUE NOT NULL
                     );
                     """
             cursor.execute(create)
