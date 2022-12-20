@@ -6,7 +6,7 @@ from asyncio import sleep
 storage = MemoryStorage()
 bot = Bot(TOKEN_API, parse_mode="HTML")
 dp = Dispatcher(bot, storage=storage,)
-db = Database("var.db")
+db = Database("TopLid")
 
 
 async def on_startup(_):
