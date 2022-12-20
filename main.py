@@ -37,7 +37,6 @@ async def on_shutdown(_):
 
 
 if __name__ == "__main__":
-    import subprocess
     executor.start_polling(
         dispatcher=dp,
         skip_updates=True,
