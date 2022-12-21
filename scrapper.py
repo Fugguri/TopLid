@@ -82,7 +82,7 @@ async def message(event):
 async def connect_(event):
     if '/request' in event.message.to_dict()['message']:
         message = event.message.to_dict()['message'].split(" ")
-
+        telegram_id = message[-1]
         urls = message[1].split("\n")
         print(urls)
         for url in urls:
@@ -99,22 +99,21 @@ async def connect_(event):
             else:
                 pass
             finally:
-                await save(client, url, clear_url)
+                await save(telegram_id, url, clear_url)
             await sleep(5)
 
 
-async def save(client, url, clear_url):
+async def save(telegram_id, url, clear_url):
     while True:
         try:
             chat = await client.get_entity(clear_url)
             print(url, clear_url, chat.id, chat.title)
 
-            db.add_chat(url, clear_url, chat.id, chat.title)
+            db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print("Succesed add chat")
             return
         except Exception as ex:
             print(ex)
-            print(123)
         finally:
             await sleep(60)
 
