@@ -93,9 +93,10 @@ async def connect_(event):
                 await client(JoinChannelRequest(entity))
                 print("Joined %s", url)
             except InviteHashExpiredError:
+                print("Ссылка недействительна!")
                 bot.send_message(
-                    chat_id=telegram_id, text="Ссылка на чат недействительна.. Попробуйте другую")
-                return
+                    chat_id=telegram_id, text="Ссылка на чат недействительна... Попробуйте другую")
+                continue
             except:
                 await client(ImportChatInviteRequest(clear_url))
             else:
