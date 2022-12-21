@@ -109,8 +109,7 @@ async def connect_(event):
             except InviteRequestSentError:
                 pass
             except FloodWaitError:
-                bot.send_message(chat_id=5909883622, text=url)
-                pass
+                bot.send_message
             finally:
                 await sleep(5)
 
