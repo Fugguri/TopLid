@@ -84,7 +84,7 @@ async def connect_(event):
         message = event.message.to_dict()['message'].split(" ")
 
         urls = message[1:-2].replace(
-            'https://t.me/', '').replace("+", "").replace('joinchat/', "").
+            'https://t.me/', '').replace("+", "").replace('joinchat/', "")
         print(urls)
         try:
             entity = await client.get_entity(message[1])
