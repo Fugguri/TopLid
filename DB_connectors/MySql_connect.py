@@ -302,7 +302,7 @@ class Database:
                         IN
                         (SELECT id FROM keywords WHERE word IN (%s)))""", key)
             key = cursor.fetchall()
-
+            print(key)
         with self.connection.cursor() as cursor:
             cursor.execute("""SELECT telegram_id
                         FROM users
@@ -310,6 +310,7 @@ class Database:
                         IN
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", unex)
+            print(unex)
             unex = cursor.fetchall()
             users = res = list(set(key+unex))
             print(users)
