@@ -116,8 +116,7 @@ async def save(telegram_id, url, clear_url):
             print("Succesed add chat")
             return
         except Exception as ex:
-            if ex in 'Cannot find any entity corresponding to':
-                return
+            print(ex)
         finally:
             await sleep(60)
 
