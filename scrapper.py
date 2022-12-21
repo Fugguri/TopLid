@@ -9,7 +9,7 @@ from main import bot
 from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
-from telethon.errors.rpcerrorlist import InviteHashExpiredError
+from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError
 # api_id = 18377495
 # api_hash = 'a0c785ad0fd3e92e7c131f0a70987987'
 # phone = '89502213750'
@@ -104,6 +104,8 @@ async def connect_(event):
                     print("Ссылка недействительна!")
                     await bot.send_message(
                         chat_id=telegram_id, text="Ссылка на чат недействительна... Попробуйте другую")
+                except InviteRequestSentError:
+                    pass
             finally:
                 await sleep(5)
 
