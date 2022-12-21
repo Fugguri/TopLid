@@ -112,7 +112,7 @@ async def join_(event, message, url, telegram_id):
             except InviteRequestSentError:
                 pass
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
-            print(er)
+            print(er, url)
             return
         except FloodWaitError:
             await sleep(900)
