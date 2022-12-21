@@ -95,7 +95,7 @@ async def connect_(event):
                 print("Joined and save", url)
             except InviteHashExpiredError:
                 print("Ссылка недействительна!")
-                bot.send_message(
+                await bot.send_message(
                     chat_id=telegram_id, text="Ссылка на чат недействительна... Попробуйте другую")
                 continue
             else:
@@ -107,8 +107,6 @@ async def connect_(event):
 
 async def save(telegram_id, url, clear_url):
     while True:
-        chat = await client.get_entity(clear_url)
-
         try:
             chat = await client.get_entity(clear_url)
             print(url, clear_url, chat.id, chat.title)
@@ -116,8 +114,10 @@ async def save(telegram_id, url, clear_url):
             db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print("Succesed add chat")
             return
-        except Exception as ex:
+        except ValueError as ex:
             print(ex)
+        else:
+            pass
         finally:
             await sleep(60)
 
