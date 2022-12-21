@@ -154,15 +154,19 @@ class Database:
             cursor.execute(
                 '''INSERT IGNORE INTO chats(chat,chat_num,chat_title) VALUES(%s,%s,%s)''', (chat, chat_num, chat_title))
             self.connection.commit()
+            print(1)
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id=(%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
+            print(1)
             cursor.execute(
                 "SELECT id FROM chats WHERE chat=(%s)", (chat,))
             keyword_id = cursor.fetchone()[0]
+            print(1)
             cursor.execute(
                 'INSERT INTO users_chats(user_id, chat_id) VALUES (%s,%s)', (user_id, keyword_id))
             self.connection.commit()
+            print(1)
             keywords = cursor.execute(
                 '''SELECT chat_title
                     FROM chats
@@ -292,7 +296,6 @@ class Database:
     def mailing_users(self, keywords, unex_words=tuple()):
         key = ", ".join(keywords)
         unex = ", ".join(unex_words)
-        print(key, unex)
         with self.connection.cursor() as cursor:
             cursor.execute(
                 """SELECT telegram_id
@@ -302,7 +305,6 @@ class Database:
                         IN
                         (SELECT id FROM keywords WHERE word IN (%s)))""", key)
             key = cursor.fetchall()
-            print(key)
         with self.connection.cursor() as cursor:
             cursor.execute("""SELECT telegram_id
                         FROM users
@@ -310,10 +312,8 @@ class Database:
                         IN
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", unex)
-            print(unex)
             unex = cursor.fetchall()
             users = res = list(set(key+unex))
-            print(users)
         return [i[0] for i in users]
 
     def add_chat_id(self, chat_id, chat):

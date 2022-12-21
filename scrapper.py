@@ -95,7 +95,7 @@ async def connect_(event):
                 await client(JoinChannelRequest(entity))
                 print("Joined %s", url)
             except:
-                await client(ImportChatInviteRequest(url))
+                await client(ImportChatInviteRequest(clear_url))
             else:
                 pass
             finally:
@@ -103,15 +103,18 @@ async def connect_(event):
             await sleep(5)
 
 
-async def save(client, message, url):
+async def save(client, url, clear_url):
     while True:
         try:
-            chat = await client.get_entity(message)
-            db.add_chat(message[-1], url, chat.id, chat.title)
-            print("Succes")
+            chat = await client.get_entity(clear_url)
+            print(url, clear_url, chat.id, chat.title)
+
+            db.add_chat(url, clear_url, chat.id, chat.title)
+            print("Succesed add chat")
             return
         except Exception as ex:
             print(ex)
+            print(123)
         finally:
             await sleep(60)
 
