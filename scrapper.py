@@ -106,6 +106,8 @@ async def connect_(event):
                         chat_id=telegram_id, text=f"Ссылка на чат {url}недействительна... Попробуйте другую")
                 except InviteRequestSentError:
                     pass
+            except InviteRequestSentError:
+                pass
             finally:
                 await sleep(5)
 
