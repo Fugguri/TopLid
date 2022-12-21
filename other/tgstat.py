@@ -24,6 +24,7 @@ def get_page(page, url, channel_type):
     }
     response = requests.post(url, headers=headers, data=form)
     response.encoding = 'utf-8'
+    print(response)
     return response
 
 
@@ -42,7 +43,8 @@ def get_channels(response, result):
 
 
 def main():
-    print(len(get_links(url="https://tgstat.ru/crypto", channel_type="channel")))
+    print(len(get_links(
+        url="https://tgstat.ru/ratings/chats/marketing?sort=mau", channel_type="chat")))
 
 
 if __name__ == "__main__":

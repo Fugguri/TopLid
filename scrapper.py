@@ -86,7 +86,7 @@ async def connect_(event):
             'https://t.me/', '').replace("+", "").replace('joinchat/', "")
         try:
             entity = await client.get_entity(message[1])
-            print("Joined %s", url)
+            print("Joined %s", message)
 
             await client(JoinChannelRequest(entity))
         except:
@@ -111,6 +111,6 @@ async def save(client, message, url):
 
 
 if __name__ == "__main__":
-    print("клиент запущен")
+    print("Клиент запущен")
     client.start()
     client.run_until_disconnected()

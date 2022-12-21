@@ -299,7 +299,8 @@ class Database:
                         WHERE id IN
                         (SELECT user_id FROM users_keywords WHERE keyword_id
                         IN
-                        (SELECT id FROM keywords WHERE word =(%s)))AND id NOT IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
+                        (SELECT id FROM keywords WHERE word IN (%s)))
+                        AND id NOT IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
                         IN
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", (key, unex))
