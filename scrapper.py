@@ -84,14 +84,11 @@ async def connect_(event):
         message = event.message.to_dict()['message'].split(" ")
         telegram_id = message[-1]
         urls = message[1].split("\n")
-        print(urls)
         for url in urls:
             clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                       "").replace('joinchat/', "")
-            print(url)
             try:
                 entity = await client.get_entity(clear_url)
-
                 await client(JoinChannelRequest(entity))
                 print("Joined %s", url)
             except:
