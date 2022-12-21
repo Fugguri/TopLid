@@ -306,6 +306,7 @@ class Database:
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", (key, unex))
             users = cursor.fetchall()
+            print(users)
         return [i[0] for i in users]
 
     def add_chat_id(self, chat_id, chat):
