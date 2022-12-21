@@ -9,7 +9,7 @@ from main import bot
 from keyboards import links
 from config import *
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
-from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError
+from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError
 db = Database('TopLid')
 
 client = TelegramClient(phone2, api_id2, api_hash2)
@@ -103,10 +103,10 @@ async def connect_(event):
                         chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
                 except InviteRequestSentError:
                     pass
-            except InviteRequestSentError:
+            except UserAlreadyParticipantError:
                 pass
             except FloodWaitError:
-                bot.send_message
+                pass
             finally:
                 await sleep(5)
 
