@@ -7,15 +7,12 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest, ExportChatInviteRequest
 from main import bot
 from keyboards import links
-from config import api_hash, api_id, phone
+from config import *
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError
-# api_id = 18377495
-# api_hash = 'a0c785ad0fd3e92e7c131f0a70987987'
-# phone = '89502213750'
 db = Database('TopLid')
 
-client = TelegramClient(phone, api_id, api_hash)
+client = TelegramClient(phone2, api_id2, api_hash2)
 
 
 @client.on(events.NewMessage)

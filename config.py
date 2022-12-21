@@ -3,6 +3,12 @@ TOKEN_API = '5962843554:AAGmne4VHop2d_OuxyENsH_mgeYpRmAG8us'
 api_id = 27044267
 api_hash = 'a7448d0befc9804176b9c917898d923a'
 phone = '+79283529546'
+
+api_id2 = 26730629
+api_hash2 = 'ecc702d7da5fac793aefc9c77454ae7b'
+phone2 = '+79185530587'
+
+
 host = 'localhost'
 user = 'fugguri'
 password = 'Pass_word'

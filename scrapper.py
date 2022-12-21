@@ -10,9 +10,6 @@ from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError
-# api_id = 18377495
-# api_hash = 'a0c785ad0fd3e92e7c131f0a70987987'
-# phone = '89502213750'
 db = Database('TopLid')
 
 client = TelegramClient(phone, api_id, api_hash)
@@ -109,7 +106,7 @@ async def connect_(event):
             except InviteRequestSentError:
                 pass
             except FloodWaitError:
-                await bot.send_message(chat_id=5909883622, text=url)
+                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
                 pass
             finally:
                 await sleep(5)
