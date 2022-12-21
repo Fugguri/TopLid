@@ -9,6 +9,7 @@ from main import bot
 from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
+import telethon.errors.rpcerrorlist.InviteHashExpiredError
 # api_id = 18377495
 # api_hash = 'a0c785ad0fd3e92e7c131f0a70987987'
 # phone = '89502213750'
@@ -91,6 +92,10 @@ async def connect_(event):
                 entity = await client.get_entity(clear_url)
                 await client(JoinChannelRequest(entity))
                 print("Joined %s", url)
+            except telethon.errors.rpcerrorlist.InviteHashExpiredError:
+                bot.send_message(
+                    chat_id=telegram_id, text="Ссылка на чат недействительна.. Попробуйте другую")
+                return
             except:
                 await client(ImportChatInviteRequest(clear_url))
             else:
