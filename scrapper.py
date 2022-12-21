@@ -84,14 +84,16 @@ async def connect_(event):
         message = event.message.to_dict()['message'].split(" ")
 
         urls = message[1].split("\n")
+        print(urls)
         for url in urls:
-            url.replace('https://t.me/', '').replace("+",
-                                                     "").replace('joinchat/', "")
+            clear_url = str(url).replace('https://t.me/', '').replace("+",
+                                                                      "").replace('joinchat/', "")
+            print(url)
             try:
-                entity = await client.get_entity(url)
-                print("Joined %s", url)
+                entity = await client.get_entity(clear_url)
 
                 await client(JoinChannelRequest(entity))
+                print("Joined %s", url)
             except:
                 await client(ImportChatInviteRequest(url))
             else:
