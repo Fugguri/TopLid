@@ -98,7 +98,7 @@ async def connect_(event):
                 pass
             finally:
                 await save(client, message, url)
-            sleep(5)
+            await sleep(5)
 
 
 async def save(client, message, url):
