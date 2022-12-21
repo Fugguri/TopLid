@@ -103,7 +103,7 @@ async def connect_(event):
                 except ValueError:
                     print("Ссылка недействительна!")
                     await bot.send_message(
-                        chat_id=telegram_id, text="Ссылка на чат недействительна... Попробуйте другую")
+                        chat_id=telegram_id, text=f"Ссылка на чат {url}недействительна... Попробуйте другую")
                 except InviteRequestSentError:
                     pass
             finally:
