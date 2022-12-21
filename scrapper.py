@@ -99,7 +99,7 @@ async def connect_(event):
                     chat_id=telegram_id, text="Ссылка на чат недействительна... Попробуйте другую")
                 continue
             except ValueError as ex:
-                print(ex)
+                pass
             else:
                 await client(ImportChatInviteRequest(clear_url))
                 await save(telegram_id, url, clear_url)
