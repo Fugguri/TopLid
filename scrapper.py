@@ -99,14 +99,14 @@ async def connect_(event):
             else:
                 pass
             finally:
-                await save(client, message, url)
+                await save(client, url, clear_url)
             await sleep(5)
 
 
 async def save(client, message, url):
     while True:
         try:
-            chat = await client.get_entity(message[1])
+            chat = await client.get_entity(message)
             db.add_chat(message[-1], url, chat.id, chat.title)
             print("Succes")
             return
