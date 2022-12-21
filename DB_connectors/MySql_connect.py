@@ -300,12 +300,18 @@ class Database:
                         WHERE id IN
                         (SELECT user_id FROM users_keywords WHERE keyword_id
                         IN
-                        (SELECT id FROM keywords WHERE word IN (%s)))
-                        AND id NOT IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
+                        (SELECT id FROM keywords WHERE word IN (%s)))""", key)
+            key = set(cursor.fetchall())
+
+        with self.connection.cursor() as cursor:
+            cursor.execute("""SELECT telegram_id
+                        FROM users
+                        WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
                         IN
                         (SELECT id FROM unex_words WHERE word IN (%s)))
-                        ;""", (key, unex))
-            users = cursor.fetchall()
+                        ;""", unex)
+            unex = set(cursor.fetchall())
+            users = res = list(set(key+unex))
             print(users)
         return [i[0] for i in users]
 
