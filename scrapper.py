@@ -113,14 +113,15 @@ async def join_(event, message, url, telegram_id):
                 pass
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
             print(er)
+            return
         except FloodWaitError:
             await sleep(900)
             # await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
         except ValueError:
-                print("Ссылка недействительна!")
-                await bot.send_message(
-                    chat_id=telegram_id, text=f"Что-то пошло не так{url}")
-                return
+            print("Ссылка недействительна!")
+            await bot.send_message(
+                chat_id=telegram_id, text=f"Что-то пошло не так{url}")
+            return
         finally:
             await sleep(5)
 
