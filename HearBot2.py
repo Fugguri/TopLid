@@ -12,7 +12,7 @@ from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError
 db = Database('TopLid')
 
-client = TelegramClient(phone2, api_id2, api_hash2)
+client = TelegramClient(phone, api_id, api_hash)
 
 
 @client.on(events.NewMessage)
@@ -83,32 +83,48 @@ async def connect_(event):
         telegram_id = message[-1]
         urls = message[1].split("\n")
         for url in urls:
-            clear_url = str(url).replace('https://t.me/', '').replace("+",
-                                                                      "").replace('joinchat/', "")
+            await join_(event, message, url, telegram_id)
+
+
+async def join_(event, message, url, telegram_id):
+    while True:
+        clear_url = str(url).replace('https://t.me/', '').replace("+",
+                                                                  "").replace('joinchat/', "")
+        try:
+            print(54643)
+            await client(ImportChatInviteRequest(clear_url))
+            await save(telegram_id, url, clear_url)
+            print("Joined and save", url)
+            return
+        except InviteHashExpiredError:
             try:
-                print(54643)
-                await client(ImportChatInviteRequest(clear_url))
+                print(53543)
+                entity = await client.get_entity(clear_url)
+                await client(JoinChannelRequest(entity))
                 await save(telegram_id, url, clear_url)
                 print("Joined and save", url)
-            except InviteHashExpiredError:
-                try:
-                    print(53543)
-                    entity = await client.get_entity(clear_url)
-                    await client(JoinChannelRequest(entity))
-                    await save(telegram_id, url, clear_url)
-                    print("Joined and save", url)
-                except ValueError:
-                    print("Ссылка недействительна!")
-                    await bot.send_message(
-                        chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
-                except InviteRequestSentError:
-                    pass
-            except UserAlreadyParticipantError:
-                pass
-            except FloodWaitError:
-                pass
-            finally:
-                await sleep(5)
+                return
+            except ValueError:
+                print("Ссылка недействительна!")
+                await bot.send_message(
+                    chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
+                return
+            except InviteRequestSentError:
+                return
+        except (UserAlreadyParticipantError, InviteRequestSentError) as er:
+            print(er, url)
+            return
+        except FloodWaitError as ex:
+            print(f"{ex} wait 900")
+            await sleep(900)
+            # await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+        except ValueError:
+            print("Ссылка недействительна!")
+            await bot.send_message(
+                chat_id=telegram_id, text=f"Что-то пошло не так{url}")
+            return
+        finally:
+            await sleep(5)
 
 
 async def save(telegram_id, url, clear_url):
@@ -122,7 +138,8 @@ async def save(telegram_id, url, clear_url):
             return
         except ValueError as ex:
             print(ex)
-        else:
+            return
+        except:
             pass
         finally:
             await sleep(60)
