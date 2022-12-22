@@ -9,7 +9,7 @@ from main import bot
 from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
-from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError
+from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 db = Database('TopLid')
 
 client = TelegramClient(phone, api_id, api_hash)
@@ -109,10 +109,13 @@ async def join_(event, message, url, telegram_id):
                 return
             except InviteRequestSentError:
                 return
+            except ChannelsTooMuchError:
+                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
             print(er, url)
             return
         except FloodWaitError as ex:
+            "Пересылая"
             await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
             return
         except ValueError:
@@ -120,6 +123,8 @@ async def join_(event, message, url, telegram_id):
             await bot.send_message(
                 chat_id=telegram_id, text=f"Что-то пошло не так{url}")
             return
+        except ChannelsTooMuchError:
+            await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
         except:
             await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
             return
