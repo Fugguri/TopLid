@@ -58,7 +58,7 @@ async def message(event):
                                                chat_id=int(
                                                    str(event.chat_id)[4:]),
                                                user=f"https://t.me/{username}"))
-                if await db.get_status(tele_id) == 1 and await db.is_pay(tele_id):
+                if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
 
                     if chat.username is None:
                         await bot.send_message(chat_id=tele_id,
