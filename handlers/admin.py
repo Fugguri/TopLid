@@ -125,3 +125,11 @@ def add_months(sourcedate, months):
     month = month % 12 + 1
     day = min(sourcedate.day, calendar.monthrange(year, month)[1])
     return datetime.date(year, month, day)
+
+
+@dp.message_handler(commands=["TG"])
+async def TGreqs(message: types.Message):
+    url = str(message.get_args())
+    from other.tgstat import get_page
+    text = "\n".join(get_page(1, url))
+    await message.answer(text=text)
