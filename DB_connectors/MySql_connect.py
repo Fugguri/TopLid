@@ -265,7 +265,7 @@ class Database:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
-            cursor.execute(f'SELECT id FROM chats WHERE chat="{chat}"')
+            cursor.execute(f'SELECT id FROM chats WHERE chat={chat}')
             chat_id = cursor.fetchone()[0]
             cursor.execute(
                 'DELETE FROM users_chats WHERE user_id = %s AND chat_id = %s', (user_id, chat_id))
