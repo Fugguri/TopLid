@@ -301,7 +301,7 @@ class Database:
                         (SELECT user_id FROM users_keywords WHERE keyword_id
                         IN
                         (SELECT id FROM keywords WHERE word IN (%s)))""", key)
-            key = cursor.fetchall()
+            uid = cursor.fetchall()
             cursor.execute(
                 """SELECT id FROM keywords WHERE word IN (%s)""", key)
             print(cursor.fetchall())
@@ -312,7 +312,7 @@ class Database:
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", unex)
             unex = cursor.fetchall()
-            users = [i for i in key if i not in unex]
+            users = [i for i in uid if i not in unex]
             print(users, key, unex)
         return [i[0] for i in users]
 
