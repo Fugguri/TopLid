@@ -163,7 +163,14 @@ async def add_word_menu(message: types.Message):
 Подписку можно приобрести по кнопке «оплата 💰»""")
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']), state=AddWord.word)
+@ dp.message_handler(state=AddWord.word)
+async def add_word(message: types.Message):
+    keywords = db.add_keyword(message.from_user.id, str(message.text))
+    await message.answer(
+        text="Ваши ключевые слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
+
+
+@ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']))
 async def remove_word(call: types.CallbackQuery):
     keywords = db.remove_keyword(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
@@ -177,20 +184,6 @@ async def add_word(message: types.Message, state: State):
                          'Вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню "Добавить новые слова" ниже\n\n'
                          'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
                          reply_markup=keywords_list())
-
-
-@ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']))
-async def remove_word(call: types.CallbackQuery):
-    keywords = db.remove_keyword(call['from']['id'], call.data)
-    await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
-                              reply_markup=words_list(keywords))
-
-
-@ dp.message_handler(state=AddWord.word)
-async def add_word(message: types.Message):
-    keywords = db.add_keyword(message.from_user.id, str(message.text))
-    await message.answer(
-        text="Ваши ключевые слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
 
 '''Исключающие слова !!!'''
@@ -230,11 +223,11 @@ async def add_word_menu(message: types.Message):
 Подписку можно приобрести по кнопке «оплата 💰»""")
 
 
-# @ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']), state=AddUnex_Word.word)
-# async def remove_word(call: types.CallbackQuery):
-#     keywords = db.remove_unex_word(call['from']['id'], call.data)
-#     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
-#                               reply_markup=words_list(keywords))
+@ dp.message_handler(state=AddUnex_Word.word)
+async def add_word(message: types.Message):
+    keywords = db.add_unex_word(message.from_user.id, str(message.text))
+    await message.answer(
+        text="Ваши исключающие слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']))
@@ -251,13 +244,6 @@ async def add_word(message: types.Message, state: State):
                          'Вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню "Добавить новые слова" ниже\n\n'
                          'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
                          reply_markup=unexcept_keywords_list())
-
-
-@ dp.message_handler(state=AddUnex_Word.word)
-async def add_word(message: types.Message):
-    keywords = db.add_unex_word(message.from_user.id, str(message.text))
-    await message.answer(
-        text="Ваши исключающие слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
 
 '''Чаты !!!'''
