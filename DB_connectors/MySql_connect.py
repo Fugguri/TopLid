@@ -260,13 +260,14 @@ class Database:
             return [i[0] for i in keywords]
 
     def remove_chat(self, telegram_id: int, chat: str):
+        print(12)
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
             cursor.execute(
                 "SELECT id FROM chats WHERE chat LIKE (%s)", (chat,))
-            print(chat)
+            print(chat, user_id)
             chat_id = cursor.fetchone()[0]
             cursor.execute(
                 'DELETE FROM users_chats WHERE user_id = %s AND chat_id =%s', (user_id, chat_id))

@@ -34,8 +34,8 @@ async def start(message: types.Message):
 
 Подробности узнать о боте через команду /help 🆘""",
                          reply_markup=start_keyboard())
-    await db.create_user(message.from_user.id,
-                         message.from_user.full_name, message.from_user.username, str(result_date))
+    db.create_user(message.from_user.id,
+                   message.from_user.full_name, message.from_user.username, str(result_date))
 
 
 @dp.message_handler(lambda message: 'Ссылка на чат' in message.text)
@@ -80,14 +80,14 @@ async def set_time(message: types.Message):
 @dp.message_handler(commands=["delete"])
 async def set_time(message: types.Message):
     word = str(message.get_args())
-    await db.remove_keyword_(word)
+    db.remove_keyword_(word)
 
 
 # @dp.message_handler(commands=["admin"])
 # async def set_time(message: types.Message):
 #     if message.from_user.username in ["fugguri", 'son2421']:
 #         admin = str(message.get_args())
-#         await db.add_admin(admin)
+#         db.add_admin(admin)
 #         await message.answer("Успешно")
 #     else:
 #         print("error")
@@ -95,12 +95,12 @@ async def set_time(message: types.Message):
 
 @dp.message_handler(commands=["pay"])
 async def set_time(message: types.Message):
-    if await db.is_admin(message.from_user.username):
+    if db.is_admin(message.from_user.username):
         x = datetime.datetime.now()
         user = str(message.get_args())
         subscription_end = add_months(x, 1)
         try:
-            await db.pay(user, str(subscription_end))
+            db.pay(user, str(subscription_end))
             await message.answer("Успешно!")
         except:
             await message.answer(
@@ -132,19 +132,19 @@ async def keywords(message: types.Message):
 
 @ dp.message_handler(Text(equals='Удалить все ключевые слова'))
 async def unexcepted_keywords_list(message: types.Message):
-    if await db.is_pay(message.from_user.id) is False:
+    if db.is_pay(message.from_user.id) is False:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
     else:
-        await db.delete_all(message.from_user.id, 'users_keywords')
+        db.delete_all(message.from_user.id, 'users_keywords')
         await message.answer(text="Вы удалили все ключевые слова.\n Не забудьте добавить новые!",
                              reply_markup=keywords_list())
 
 
 @ dp.message_handler(Text(equals='Список ключевых слов'))
 async def unexcepted_keywords_list(message: types.Message):
-    if await db.is_pay(message.from_user.id):
-        keywords = await db.all_words(message.from_user.id)
+    if db.is_pay(message.from_user.id):
+        keywords = db.all_words(message.from_user.id)
         await message.answer(text="Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                              reply_markup=words_list(keywords))
     else:
@@ -154,7 +154,7 @@ async def unexcepted_keywords_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Добавить новое ключевое слово'))
 async def add_word_menu(message: types.Message):
-    if await db.is_pay(message.from_user.id):
+    if db.is_pay(message.from_user.id):
         await AddWord.word.set()
         await message.answer(text="Введите ключевое слово", reply_markup=back())
     else:
@@ -165,7 +165,7 @@ async def add_word_menu(message: types.Message):
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']), state=AddWord.word)
 async def remove_word(call: types.CallbackQuery):
-    keywords = await db.remove_keyword(call['from']['id'], call.data)
+    keywords = db.remove_keyword(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
@@ -181,14 +181,14 @@ async def add_word(message: types.Message, state: State):
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']))
 async def remove_word(call: types.CallbackQuery):
-    keywords = await db.remove_keyword(call['from']['id'], call.data)
+    keywords = db.remove_keyword(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
 
 @ dp.message_handler(state=AddWord.word)
 async def add_word(message: types.Message):
-    keywords = await db.add_keyword(message.from_user.id, str(message.text))
+    keywords = db.add_keyword(message.from_user.id, str(message.text))
     await message.answer(
         text="Ваши ключевые слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
@@ -204,15 +204,15 @@ async def unexcepted_keywords_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Удалить все исключающие слова'))
 async def unexcepted_keywords_list(message: types.Message):
-    await db.delete_all(message.from_user.id, 'users_unex_words')
+    db.delete_all(message.from_user.id, 'users_unex_words')
     await message.answer(text="Вы удалили все исключающие слова.\n Не забудьте добавить новые!",
                          reply_markup=unexcept_keywords_list())
 
 
 @ dp.message_handler(Text(equals='Список исключающих слов'))
 async def unexcepted_keywords_list(message: types.Message):
-    if await db.is_pay(message.from_user.id):
-        keywords = await db.all_unex_words(message.from_user.id)
+    if db.is_pay(message.from_user.id):
+        keywords = db.all_unex_words(message.from_user.id)
         await message.answer(text="Список илючающих слов!\n Чтобы удалить, нажмите на слово!",
                              reply_markup=words_list(keywords))
     else:
@@ -222,7 +222,7 @@ async def unexcepted_keywords_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Добавить новое исключающее слово'))
 async def add_word_menu(message: types.Message):
-    if await db.is_pay(message.from_user.id):
+    if db.is_pay(message.from_user.id):
         await AddUnex_Word.word.set()
         await message.answer(text="Введите исключающее слово", reply_markup=back())
     else:
@@ -232,21 +232,21 @@ async def add_word_menu(message: types.Message):
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']), state=AddUnex_Word.word)
 async def remove_word(call: types.CallbackQuery):
-    keywords = await db.remove_unex_word(call['from']['id'], call.data)
+    keywords = db.remove_unex_word(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']))
 async def remove_word(call: types.CallbackQuery):
-    keywords = await db.remove_unex_word(call['from']['id'], call.data)
+    keywords = db.remove_unex_word(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']), state=AddUnex_Word.word)
 async def remove_word(call: types.CallbackQuery):
-    keywords = await db.remove_unex_word(call['from']['id'], call.data)
+    keywords = db.remove_unex_word(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
@@ -262,7 +262,7 @@ async def add_word(message: types.Message, state: State):
 
 @ dp.message_handler(state=AddUnex_Word.word)
 async def add_word(message: types.Message):
-    keywords = await db.add_unex_word(message.from_user.id, str(message.text))
+    keywords = db.add_unex_word(message.from_user.id, str(message.text))
     await message.answer(
         text="Ваши исключающие слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
@@ -278,20 +278,20 @@ async def chat_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Из базы чатов'))
 async def unexcepted_keywords_list(message: types.Message):
-    await db.delete_all(message.from_user.id, 'users_chats')
+    db.delete_all(message.from_user.id, 'users_chats')
     await message.answer(text="Вы удалили все чаты.\n Не забудьте добавить новые!",
                          reply_markup=chats_list_())
 
 
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
 async def all_chat_acces(message: types.Message):
-    if await db.is_pay(message.from_user.id):
-        if await db.get_status(message.from_user.id) == 1:
-            await db.set_status(message.from_user.id, 0)
+    if db.is_pay(message.from_user.id):
+        if db.get_status(message.from_user.id) == 1:
+            db.set_status(message.from_user.id, 0)
             await message.answer(text="Вы переключились собственный список чатов",
                                  reply_markup=chats_list_())
         else:
-            await db.set_status(message.from_user.id, 1)
+            db.set_status(message.from_user.id, 1)
             await message.answer(text="Вы переключились на нашу базу чатов",
                                  reply_markup=chats_list_())
     else:
@@ -301,7 +301,7 @@ async def all_chat_acces(message: types.Message):
 
 @ dp.message_handler(Text(equals='Мои чаты'))
 async def chatse_list(message: types.Message):
-    keywords = await db.all_user_chats(message.from_user.id)
+    keywords = db.all_user_chats(message.from_user.id)
     text = "Список ваших чатов!\nЧтобы удалить, нажмите на чат!"
     try:
         await message.answer(text=str(text),
@@ -313,7 +313,7 @@ async def chatse_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Добавить новый чат'))
 async def add_word_menu(message: types.Message):
-    if await db.is_pay(message.from_user.id):
+    if db.is_pay(message.from_user.id):
         await AddChat.chat.set()
         await message.answer(text="Введите ссылку на чат", reply_markup=back())
     else:
@@ -323,7 +323,7 @@ async def add_word_menu(message: types.Message):
 
 @ dp.callback_query_handler(lambda call: call.data in db.all_chats(call['from']['id']), state=AddChat.chat)
 async def remove_chat(call: types.CallbackQuery):
-    keywords = await db.remove_chat(call['from']['id'], call.data)
+    keywords = db.remove_chat(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                               reply_markup=chats_key(keywords))
 
@@ -337,16 +337,18 @@ async def add_word(message: types.Message, state: State):
                          reply_markup=chats_list_())
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_user_chats(call['from']['id']))
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))))
 async def remove_chat(call: types.CallbackQuery):
-    keywords = await db.remove_chat(call['from']['id'], call.data)
+    text = ([i for i in call][2][1]["reply_markup"]
+            ["inline_keyboard"][0][0]["text"])
+    keywords = db.remove_chat(call['from']['id'], text)
     await call.message.answer("Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_user_chats(call['from']['id']), state=AddChat.chat)
+@ dp.callback_query_handler(lambda call: call.text in db.all_user_chats(call['from']['id']), state=AddChat.chat)
 async def remove_chat(call: types.CallbackQuery):
-    keywords = await db.remove_chat(call['from']['id'], call.text)
+    keywords = db.remove_chat(call['from']['id'], call.text)
     await call.message.answer("Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
@@ -356,7 +358,7 @@ async def add_word(message: types.Message):
     await bot.send_message(chat_id=5593323077, text=f'/request {str(message.text)} {message.from_user.id}')
     from asyncio import sleep
     await sleep(1)
-    chats = await db.all_user_chats(message.from_user.id)
+    chats = db.all_user_chats(message.from_user.id)
     await message.answer(
         text="Ваши чаты. Добавленный чат отобразится через время, после того как бот вступит в чат.\nЧтобы удалить нажмите на название чата", reply_markup=chats_key(chats))
 
