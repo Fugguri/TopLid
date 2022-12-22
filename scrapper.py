@@ -114,7 +114,7 @@ async def join_(event, message, url, telegram_id):
                 await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
             except FloodWaitError as ex:
                 print("Пересылаю")
-                bot.send_message(chat_id=message[-1], text="Пересылаю")
+                await bot.send_message(chat_id=message[-1], text="Пересылаю")
                 await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
                 return
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
