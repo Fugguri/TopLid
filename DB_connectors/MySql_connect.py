@@ -246,8 +246,8 @@ class Database:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
-            cursor.execute(
-                "SELECT id FROM unex_words WHERE word = (%s)", (unex_word,))
+            sql = "SELECT id FROM unex_words WHERE word = (%s)"
+            cursor.execute(sql, unex_word)
             keyword_id = cursor.fetchone()[0]
             cursor.execute(
                 'DELETE FROM users_unex_words WHERE user_id =%s AND unex_word_id =%s', (user_id, keyword_id))
