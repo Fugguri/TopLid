@@ -291,8 +291,8 @@ class Database:
             return [i[0] for i in words]
 
     def mailing_users(self, keywords, unex_words=tuple()):
-        key = ", ".join(keywords)
-        unex = ", ".join(unex_words)
+        key = ', '.join(["'"+key+"'" for key in keywords])
+        unex = ', '.join(unex_words)
         print(key, unex)
         with self.connection.cursor() as cursor:
             cursor.execute(
