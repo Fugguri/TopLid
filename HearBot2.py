@@ -12,15 +12,15 @@ from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError
 db = Database('TopLid')
 
-client = TelegramClient(phone, api_id, api_hash)
+client = TelegramClient(phone2, api_id2, api_hash2)
 
 
 @client.on(events.NewMessage)
 async def message(event):
-    chat = await client.get_entity(event.chat_id)
-    username = await event.get_sender()
     if chat is not User and chat.id != 5751517728:
         # print(event.message.to_dict()['message'])
+        chat = await client.get_entity(event.chat_id)
+        username = await event.get_sender()
         keywords = db.all_words_()
         unex_words = db.all_unex_words_()
         chat_username = chat.usernames
@@ -74,7 +74,8 @@ async def message(event):
                                                message=message_link,
                                                chat_id=f"{chat.username}",
                                                user=f"t.me/{username}"))
-        await connect_(event)
+        if event.chat_id == 5751517728:
+            await connect_(event)
 
 
 async def connect_(event):
