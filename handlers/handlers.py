@@ -144,7 +144,7 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals='Список ключевых слов'))
 async def unexcepted_keywords_list(message: types.Message):
     if db.is_pay(message.from_user.id):
-        await keywords = db.all_words(message.from_user.id)
+        keywords = await db.all_words(message.from_user.id)
         await message.answer(text="Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                              reply_markup=words_list(keywords))
     else:
