@@ -21,8 +21,8 @@ async def message(event):
     username = await event.get_sender()
     if chat is not User and chat.id != 5751517728:
         # print(event.message.to_dict()['message'])
-        keywords = db.all_words_()
-        unex_words = db.all_unex_words_()
+        keywords = await db.all_words_()
+        unex_words = await db.all_unex_words_()
         chat_username = chat.usernames
         message_id = event.message.id
         message_link = ""
@@ -48,9 +48,9 @@ async def message(event):
             if final_unex_words == []:
                 final_unex_words == ['bcbcv', 'bvbcv']
 
-            users = db.mailing_users(final_words, final_unex_words)
+            users = await db.mailing_users(final_words, final_unex_words)
             for tele_id in users:
-                if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
+                if int(str(event.chat_id)[4:]) in await db.all_chats(tele_id) and await db.is_pay(tele_id) and await db.get_status(tele_id) == 0:
                     await bot.send_message(chat_id=tele_id,
                                            text=text,
                                            reply_markup=links(
@@ -58,7 +58,7 @@ async def message(event):
                                                chat_id=int(
                                                    str(event.chat_id)[4:]),
                                                user=f"https://t.me/{username}"))
-                if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
+                if await db.get_status(tele_id) == 1 and await db.is_pay(tele_id):
 
                     if chat.username is None:
                         await bot.send_message(chat_id=tele_id,
@@ -142,7 +142,7 @@ async def save(telegram_id, url, clear_url):
     while True:
         try:
             chat = await client.get_entity(clear_url)
-            db.add_chat(telegram_id, clear_url, chat.id, chat.title)
+            await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print(f"Succesed add chat {clear_url}")
             return
         except ValueError as ex:
