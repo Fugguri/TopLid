@@ -17,9 +17,9 @@ client = TelegramClient(phone2, api_id2, api_hash2)
 
 @client.on(events.NewMessage)
 async def message(event):
-    chat = await client.get_entity(event.sender_id)
     username = await event.get_sender()
 
+    chat = await client.get_entity(event.chat_id)
     if chat is not User and chat.id != 5751517728:
         # print(event.message.to_dict()['message'])
         keywords = db.all_words_()
