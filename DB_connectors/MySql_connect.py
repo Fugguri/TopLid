@@ -246,7 +246,7 @@ class Database:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
-            sql = "SELECT id FROM unex_words WHERE word = (%s)"
+            sql = "SELECT id FROM unex_words WHERE word = %s"
             cursor.execute(sql, unex_word)
             keyword_id = cursor.fetchone()[0]
             cursor.execute(
