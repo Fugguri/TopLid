@@ -266,11 +266,11 @@ class Database:
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
             cursor.execute(
-                "SELECT id FROM chats WHERE chat=(%s)", chat)
+                "SELECT id FROM chats WHERE chat = (%s)", chat)
             print(chat, user_id)
             chat_id = cursor.fetchone()[0]
             cursor.execute(
-                'DELETE FROM users_chats WHERE user_id = %s AND chat_id =%s', (user_id, chat_id))
+                'DELETE FROM users_chats WHERE user_id = %s AND chat_id = %s', (user_id, chat_id))
             self.connection.commit()
             cursor.execute(
                 '''SELECT chat
