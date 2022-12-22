@@ -223,6 +223,15 @@ async def add_word_menu(message: types.Message):
 Подписку можно приобрести по кнопке «оплата 💰»""")
 
 
+@ dp.message_handler(Text(equals="Назад"), state=AddUnex_Word.word)
+async def add_word(message: types.Message, state: State):
+    await state.finish()
+    await message.answer(text='Бот выполняет поиск по ключевым словам.'
+                         'Вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню "Добавить новые слова" ниже\n\n'
+                         'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
+                         reply_markup=unexcept_keywords_list())
+
+
 @ dp.message_handler(state=AddUnex_Word.word)
 async def add_word(message: types.Message):
     keywords = db.add_unex_word(message.from_user.id, str(message.text))
@@ -235,15 +244,6 @@ async def remove_word(call: types.CallbackQuery):
     keywords = db.remove_unex_word(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
-
-
-@ dp.message_handler(Text(equals="Назад"), state=AddUnex_Word.word)
-async def add_word(message: types.Message, state: State):
-    await state.finish()
-    await message.answer(text='Бот выполняет поиск по ключевым словам.'
-                         'Вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню "Добавить новые слова" ниже\n\n'
-                         'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
-                         reply_markup=unexcept_keywords_list())
 
 
 '''Чаты !!!'''
