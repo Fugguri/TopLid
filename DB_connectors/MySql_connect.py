@@ -293,11 +293,8 @@ class Database:
     def mailing_users(self, keywords, unex_words=tuple()):
         key = keywords
         unex = unex_words
-        print(key, unex)
-
         kids = ', '.join(['%s'] * len(key))
         uids = ', '.join(['%s'] * len(unex))
-        print(key, unex)
         with self.connection.cursor() as cursor:
             cursor.execute(
                 f"""SELECT telegram_id
@@ -317,7 +314,6 @@ class Database:
 
                 unex = cursor.fetchall()
                 users = [i for i in uid if i not in unex]
-                print(key, unex)
                 return [i[0] for i in users]
             else:
                 return [i[0] for i in key]
