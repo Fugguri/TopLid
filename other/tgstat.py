@@ -23,7 +23,7 @@ def get_page(page, url=None, channel_type=None):
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:107.0) Gecko/20100101 Firefox/107.0',
     }
     response = requests.post(
-        "url", headers=headers, data=form)
+        url, headers=headers, data=form)
     response.encoding = 'utf-8'
     result = []
     get_channels(response, result)
