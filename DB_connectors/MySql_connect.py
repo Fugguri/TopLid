@@ -293,6 +293,7 @@ class Database:
     def mailing_users(self, keywords, unex_words=tuple()):
         key = ", ".join(keywords)
         unex = ", ".join(unex_words)
+        print(key, unex)
         with self.connection.cursor() as cursor:
             cursor.execute(
                 """SELECT telegram_id
