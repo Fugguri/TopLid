@@ -110,7 +110,7 @@ async def join_(event, message, url, telegram_id):
                     chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
                 return
             except InviteRequestSentError:
-                pass
+                return
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
             print(er, url)
             return
