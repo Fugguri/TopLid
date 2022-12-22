@@ -266,10 +266,10 @@ class Database:
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
             cursor.execute(
-                sql='SELECT id FROM unex_word WHERE user_id = “' + chat+'“'
-                cursor(sql)
+                sql='SELECT id FROM unex_word WHERE user_id = “' + chat+'“')
+            cursor(sql)
             print(chat, user_id)
-            chat_id=cursor.fetchone()[0]
+            chat_id = cursor.fetchone()[0]
             cursor.execute(
                 'DELETE FROM users_chats WHERE user_id = %s AND chat_id = %s', (user_id, chat_id))
             self.connection.commit()
@@ -277,27 +277,27 @@ class Database:
                 '''SELECT chat
                         FROM chats
                         WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
-            keywords=cursor.fetchall()
+            keywords = cursor.fetchall()
             return [i[0] for i in keywords]
 
     def all_words_(self):
         with self.connection.cursor() as cursor:
             cursor.execute("SELECT word FROM keywords")
-            words=cursor.fetchall()
+            words = cursor.fetchall()
             return [i[0] for i in words]
 
     def all_unex_words_(self):
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT word FROM unex_words")
-            words=cursor.fetchall()
+            words = cursor.fetchall()
             return [i[0] for i in words]
 
     def mailing_users(self, keywords, unex_words=tuple()):
-        key=keywords
-        unex=unex_words
-        kids=', '.join(['%s'] * len(key))
-        uids=', '.join(['%s'] * len(unex))
+        key = keywords
+        unex = unex_words
+        kids = ', '.join(['%s'] * len(key))
+        uids = ', '.join(['%s'] * len(unex))
         with self.connection.cursor() as cursor:
             cursor.execute(
                 f"""SELECT telegram_id
@@ -305,18 +305,18 @@ class Database:
                         (SELECT user_id FROM users_keywords WHERE keyword_id
                         IN
                         (SELECT id FROM keywords WHERE word IN ({kids})))""", key)
-            uid=cursor.fetchall()
-            sql="SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({}))) ".format(
+            uid = cursor.fetchall()
+            sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({}))) ".format(
                 kids)
             cursor.execute(sql, key)
-            key=cursor.fetchall()
+            key = cursor.fetchall()
             if unex != []:
-                sql="SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({})))".format(
+                sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({})))".format(
                     uids)
                 cursor.execute(sql, unex)
 
-                unex=cursor.fetchall()
-                users=[i for i in uid if i not in unex]
+                unex = cursor.fetchall()
+                users = [i for i in uid if i not in unex]
                 return [i[0] for i in users]
             else:
                 return [i[0] for i in key]
@@ -337,7 +337,7 @@ class Database:
         with self.connection.cursor() as cursor:
             cursor.execute(
                 f'SELECT is_all_chats FROM users WHERE telegram_id={telegram_id}')
-            is_subs=cursor.fetchone()[0]
+            is_subs = cursor.fetchone()[0]
             return is_subs
 
     def set_status(self, telegram_id, status):
@@ -356,7 +356,7 @@ class Database:
         with self.connection.cursor() as cursor:
             cursor.execute(
                 '''SELECT pay_end FROM users WHERE telegram_id=%s''', telegram_id)
-            pay_end=cursor.fetchone()[0]
+            pay_end = cursor.fetchone()[0]
             """По хорошему
             переписать на проверку на
             типах данных DATETIME"""
@@ -371,17 +371,17 @@ class Database:
     def is_admin(self, username):
         with self.connection.cursor() as cursor:
             cursor.execute("SELECT username FROM admins")
-            res=cursor.fetchall()
+            res = cursor.fetchall()
         return username in [i[0]for i in res]
 
     def get_chat_link(self, chat_id):
         with self.connection.cursor() as cursor:
-            chat=cursor.execute(
+            chat = cursor.execute(
                 "SELECT chat FROM chats WHERE chat_num=%s", chat_id)
-            chat=cursor.fetchone()[0]
+            chat = cursor.fetchone()[0]
             return chat
 
 
 if __name__ == "__main__":
-    a=Database("TopLid")
+    a = Database("TopLid")
     a.cbdt()
