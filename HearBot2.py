@@ -17,10 +17,11 @@ client = TelegramClient(phone2, api_id2, api_hash2)
 
 @client.on(events.NewMessage)
 async def message(event):
+    chat = await client.get_entity(event.sender_id)
+    username = await event.get_sender()
+
     if chat is not User and chat.id != 5751517728:
         # print(event.message.to_dict()['message'])
-        chat = await client.get_entity(event.chat_id)
-        username = await event.get_sender()
         keywords = db.all_words_()
         unex_words = db.all_unex_words_()
         chat_username = chat.usernames
@@ -74,8 +75,8 @@ async def message(event):
                                                message=message_link,
                                                chat_id=f"{chat.username}",
                                                user=f"t.me/{username}"))
-        if event.chat_id == 5751517728:
-            await connect_(event)
+    if chat.username == 'TopLid_bot':
+        await connect_(event)
 
 
 async def connect_(event):
@@ -125,7 +126,7 @@ async def join_(event, message, url, telegram_id):
                 chat_id=telegram_id, text=f"Что-то пошло не так{url}")
             return
         finally:
-            await sleep(5)
+            await sleep(17)
 
 
 async def save(telegram_id, url, clear_url):
