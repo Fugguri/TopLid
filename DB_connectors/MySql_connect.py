@@ -266,7 +266,7 @@ class Database:
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
             cursor.execute(
-                "SELECT id FROM chats WHERE chat = (%s)", chat)
+                "SELECT id FROM chats WHERE chat = %s", chat)
             print(chat, user_id)
             chat_id = cursor.fetchone()[0]
             cursor.execute(
