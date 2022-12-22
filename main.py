@@ -11,7 +11,7 @@ db = Database("TopLid")
 
 async def on_startup(_):
     print("Бот запущен")
-    await db.cbdt()
+    db.cbdt()
 #     await add_word()
 
 # links_ = ['3jEiz-LRF5E4MDJi', 'AY8kjWpE_U4wODc6', 'AY8kjWpE_U4wODc6', 'CyGAnUwHNsHqM7ymSEQT0A', 'DiVhlvzQPY8xMDgy', 'Doqdj-qbjfY2NmNi', 'exchange_reklama', 'adm_telegram', 'tgm_adm', 'tgm_trade', 'trade_tgm', 'dvijenie_telegram', 'piarNOpar', 'qSHHb07VCm8zNTEy', 'z12CYsIbtrkxYzZh', 'fQ0ZAAsetodkMGZi', 'Po7Kjl6GTrlhMzRi', '8b0xNR4WaH9mZTFi', 'Ld4BggAk8KszNTZh', 'iGaRzs9IDKo0Y2Qy', 'NVUl3pmRGOIwMmMx', 'o0UkYEKA44A1YzJh', '2OV6mVrJRWkyZDky', 'cDHaVzQdYrYwNDRi', '24dusMZlQgk4OTcy', '0jIVcFn-8gtmOWI6', 'M2TwyjbS2NliNmMy', '1K4pIe73QZQ4MTUy', 'YczkQTbfxys0OTBi', '75bDB9sRHzI4MzZi', 'hJbkhbBO_540Y2Fi', 'ZvyO25hfO4o1NGIy', '6IDDBiy2W7dhNWU6', '6IDDBiy2W7dhNWU6', '6IDDBiy2W7dhNWU6', 'mb2UaSwa1JAwN2My', '-UuYAyyp2HNlYTIx', 'COIvySwtDGxhMGZh',
