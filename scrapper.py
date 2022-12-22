@@ -65,8 +65,8 @@ async def message(event):
                                                text=text,
                                                reply_markup=links(
                                                    message=message_link,
-                                                   chat_id=db.get_chat_link(int(
-                                                       str(event.chat_id)[4:])),
+                                                   chat_id=int(
+                                                       str(event.chat_id)[4:]),
                                                    user=f"t.me/{username}"))
                     else:
                         await bot.send_message(chat_id=tele_id,
