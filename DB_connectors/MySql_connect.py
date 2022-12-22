@@ -310,7 +310,7 @@ class Database:
                         (SELECT id FROM unex_words WHERE word IN (%s)))
                         ;""", unex)
             unex = cursor.fetchall()
-            users = [i for i in key in i not in unex]
+            users = [i for i in key if i not in unex]
             print(users, key, unex)
         return [i[0] for i in users]
 
