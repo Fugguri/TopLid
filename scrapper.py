@@ -91,14 +91,12 @@ async def join_(event, message, url, telegram_id):
         clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                   "").replace('joinchat/', "")
         try:
-            print(54643)
             await client(ImportChatInviteRequest(clear_url))
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
             return
         except InviteHashExpiredError:
             try:
-                print(53543)
                 entity = await client.get_entity(clear_url)
                 await client(JoinChannelRequest(entity))
                 await save(telegram_id, url, clear_url)
@@ -133,10 +131,8 @@ async def save(telegram_id, url, clear_url):
     while True:
         try:
             chat = await client.get_entity(clear_url)
-            print(url, clear_url, chat.id, chat.title)
-
             db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-            print("Succesed add chat")
+            print(f"Succesed add chat {clear_url}")
             return
         except ValueError as ex:
             print(ex)

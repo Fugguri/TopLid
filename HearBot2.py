@@ -100,7 +100,6 @@ async def join_(event, message, url, telegram_id):
             return
         except InviteHashExpiredError:
             try:
-                print(53543)
                 entity = await client.get_entity(clear_url)
                 await client(JoinChannelRequest(entity))
                 await save(telegram_id, url, clear_url)
@@ -118,7 +117,7 @@ async def join_(event, message, url, telegram_id):
             return
         except FloodWaitError as ex:
             print(f"{ex} wait 900")
-            await sleep(900)
+            await sleep(600)
             # await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
         except ValueError:
             print("Ссылка недействительна!")
