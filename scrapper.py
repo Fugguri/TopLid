@@ -50,7 +50,7 @@ async def message(event):
 
             users = db.mailing_users(final_words, final_unex_words)
             for tele_id in users:
-                if int(str(event.chat_id)[4:]) in await db.all_chats(tele_id) and await db.is_pay(tele_id) and await db.get_status(tele_id) == 0:
+                if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
                     await bot.send_message(chat_id=tele_id,
                                            text=text,
                                            reply_markup=links(
