@@ -9,7 +9,7 @@ from main import bot
 from keyboards import links
 from config import *
 from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
-from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError
+from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 db = Database('TopLid')
 
 client = TelegramClient(phone2, api_id2, api_hash2)
@@ -17,9 +17,8 @@ client = TelegramClient(phone2, api_id2, api_hash2)
 
 @client.on(events.NewMessage)
 async def message(event):
+    chat = await client.get_entity(event.chat_id)
     username = await event.get_sender()
-
-    chat = await client.get_entity(username.id)
     if chat is not User and chat.id != 5751517728:
         # print(event.message.to_dict()['message'])
         keywords = db.all_words_()
@@ -49,33 +48,33 @@ async def message(event):
             if final_unex_words == []:
                 final_unex_words == ['bcbcv', 'bvbcv']
 
-        users = db.mailing_users(final_words, final_unex_words)
-        for tele_id in users:
-            if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
-                await bot.send_message(chat_id=tele_id,
-                                       text=text,
-                                       reply_markup=links(
-                                           message=message_link,
-                                           chat_id=int(str(event.chat_id)[4:]),
-                                           user=f"https://t.me/{username}"))
-            if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
-
-                if chat.username is None:
+            users = db.mailing_users(final_words, final_unex_words)
+            for tele_id in users:
+                if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
                     await bot.send_message(chat_id=tele_id,
                                            text=text,
                                            reply_markup=links(
                                                message=message_link,
                                                chat_id=int(
                                                    str(event.chat_id)[4:]),
-                                               user=f"t.me/{username}"))
-                else:
-                    await bot.send_message(chat_id=tele_id,
-                                           text=text,
-                                           reply_markup=links(
-                                               message=message_link,
-                                               chat_id=f"{chat.username}",
-                                               user=f"t.me/{username}"))
-    if chat.username == 'TopLid_bot':
+                                               user=f"https://t.me/{username}"))
+                if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
+
+                    if chat.username is None:
+                        await bot.send_message(chat_id=tele_id,
+                                               text=text,
+                                               reply_markup=links(
+                                                   message=message_link,
+                                                   chat_id=int(
+                                                       str(event.chat_id)[4:]),
+                                                   user=f"t.me/{username}"))
+                    else:
+                        await bot.send_message(chat_id=tele_id,
+                                               text=text,
+                                               reply_markup=links(
+                                                   message=message_link,
+                                                   chat_id=f"{chat.username}",
+                                                   user=f"t.me/{username}"))
         await connect_(event)
 
 
@@ -93,7 +92,6 @@ async def join_(event, message, url, telegram_id):
         clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                   "").replace('joinchat/', "")
         try:
-            print(54643)
             await client(ImportChatInviteRequest(clear_url))
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
@@ -112,6 +110,8 @@ async def join_(event, message, url, telegram_id):
                 return
             except InviteRequestSentError:
                 return
+            except ChannelsTooMuchError:
+                pass
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
             print(er, url)
             return
@@ -132,10 +132,8 @@ async def save(telegram_id, url, clear_url):
     while True:
         try:
             chat = await client.get_entity(clear_url)
-            print(url, clear_url, chat.id, chat.title)
-
             db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-            print("Succesed add chat")
+            print(f"Succesed add chat {clear_url}")
             return
         except ValueError as ex:
             print(ex)
