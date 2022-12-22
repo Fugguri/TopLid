@@ -291,30 +291,36 @@ class Database:
             return [i[0] for i in words]
 
     def mailing_users(self, keywords, unex_words=tuple()):
-        key = ', '.join(["'"+key+"'" for key in keywords])
-        unex = ', '.join(unex_words)
+        key = keywords
+        unex = unex_words
+        print(key, unex)
+
+        kids = ', '.join(['%s'] * len(key))
+        uids = ', '.join(['%s'] * len(unex))
         print(key, unex)
         with self.connection.cursor() as cursor:
             cursor.execute(
-                """SELECT telegram_id
+                f"""SELECT telegram_id
                         FROM users WHERE id IN
                         (SELECT user_id FROM users_keywords WHERE keyword_id
                         IN
-                        (SELECT id FROM keywords WHERE word IN (%s)))""", key)
+                        (SELECT id FROM keywords WHERE word IN ({kids})))""", key)
             uid = cursor.fetchall()
-            cursor.execute(
-                """SELECT id FROM keywords WHERE word IN (%s)""", key)
-            print(cursor.fetchall())
-            cursor.execute("""SELECT telegram_id
-                        FROM users
-                        WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
-                        IN
-                        (SELECT id FROM unex_words WHERE word IN (%s)))
-                        ;""", unex)
-            unex = cursor.fetchall()
-            users = [i for i in uid if i not in unex]
-            print(users, key, unex)
-        return [i[0] for i in users]
+            sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({}))) ".format(
+                kids)
+            cursor.execute(sql, key)
+            key = cursor.fetchall()
+            if unex != []:
+                sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({})))".format(
+                    uids)
+                cursor.execute(sql, unex)
+
+                unex = cursor.fetchall()
+                users = [i for i in uid if i not in unex]
+                print(key, unex)
+                return [i[0] for i in users]
+            else:
+                return [i[0] for i in key]
 
     def add_chat_id(self, chat_id, chat):
         with self.connection.cursor() as cursor:
@@ -352,7 +358,7 @@ class Database:
             cursor.execute(
                 '''SELECT pay_end FROM users WHERE telegram_id=%s''', telegram_id)
             pay_end = cursor.fetchone()[0]
-            """По хорошему 
+            """По хорошему
             переписать на проверку на
             типах данных DATETIME"""
         return str(pay_end) >= str(date.today())

@@ -48,32 +48,33 @@ async def message(event):
             if final_unex_words == []:
                 final_unex_words == ['bcbcv', 'bvbcv']
 
-        users = db.mailing_users(final_words, final_unex_words)
-        for tele_id in users:
-            if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
-                await bot.send_message(chat_id=tele_id,
-                                       text=text,
-                                       reply_markup=links(
-                                           message=message_link,
-                                           chat_id=int(str(event.chat_id)[4:]),
-                                           user=f"https://t.me/{username}"))
-            if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
-
-                if chat.username is None:
+            users = db.mailing_users(final_words, final_unex_words)
+            for tele_id in users:
+                if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
                     await bot.send_message(chat_id=tele_id,
                                            text=text,
                                            reply_markup=links(
                                                message=message_link,
                                                chat_id=int(
                                                    str(event.chat_id)[4:]),
-                                               user=f"t.me/{username}"))
-                else:
-                    await bot.send_message(chat_id=tele_id,
-                                           text=text,
-                                           reply_markup=links(
-                                               message=message_link,
-                                               chat_id=f"{chat.username}",
-                                               user=f"t.me/{username}"))
+                                               user=f"https://t.me/{username}"))
+                if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
+
+                    if chat.username is None:
+                        await bot.send_message(chat_id=tele_id,
+                                               text=text,
+                                               reply_markup=links(
+                                                   message=message_link,
+                                                   chat_id=int(
+                                                       str(event.chat_id)[4:]),
+                                                   user=f"t.me/{username}"))
+                    else:
+                        await bot.send_message(chat_id=tele_id,
+                                               text=text,
+                                               reply_markup=links(
+                                                   message=message_link,
+                                                   chat_id=f"{chat.username}",
+                                                   user=f"t.me/{username}"))
         await connect_(event)
 
 
@@ -115,7 +116,7 @@ async def join_(event, message, url, telegram_id):
             print(er, url)
             return
         except FloodWaitError as ex:
-            "Пересылая"
+            "Пересылаю"
             await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
             return
         except ValueError:
