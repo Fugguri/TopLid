@@ -106,7 +106,7 @@ class Database:
     def add_keyword(self, telegram_id: int, word: str):
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''INSERT IGNORE INTO keywords(word) VALUES(%s)''', (word,))
+                '''INSERT IGNORE INTO keywords(word) VALUES('%s')''', (word,))
             self.connection.commit()
         with self.connection.cursor() as cursor:
             cursor.execute(
