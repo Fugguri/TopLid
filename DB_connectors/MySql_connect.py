@@ -246,11 +246,11 @@ class Database:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
-            sql = 'SELECT id FROM unex_word WHERE word = “' + unex_word+'“'
+            sql = 'SELECT id FROM unex_word WHERE word = (“' + unex_word+'“)'
             cursor.execute(sql)
             keyword_id = cursor.fetchone()[0]
             cursor.execute(
-                'DELETE FROM users_unex_words WHERE user_id =%s AND unex_word_id =%s', (user_id, keyword_id))
+                'DELETE FROM users_unex_words WHERE user_id = %s AND unex_word_id = %s', (user_id, keyword_id))
             self.connection.commit()
             cursor.execute(
                 '''SELECT word
