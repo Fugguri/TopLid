@@ -341,6 +341,7 @@ async def add_word(message: types.Message, state: State):
 async def remove_chat(call: types.CallbackQuery):
     text = ([i for i in call][2][1]["reply_markup"]
             ["inline_keyboard"][0][0]["text"])
+    print(text)
     keywords = db.remove_chat(call['from']['id'], text)
     await call.message.answer("Список ключевых слов!\nЧтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))

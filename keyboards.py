@@ -86,7 +86,7 @@ def chats_key(words):
             else:
                 button = InlineKeyboardButton(text=word, callback_data=word)
                 keyboard.add(button)
-
+            print(word)
     except Exception as ex:
         print(ex)
 
