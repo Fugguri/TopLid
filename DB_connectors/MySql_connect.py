@@ -110,8 +110,8 @@ class Database:
             self.connection.commit()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                "SELECT id FROM users WHERE telegram_id =(%s)", (telegram_id,))
-            user_id = cursor.fetchall()
+                "SELECT id FROM users WHERE telegram_id=(%s)", (telegram_id,))
+            user_id = cursor.fetchone()[0]
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT id FROM keywords WHERE word =(%s)", (word,))
@@ -124,7 +124,7 @@ class Database:
             cursor.execute(
                 '''SELECT word
                     FROM keywords
-                    WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
+                    WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', telegram_id)
             keywords = cursor.fetchall()
             return [i[0] for i in keywords]
 
