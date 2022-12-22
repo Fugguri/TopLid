@@ -138,6 +138,7 @@ async def save(telegram_id, url, clear_url):
             return
         except ValueError as ex:
             print(ex)
+            return
         else:
             pass
         finally:
