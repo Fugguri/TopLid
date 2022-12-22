@@ -303,7 +303,7 @@ class Database:
                         IN
                         (SELECT id FROM keywords WHERE word IN (%s)))""", key)
             key = cursor.fetchall()
-        with self.connection.cursor() as cursor:
+
             cursor.execute("""SELECT telegram_id
                         FROM users
                         WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id
