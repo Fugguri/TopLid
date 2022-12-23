@@ -211,7 +211,7 @@ class Database:
             #     "SELECT id FROM keywords WHERE word = (%s)", (keyword,))
             # keyword_id = cursor.fetchone()[0]
             cursor.execute(
-                'DELETE FROM users_keywords WHERE user_id = SELECT id FROM users WHERE telegram_id = (%s) AND keyword_id =SELECT id FROM keywords WHERE word = (%s)', (telegram_id, keyword))
+                'DELETE FROM users_keywords WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND keyword_id = (SELECT id FROM keywords WHERE word = (%s))', (telegram_id, keyword))
             self.connection.commit()
             keywords = cursor.execute(
                 '''SELECT word
