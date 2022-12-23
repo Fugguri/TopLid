@@ -163,7 +163,7 @@ async def save(telegram_id, url, clear_url):
         except:
             pass
         finally:
-            await sleep(60)
+            sleep(60)
 
 
 if __name__ == "__main__":
