@@ -211,14 +211,14 @@ class Database:
             #     "SELECT id FROM keywords WHERE word = (%s)", (keyword,))
             # keyword_id = cursor.fetchone()[0]
             cursor.execute(
-                'DELETE FROM users_keywords WHERE user_id = SELECT id FROM users WHERE telegram_id = (%s) AND keyword_id =SELECT id FROM keywords WHERE word = (%s)', (elegram_id, keyword))
+                'DELETE FROM users_keywords WHERE user_id = SELECT id FROM users WHERE telegram_id = (%s) AND keyword_id =SELECT id FROM keywords WHERE word = (%s)', (telegram_id, keyword))
             self.connection.commit()
             keywords = cursor.execute(
                 '''SELECT word
                     FROM keywords
                     WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
-            return [i[0][:20] for i in keywords]
+            return [i for i in keywords]
 
     def remove_keyword_(self,  keyword: str):
         with self.connection.cursor() as cursor:
