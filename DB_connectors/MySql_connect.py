@@ -218,7 +218,7 @@ class Database:
                     FROM keywords
                     WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
-            return [i for i in keywords]
+            return [i[0] for i in keywords]
 
     def remove_keyword_(self,  keyword: str):
         with self.connection.cursor() as cursor:
