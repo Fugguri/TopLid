@@ -9,7 +9,7 @@ from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 import logging
-
+from pymysql.err import
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -117,55 +117,57 @@ async def join_(event, message, url, telegram_id):
                 await bot.send_message(
                     chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
                 return
-        #     except InviteRequestSentError:
-        #         return
-        #     except ChannelsTooMuchError:
-        #         await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-        #     except FloodWaitError as ex:
-        #         print("Пересылаю")
-        #         await bot.send_message(chat_id=message[-1], text="Пересылаю")
-        #         await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-        #         return
-        #     except Exception as ex:
-        #         print(ex)
-        # except (UserAlreadyParticipantError, InviteRequestSentError) as er:
-        #     print(er, url)
-        #     return
-        # except FloodWaitError as ex:
-        #     print("Пересылаю")
-        #     await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-        #     return
-        # except ValueError:
-        #     print("Ссылка недействительна!")
-        #     await bot.send_message(
-        #         chat_id=telegram_id, text=f"Что-то пошло не так{url}")
-        #     return
-        # except ChannelsTooMuchError:
-        #     await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-        # except:
-        #     await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-        #     return
-        # finally:
-        #     await sleep(5)
+            except InviteRequestSentError:
+                return
+            except ChannelsTooMuchError:
+                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+            except FloodWaitError as ex:
+                print("Пересылаю")
+                await bot.send_message(chat_id=message[-1], text="Пересылаю")
+                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+                return
+            except Exception as ex:
+                print(ex)
+        except (UserAlreadyParticipantError, InviteRequestSentError) as er:
+            print(er, url)
+            return
+        except FloodWaitError as ex:
+            print("Пересылаю")
+            await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+            return
+        except ValueError:
+            print("Ссылка недействительна!")
+            await bot.send_message(
+                chat_id=telegram_id, text=f"Что-то пошло не так{url}")
+            return
+        except ChannelsTooMuchError:
+            await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+        except:
+            await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+            return
+        finally:
+            await sleep(5)
 
 
 async def save(telegram_id, url, clear_url):
     while True:
-        # try:
-        chat = await client.get_entity(clear_url)
-        await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-        print(f"Succes add chat {clear_url}")
-        # sleep(30)
-        #     return
-        # except ValueError as ex:
-        #     print(ex)
-        #     return
-        # except Exception as ex:
-        #     print(ex)
-
-        # finally:
-        #     # sleep(60)
+        try:
+            chat = await client.get_entity(clear_url)
+            await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
+            print(f"Succes add chat {clear_url}")
+            sleep(30)
+            return
+        except ValueError as ex:
+            print(ex)
+            return
+        # except :
         #     pass
+        except Exception as ex:
+            print(ex)
+
+        finally:
+            # sleep(60)
+            pass
 
 
 if __name__ == "__main__":
