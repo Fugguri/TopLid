@@ -90,10 +90,15 @@ async def connect_(event):
         telegram_id = message[-1]
         urls = message[1].split("\n")
         print(urls)
-        for url in urls:
-            a = await join_(event, message, url, telegram_id)
-            print(a)
-            # await sleep(15)
+        for url in message:
+            if 'http' in url:
+                url.replace("\n", '')
+                a = await join_(event, message, url, telegram_id)
+            else:
+                for i in urls:
+                    a = await join_(event, message, url, telegram_id)
+                    await sleep(15)
+            await sleep(15)
 
 
 async def join_(event, message, url, telegram_id):
