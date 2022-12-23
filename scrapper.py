@@ -91,7 +91,7 @@ async def connect_(event):
         for url in urls:
             a = await join_(event, message, url, telegram_id)
             print(a)
-            sleep(15)
+            await sleep(15)
 
 
 async def join_(event, message, url, telegram_id):
@@ -112,7 +112,7 @@ async def join_(event, message, url, telegram_id):
                 await client(JoinChannelRequest(entity))
                 await save(telegram_id, url, clear_url)
                 print("Joined and save", url)
-                sleep(30)
+                await sleep(30)
                 return
             except ValueError:
                 print("Ссылка недействительна!")
