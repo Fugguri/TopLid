@@ -39,8 +39,8 @@ def get_channels(response, result):
 
     for links in date:
         link = links.find('a').get('href').replace(
-            'https://tgstat.ru/channel/', '').replace('https://tgstat.ru/chat/', '').replace('/stat', " ")
-        result.append("https://t.me/"+link.replace("@", ""))
+            'https://tgstat.ru/channel/', '').replace('https://tgstat.ru/chat/', '').replace('/stat', "")
+        result.append("https://t.me/"+link.replace("@", "").replace(' ', ""))
         stop_marker.append(link)
     return stop_marker
 
