@@ -91,16 +91,16 @@ async def connect_(event):
         for url in message:
             if 'http' in url:
                 url.replace("\n", '')
-                a = await join_(event, message, url, telegram_id)
+                a = await join_(message, url, telegram_id)
             else:
                 pass
                 for i in urls:
-                    a = await join_(event, message, url, telegram_id)
+                    a = await join_(message, url, telegram_id)
                     await sleep(15)
             await sleep(15)
 
 
-async def join_(event, message, url, telegram_id):
+async def join_(message, url, telegram_id):
     while True:
         clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                   "").replace('joinchat/', "")
@@ -131,6 +131,7 @@ async def join_(event, message, url, telegram_id):
                 await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
                 return
             except FloodWaitError as ex:
+                print(ex)
                 print("Пересылаю")
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
                 await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
@@ -142,6 +143,7 @@ async def join_(event, message, url, telegram_id):
             print(er, url)
             return
         except FloodWaitError as ex:
+            print(ex)
             print("Пересылаю")
             await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
             return
