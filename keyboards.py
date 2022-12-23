@@ -22,8 +22,7 @@ def keywords_list():
     keyboard.add(
         add_keyword,
         keywords_list,
-        delete_keywords,
-        back_to_main_menu)
+        delete_keywords).add(back_to_main_menu)
     return keyboard
 
 
@@ -38,8 +37,7 @@ def unexcept_keywords_list():
     keyboard.add(
         unexcept_add_keyword,
         unexcept_keywords_list,
-        unexcept_delete_keywords,
-        back_to_main_menu)
+        unexcept_delete_keywords).add(back_to_main_menu)
     return keyboard
 
 
@@ -50,14 +48,7 @@ def chats_list_(telegram_id: int):
     back_to_main_menu = KeyboardButton(text="В главное меню")
     delete_chat = KeyboardButton(text="Удалить все чаты")
     keyboard.add(all_chats, add_chat, isall(
-        telegram_id), delete_chat, back_to_main_menu)
-    # if db.get_status(telegram_id) == 1:
-    #     from_my_chats = KeyboardButton(text="Собирать из моих чатов")
-    #     keyboard.add(from_my_chats)
-    # else:
-    #     from_all_chats = KeyboardButton(text="Собирать из всех чатов")
-    #     keyboard.add(from_all_chats)
-
+        telegram_id), delete_chat).add(back_to_main_menu)
     return keyboard
 
 
