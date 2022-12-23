@@ -66,7 +66,7 @@ def isall(telegram_id):
         return KeyboardButton(text="Собирать из моих чатов")
 
     else:
-        return = KeyboardButton(text="Собирать из всех чатов")
+        return KeyboardButton(text="Собирать из всех чатов")
 
 
 def words_list(words):
