@@ -29,8 +29,6 @@ async def message(event):
         # print(event.message.to_dict()['message'])
         keywords = db.all_words_()
         unex_words = db.all_unex_words_()
-        chat_username = chat
-        print(chat)
         message_id = event.message.id
         message_link = ""
         final_words = []
