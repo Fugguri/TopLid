@@ -241,14 +241,6 @@ class Database:
     def remove_chat(self, telegram_id: int, chat: str):
         with self.connection.cursor() as cursor:
             cursor.execute(
-                "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
-            user_id = cursor.fetchone()[0]
-            print(user_id)
-            cursor.execute(
-                """SELECT id FROM chats WHERE chat_title = %s""", (chat,))
-            chat_id = cursor.fetchone()
-            print(chat_id)
-            cursor.execute(
                 'DELETE FROM users_chats WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND chat_id = (SELECT id FROM chats WHERE chat_title = (%s))', (telegram_id, chat))
             self.connection.commit()
             # cursor.execute(
