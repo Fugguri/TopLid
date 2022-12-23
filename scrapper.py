@@ -15,7 +15,6 @@ client = TelegramClient(phone, api_id, api_hash)
 
 @client.on(events.NewMessage,)
 async def message(event):
-    print(event)
     chat = await client.get_entity(event.chat_id)
     username = await event.get_sender()
     if chat is not User and chat.id != 5751517728:
