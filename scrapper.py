@@ -85,12 +85,11 @@ async def message(event):
 
 async def connect_(event):
     if '/request' in event.message.to_dict()['message']:
-        message = event.message.to_dict()['message'].replace("\n")
-        print(message)
+        message = event.message.to_dict()['message'].split(" ")
         telegram_id = message[-1]
         urls = message[1].split("\n")
-        print(urls)
-        for url in message:
+        print
+        for url in urls:
             if 'http' in url:
                 url.replace("\n", '')
                 a = await join_(event, message, url, telegram_id)
