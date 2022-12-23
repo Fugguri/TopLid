@@ -253,11 +253,15 @@ async def chat_list(message: types.Message):
                          reply_markup=chats_list_(message.from_user.id))
 
 
-@ dp.message_handler(Text(equals='Из базы чатов'))
+@ dp.message_handler(Text(equals='Удалить все чаты'))
 async def unexcepted_keywords_list(message: types.Message):
-    db.delete_all(message.from_user.id, 'users_chats')
-    await message.answer(text="Вы удалили все чаты.\n Не забудьте добавить новые!",
-                         reply_markup=chats_list_(message.from_user.id))
+    if db.is_pay(message.from_user.id) is False:
+        await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
+Подписку можно приобрести по кнопке «оплата 💰»""")
+    else:
+        db.delete_all(message.from_user.id, 'users_chats')
+        await message.answer(text="Вы удалили все чаты.\n Не забудьте добавить новые!",
+                             reply_markup=chats_list_(message.from_user.id))
 
 
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
