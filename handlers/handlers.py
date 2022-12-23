@@ -263,14 +263,20 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
-        if db.get_status(message.from_user.id) == 1:
-            db.set_status(message.from_user.id, 0)
-            await message.answer(text="Вы переключились собственный список чатов",
-                                 reply_markup=chats_list_(message.from_user.id))
-        else:
-            db.set_status(message.from_user.id, 1)
-            await message.answer(text="Вы переключились на нашу базу чатов",
-                                 reply_markup=chats_list_(message.from_user.id))
+        db.set_status(message.from_user.id, 1)
+        await message.answer(text="Вы переключились на нашу базу чатов",
+                             reply_markup=chats_list_(message.from_user.id))
+    else:
+        await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
+Подписку можно приобрести по кнопке «оплата 💰»""")
+
+
+@ dp.message_handler(Text(equals="Собирать из моих чатов"))
+async def all_chat_acces(message: types.Message):
+    if db.is_pay(message.from_user.id):
+        db.set_status(message.from_user.id, 0)
+        await message.answer(text="Вы переключились собственный список чатов",
+                             reply_markup=chats_list_(message.from_user.id))
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
