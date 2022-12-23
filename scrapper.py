@@ -86,6 +86,7 @@ async def message(event):
 async def connect_(event):
     if '/request' in event.message.to_dict()['message']:
         message = event.message.to_dict()['message'].split(" ")
+        print(message)
         telegram_id = message[-1]
         urls = message[1].split("\n")
         print(urls)
