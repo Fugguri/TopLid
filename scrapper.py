@@ -93,6 +93,7 @@ async def connect_(event):
                 url.replace("\n", '')
                 a = await join_(event, message, url, telegram_id)
             else:
+                pass
                 for i in urls:
                     a = await join_(event, message, url, telegram_id)
                     await sleep(15)
