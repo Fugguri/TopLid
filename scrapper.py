@@ -89,6 +89,7 @@ async def connect_(event):
         for url in urls:
             a = await join_(event, message, url, telegram_id)
             print(a)
+            sleep(15)
 
 
 async def join_(event, message, url, telegram_id):
@@ -101,7 +102,7 @@ async def join_(event, message, url, telegram_id):
             print("try")
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
-            sleep(30)
+
             return "true"
         except InviteHashExpiredError:
             try:
