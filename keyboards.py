@@ -44,13 +44,11 @@ def unexcept_keywords_list():
 
 
 def chats_list_(telegram_id: int):
-    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     all_chats = KeyboardButton(text="Мои чаты")
-    keyboard.add(all_chats)
     add_chat = KeyboardButton(text="Добавить новый чат")
-    keyboard.add(add_chat)
     delete_chat = KeyboardButton(text="Удалить все чаты")
-    keyboard.add(delete_chat)
+    keyboard.add(all_chats, add_chat, delete_chat)
     if db.get_status(telegram_id) == 1:
         from_my_chats = KeyboardButton(text="Собирать из моих чатов")
         keyboard.add(from_my_chats)
