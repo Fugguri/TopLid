@@ -79,7 +79,7 @@ async def message(event):
                                                text=text,
                                                reply_markup=links(
                                                    message=message_link,
-                                                   chat_id=f"{chat_username}",
+                                                   chat_id=f"{chat.username}",
                                                    user=f"t.me/{username}"))
         await connect_(event)
 
