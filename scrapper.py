@@ -130,6 +130,7 @@ async def join_(event, message, url, telegram_id):
                 return
             except Exception as ex:
                 print(ex)
+                return
         except (UserAlreadyParticipantError, InviteRequestSentError) as er:
             print(er, url)
             return
