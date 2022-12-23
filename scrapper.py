@@ -9,7 +9,9 @@ from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 import logging
-from pymysql.err import
+# from pymysql.err import
+
+
 logging.basicConfig()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
