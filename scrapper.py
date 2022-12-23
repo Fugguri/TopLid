@@ -151,21 +151,21 @@ async def join_(event, message, url, telegram_id):
 
 async def save(telegram_id, url, clear_url):
     while True:
-        try:
-            chat = await client.get_entity(clear_url)
-            await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-            print(f"Succes add chat {clear_url}")
-            # sleep(30)
-            return
-        except ValueError as ex:
-            print(ex)
-            return
-        except Exception as ex:
-            print(ex)
+        # try:
+        chat = await client.get_entity(clear_url)
+        await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
+        print(f"Succes add chat {clear_url}")
+        # sleep(30)
+        #     return
+        # except ValueError as ex:
+        #     print(ex)
+        #     return
+        # except Exception as ex:
+        #     print(ex)
 
-        finally:
-            # sleep(60)
-            pass
+        # finally:
+        #     # sleep(60)
+        #     pass
 
 
 if __name__ == "__main__":
