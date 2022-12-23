@@ -1,22 +1,21 @@
 from asyncio import sleep
-
 from telethon import TelegramClient, events
-from telethon.tl.types import User, Channel, Chat as User, Channel, Chat
+from telethon.tl.types import User, Channel, Chat, PeerChannel, PeerChat
 from DB_connectors.MySql_connect import Database
 from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest, ExportChatInviteRequest
 from main import bot
 from keyboards import links
 from config import api_hash, api_id, phone
-from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 db = Database('TopLid')
 
 client = TelegramClient(phone, api_id, api_hash)
 
 
-@client.on(events.NewMessage)
+@client.on(events.NewMessage,)
 async def message(event):
+    print(event)
     chat = await client.get_entity(event.chat_id)
     username = await event.get_sender()
     if chat is not User and chat.id != 5751517728:
@@ -30,7 +29,6 @@ async def message(event):
         final_unex_words = []
         text = f"""{event.message.to_dict()['message']}"""
         message_link = f't.me/c/{str(event.chat_id)[4:]}/{message_id}'
-
         try:
             username = username.username
         except:
@@ -95,6 +93,7 @@ async def join_(event, message, url, telegram_id):
             await client(ImportChatInviteRequest(clear_url))
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
+            sleep(30)
             return
         except InviteHashExpiredError:
             try:
@@ -102,6 +101,7 @@ async def join_(event, message, url, telegram_id):
                 await client(JoinChannelRequest(entity))
                 await save(telegram_id, url, clear_url)
                 print("Joined and save", url)
+                sleep(30)
                 return
             except ValueError:
                 print("Ссылка недействительна!")
@@ -144,6 +144,7 @@ async def save(telegram_id, url, clear_url):
             chat = await client.get_entity(clear_url)
             await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print(f"Succesed add chat {clear_url}")
+            sleep(30)
             return
         except ValueError as ex:
             print(ex)
