@@ -98,6 +98,7 @@ async def join_(event, message, url, telegram_id):
         try:
             print("try")
             await client(ImportChatInviteRequest(clear_url))
+            print("try")
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
             sleep(30)
