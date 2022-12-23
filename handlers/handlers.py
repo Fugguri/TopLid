@@ -250,14 +250,14 @@ async def remove_word(call: types.CallbackQuery):
 @ dp.message_handler(Text(equals='ЧАТЫ🔎'))
 async def chat_list(message: types.Message):
     await message.answer(text='''Тут вы можете добавить свой список чатов и каналов, по которым будет проходить поиск лидов для вас 🎯\nВы можете выбрать чаты из нашей базы или переключиться на свои кнопной "Из базы чатов"''',
-                         reply_markup=chats_list_())
+                         reply_markup=chats_list_(message.from_user.id))
 
 
 @ dp.message_handler(Text(equals='Из базы чатов'))
 async def unexcepted_keywords_list(message: types.Message):
     db.delete_all(message.from_user.id, 'users_chats')
     await message.answer(text="Вы удалили все чаты.\n Не забудьте добавить новые!",
-                         reply_markup=chats_list_())
+                         reply_markup=chats_list_(message.from_user.id))
 
 
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
@@ -266,11 +266,11 @@ async def all_chat_acces(message: types.Message):
         if db.get_status(message.from_user.id) == 1:
             db.set_status(message.from_user.id, 0)
             await message.answer(text="Вы переключились собственный список чатов",
-                                 reply_markup=chats_list_())
+                                 reply_markup=chats_list_(message.from_user.id))
         else:
             db.set_status(message.from_user.id, 1)
             await message.answer(text="Вы переключились на нашу базу чатов",
-                                 reply_markup=chats_list_())
+                                 reply_markup=chats_list_(message.from_user.id))
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
@@ -314,7 +314,7 @@ async def add_word(message: types.Message, state: State):
     await message.answer(text='Бот выполняет поиск по ключевым словам.\n'
                          'Вы можете задать / удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню\n"Добавить новые слова" ниже\n\n'
                          'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
-                         reply_markup=chats_list_())
+                         reply_markup=chats_list_(message.from_user.id))
 
 
 @ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))), state=AddChat.chat)

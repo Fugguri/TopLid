@@ -8,8 +8,14 @@ from main import bot
 from keyboards import links
 from config import api_hash, api_id, phone
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
-db = Database('TopLid')
+import logging
 
+logging.basicConfig()
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+
+db = Database('TopLid')
 client = TelegramClient(phone, api_id, api_hash)
 
 
