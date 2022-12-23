@@ -204,12 +204,6 @@ class Database:
 
     def remove_keyword(self, telegram_id: int, keyword: str):
         with self.connection.cursor() as cursor:
-            # cursor.execute(
-            #     "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
-            # user_id = cursor.fetchone()[0]
-            # cursor.execute(
-            #     "SELECT id FROM keywords WHERE word = (%s)", (keyword,))
-            # keyword_id = cursor.fetchone()[0]
             cursor.execute(
                 'DELETE FROM users_keywords WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND keyword_id = (SELECT id FROM keywords WHERE word = (%s))', (telegram_id, keyword))
             self.connection.commit()
@@ -220,7 +214,7 @@ class Database:
             keywords = cursor.fetchall()
             return [i[0] for i in keywords]
 
-    def remove_keyword_(self,  keyword: str):
+    def remove_keyword_from_table(self,  keyword: str):
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "DELETE FROM keywords WHERE word = (%s)", (keyword,))

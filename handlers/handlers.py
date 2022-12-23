@@ -80,7 +80,7 @@ async def set_time(message: types.Message):
 @dp.message_handler(commands=["delete"])
 async def set_time(message: types.Message):
     word = str(message.get_args())
-    db.remove_keyword_(word)
+    db.remove_keyword_from_table(word)
 
 
 @dp.message_handler(commands=["pay"])
