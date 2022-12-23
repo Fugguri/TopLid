@@ -51,7 +51,7 @@ async def pay(message: types.Message):
 
 @dp.message_handler(Text(equals='ПОМОЩЬ 🆘'))
 async def help(message: types.Message):
-    await message.answer(text="Тут будет ссылка на поддержку")
+    await message.answer(text="По всем вопросам @son2421")
 
 
 @dp.message_handler(Text(equals='В главное меню'))
