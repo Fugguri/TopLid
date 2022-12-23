@@ -83,6 +83,7 @@ async def message(event):
 
 async def connect_(event):
     if '/request' in event.message.to_dict()['message']:
+        print(123)
         message = event.message.to_dict()['message'].split(" ")
         telegram_id = message[-1]
         urls = message[1].split("\n")
@@ -95,6 +96,7 @@ async def join_(event, message, url, telegram_id):
         clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                   "").replace('joinchat/', "")
         try:
+            print("try")
             await client(ImportChatInviteRequest(clear_url))
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
