@@ -96,38 +96,38 @@ async def join_(event, message, url, telegram_id):
     while True:
         clear_url = str(url).replace('https://t.me/', '').replace("+",
                                                                   "").replace('joinchat/', "")
-        try:
-            print("try")
-            await client(ImportChatInviteRequest(clear_url))
-            print("try")
-            await save(telegram_id, url, clear_url)
-            print("Joined and save", url)
+        # try:
+        print("try")
+        await client(ImportChatInviteRequest(clear_url))
+        print("try")
+        await save(telegram_id, url, clear_url)
+        print("Joined and save", url)
 
-            return "true"
-        except InviteHashExpiredError:
-            try:
-                entity = await client.get_entity(clear_url)
-                await client(JoinChannelRequest(entity))
-                await save(telegram_id, url, clear_url)
-                print("Joined and save", url)
-                sleep(30)
-                return
-            except ValueError:
-                print("Ссылка недействительна!")
-                await bot.send_message(
-                    chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
-                return
-            except InviteRequestSentError:
-                return
-            except ChannelsTooMuchError:
-                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-            except FloodWaitError as ex:
-                print("Пересылаю")
-                await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-                return
-            except Exception as ex:
-                print(ex)
+        #     return "true"
+        # except InviteHashExpiredError:
+        #     try:
+        #         entity = await client.get_entity(clear_url)
+        #         await client(JoinChannelRequest(entity))
+        #         await save(telegram_id, url, clear_url)
+        #         print("Joined and save", url)
+        #         sleep(30)
+        #         return
+        #     except ValueError:
+        #         print("Ссылка недействительна!")
+        #         await bot.send_message(
+        #             chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
+        #         return
+        #     except InviteRequestSentError:
+        #         return
+        #     except ChannelsTooMuchError:
+        #         await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+        #     except FloodWaitError as ex:
+        #         print("Пересылаю")
+        #         await bot.send_message(chat_id=message[-1], text="Пересылаю")
+        #         await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+        #         return
+        #     except Exception as ex:
+        #         print(ex)
         # except (UserAlreadyParticipantError, InviteRequestSentError) as er:
         #     print(er, url)
         #     return
