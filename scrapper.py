@@ -83,12 +83,12 @@ async def message(event):
 
 async def connect_(event):
     if '/request' in event.message.to_dict()['message']:
-        print(123)
         message = event.message.to_dict()['message'].split(" ")
         telegram_id = message[-1]
         urls = message[1].split("\n")
         for url in urls:
-            await join_(event, message, url, telegram_id)
+            a = await join_(event, message, url, telegram_id)
+            print(a)
 
 
 async def join_(event, message, url, telegram_id):
@@ -102,8 +102,7 @@ async def join_(event, message, url, telegram_id):
             await save(telegram_id, url, clear_url)
             print("Joined and save", url)
             sleep(30)
-            return
-
+            return "true"
         except InviteHashExpiredError:
             try:
                 entity = await client.get_entity(clear_url)
@@ -154,7 +153,7 @@ async def save(telegram_id, url, clear_url):
         try:
             chat = await client.get_entity(clear_url)
             await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-            print(f"Succesed add chat {clear_url}")
+            print(f"Succes add chat {clear_url}")
             sleep(30)
             return
         except ValueError as ex:
