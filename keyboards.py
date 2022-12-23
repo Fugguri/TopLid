@@ -53,10 +53,10 @@ def chats_list_(telegram_id: int):
     keyboard.add(delete_chat)
     if db.get_status(telegram_id) == 1:
         from_my_chats = KeyboardButton(text="Собирать из моих чатов")
-        keyboard.add(from_all_chats)
+        keyboard.add(from_my_chats)
     else:
         from_all_chats = KeyboardButton(text="Собирать из всех чатов")
-        keyboard.add(from_my_chats)
+        keyboard.add(from_all_chats)
     back_to_main_menu = KeyboardButton(text="В главное меню")
     keyboard.add(back_to_main_menu)
     return keyboard
