@@ -155,13 +155,14 @@ async def save(telegram_id, url, clear_url):
             chat = await client.get_entity(clear_url)
             await db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print(f"Succes add chat {clear_url}")
-            sleep(30)
+            # sleep(30)
             return
         except ValueError as ex:
             print(ex)
             return
-        except:
-            pass
+        except Exception as ex:
+            print(ex)
+
         finally:
             # sleep(60)
             pass
