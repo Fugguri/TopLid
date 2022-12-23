@@ -123,6 +123,7 @@ async def join_(event, message, url, telegram_id):
                 return
             except ChannelsTooMuchError:
                 await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
+                return
             except FloodWaitError as ex:
                 print("Пересылаю")
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
