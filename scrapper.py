@@ -6,7 +6,7 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest, ExportChatInviteRequest
 from main import bot
 from keyboards import links
-from config import api_hash, api_id, phone
+from DB_connectors.config import api_hash, api_id, phone
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 import logging
 # from pymysql.err import
