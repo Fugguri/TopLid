@@ -6,7 +6,6 @@ from aiogram.dispatcher.filters import Text
 from aiogram import types
 from main import dp, db, bot
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from datetime import date
 
 
 class AddWord(StatesGroup):
@@ -197,9 +196,9 @@ async def unexcepted_keywords_list(message: types.Message):
 
 @ dp.message_handler(Text(equals='Удалить все исключающие слова'))
 async def unexcepted_keywords_list(message: types.Message):
-    db.delete_all(message.from_user.id, 'users_unex_words')
     await message.answer(text="Вы удалили все исключающие слова.\n Не забудьте добавить новые!",
                          reply_markup=unexcept_keywords_list())
+    db.delete_all(message.from_user.id, 'users_unex_words')
 
 
 @ dp.message_handler(Text(equals='Список исключающих слов'))
@@ -270,11 +269,9 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
-        print(1)
-        db.set_status(message.from_user.id, 1)
-        print(2)
         await message.answer(text="Вы переключились на нашу базу чатов",
                              reply_markup=chats_list_(message.from_user.id))
+        db.set_status(message.from_user.id, 1)
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
@@ -283,9 +280,9 @@ async def all_chat_acces(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из моих чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
-        db.set_status(message.from_user.id, 0)
         await message.answer(text="Вы переключились собственный список чатов",
                              reply_markup=chats_list_(message.from_user.id))
+        db.set_status(message.from_user.id, 0)
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
