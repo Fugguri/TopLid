@@ -1,3 +1,4 @@
+from asyncio import sleep
 import calendar
 import datetime
 from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
@@ -269,7 +270,9 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
+        print(1)
         db.set_status(message.from_user.id, 1)
+        print(2)
         await message.answer(text="Вы переключились на нашу базу чатов",
                              reply_markup=chats_list_(message.from_user.id))
     else:
@@ -350,7 +353,6 @@ async def remove_chat(call: types.CallbackQuery):
 @ dp.message_handler(state=AddChat.chat)
 async def add_word(message: types.Message):
     await bot.send_message(chat_id=5593323077, text=f'/request {str(message.text)} {message.from_user.id}')
-    from asyncio import sleep
     await sleep(1)
     chats = db.all_user_chats(message.from_user.id)
     await message.answer(
