@@ -23,6 +23,9 @@ client = TelegramClient(phone, api_id, api_hash)
 
 @client.on(events.NewMessage,)
 async def message(event):
+    # async for dialog in client.iter_dialogs():
+    #     # if dialog.is_channel:
+    #     print(f'{dialog.id}:{dialog.title}')
     chat = await client.get_entity(event.chat_id)
     username = await event.get_sender()
     if chat is not User and chat.id != 5751517728:
@@ -87,14 +90,14 @@ async def connect_(event):
         message = event.message.to_dict()['message'].split(" ")
         telegram_id = message[-1]
         urls = message[1].split("\n")
-        print
+
         for url in message:
             if 'http' in url:
                 url.replace("\n", '')
                 a = await join_(message, url, telegram_id)
             else:
                 pass
-                for i in urls:
+                for url in urls:
                     a = await join_(message, url, telegram_id)
                     await sleep(60)
             await sleep(60)

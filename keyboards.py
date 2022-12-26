@@ -47,17 +47,19 @@ def chats_list_(telegram_id: int):
     add_chat = KeyboardButton(text="Добавить новый чат")
     back_to_main_menu = KeyboardButton(text="В главное меню")
     delete_chat = KeyboardButton(text="Удалить все чаты")
-    keyboard.add(all_chats, add_chat, isall(
-        telegram_id), delete_chat).add(back_to_main_menu)
+    keyboard.add(all_chats, add_chat).add(delete_chat)
+    if db.get_status(telegram_id) == 1:
+        print(2)
+        keyboard.add(KeyboardButton(text="Собирать из моих чатов"))
+    else:
+        print(3)
+        keyboard.add(KeyboardButton(text="Собирать из всех чатов"))
+    keyboard.add(back_to_main_menu)
     return keyboard
 
 
 def isall(telegram_id):
-    if db.get_status(telegram_id) == 1:
-        return KeyboardButton(text="Собирать из моих чатов")
-
-    else:
-        return KeyboardButton(text="Собирать из всех чатов")
+    print(1)
 
 
 def words_list(words):

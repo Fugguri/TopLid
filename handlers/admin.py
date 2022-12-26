@@ -9,55 +9,80 @@ import calendar
 
 class Admin(StatesGroup):
     ferify = State()
+    menu = State()
     pay = State()
     add_admin = State()
+    annul = State()
 
 
-admin_markup = types.InlineKeyboardMarkup()
-admin_markup.add(types.InlineKeyboardButton(
-    text="Добавить пользователя(оплачен доступ)", callback_data="Добавить пользователя"))
-admin_markup.add(types.InlineKeyboardButton(
-    text="Добавить администратора", callback_data="Добавить администратора"))
-admin_markup.add(types.InlineKeyboardButton(
-    text="Назад", callback_data="Назад"))
+admin_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+admin_markup.add(types.KeyboardButton(
+    text="Добавить пользователя(оплачен доступ)"))
+admin_markup.add(types.KeyboardButton(
+    text="Добавить администратора"))
+admin_markup.add(types.KeyboardButton(
+    text="Аннулировать подписку"))
+admin_markup.add(types.KeyboardButton(
+    text="Назад"))
 
-back_key = types.InlineKeyboardMarkup()
-back_key.add(types.InlineKeyboardButton(
-    text="Назад", callback_data="В меню"))
-# add_user = types.InlineKeyboardMarkup(
-#     [types.InlineKeyboardButton(text="Назад", callback_data="Назад")])
-# add_admin = types.InlineKeyboardMarkup([
-# add_admin.add(types.InlineKeyboardButton(text="", callback_data=""),
-#     types.InlineKeyboardButton(text="", callback_data=""),
-#     types.InlineKeyboardButton(
-#         text="Назад", callback_data="Назад")
-# ])
+back_key = types.ReplyKeyboardMarkup(resize_keyboard=True)
+back_key.add(types.KeyboardButton(
+    text="В меню"))
 
 
 @ dp.message_handler(commands=["admin"])
 async def admin_cab(message: types.Message):
-    await Admin.ferify.set()
     if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         await message.answer("Выберите команду", reply_markup=admin_markup)
+        await Admin.menu.set()
     else:
+        await Admin.ferify.set()
         await message.answer(text="Введите пароль администратора")
+
+
+@ dp.message_handler(Text(equals="Назад"), state=Admin)
+async def admin_add(message: types.Message, state: State):
+    await message.answer("Вы в главном меню", reply_markup=start_keyboard())
+    await state.finish()
+
+
+@ dp.message_handler(Text(equals="Аннулировать подписку"), state=Admin.menu)
+async def back(message: types.Message, state: State):
+    await message.answer(
+        "Введите ник(username) пользователя", reply_markup=back_key)
+    await Admin.annul.set()
+
+
+@ dp.message_handler(Text(equals="Добавить администратора"), state=Admin.menu)
+async def back(message: types.Message, state: State):
+    await message.answer(
+        "Введите ник(username) пользователя", reply_markup=back_key)
+    await Admin.add_admin.set()
+
+
+@ dp.message_handler(Text(equals="В меню"), state=Admin)
+async def admin_add(message: types.Message, state: State):
+    await state.finish()
+    await message.answer("Выберите команду", reply_markup=admin_markup)
+    await Admin.menu.set()
+
+
+@ dp.message_handler(Text(equals="Добавить пользователя(оплачен доступ)"), state=Admin.menu)
+async def back(message: types.Message, state: State):
+    await message.answer("Введите ник(username) пользователя", reply_markup=back_key)
+    await Admin.pay.set()
 
 
 @ dp.message_handler(state=Admin.ferify)
 async def is_correct(message: types.Message):
     if message.text == "TopLidAdmin":
         await message.answer("Выберите команду", reply_markup=admin_markup)
+        await Admin.menu.set()
     else:
         await message.answer("Неверно!\nПопробуйте еще раз")
 
 
-@dp.callback_query_handler(lambda call: call.data == "Добавить пользователя", state=Admin.ferify)
-async def back(callback: types.CallbackQuery):
-    await callback.message.answer("Введите ник(username) пользователя", reply_markup=back_key)
-    await Admin.pay.set()
-
-
-@dp.message_handler(state=Admin.pay)
+@ dp.message_handler(state=Admin.pay)
 async def back(message: types.CallbackQuery):
     if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         x = datetime.datetime.now()
@@ -73,14 +98,7 @@ async def back(message: types.CallbackQuery):
         await message.answer("Вы не администратор")
 
 
-@dp.callback_query_handler(lambda call: call.data == "Добавить администратора", state=Admin.ferify)
-async def back(callback: types.CallbackQuery):
-    await callback.message.answer(
-        "Введите ник(username) пользователя", reply_markup=back_key)
-    await Admin.add_admin.set()
-
-
-@dp.message_handler(state=Admin.add_admin)
+@ dp.message_handler(state=Admin.add_admin)
 async def back(message: types.CallbackQuery):
     if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
         admin = str(message.text)
@@ -90,33 +108,19 @@ async def back(message: types.CallbackQuery):
         print("Вы не администратор")
 
 
-@dp.message_handler(commands=["annul"])
+@ dp.message_handler(state=Admin.annul)
 async def set_time(message: types.Message):
     if db.is_admin(message.from_user.username) or message.from_user.username in ['son2421', "fugguri"]:
         x = datetime.datetime.now()
-        user = str(message.get_args())
         subscription_end = add_months(x, -1)
         try:
-            db.pay(user, str(subscription_end))
+            db.pay(message.text, str(subscription_end))
             await message.answer("Успешно!")
         except:
             await message.answer(
                 "Ошибка!\nПроверьте данные или обратитесь к администратору!")
     else:
         await message.answer("Вы не администратор")
-
-
-@dp.callback_query_handler(lambda call: call.data == "Назад", state=Admin)
-async def admin_add(callback: types.CallbackQuery, state: State):
-    await callback.message.answer("Вы в главном меню", reply_markup=start_keyboard())
-    await state.finish()
-
-
-@dp.callback_query_handler(lambda call: call.data == "В меню", state=Admin)
-async def admin_add(callback: types.CallbackQuery, state: State):
-    await state.finish()
-    await callback.message.answer("Выберите команду", reply_markup=admin_markup)
-    await Admin.ferify.set()
 
 
 def add_months(sourcedate, months):
@@ -127,7 +131,7 @@ def add_months(sourcedate, months):
     return datetime.date(year, month, day)
 
 
-@dp.message_handler(commands=["TG"])
+@ dp.message_handler(commands=["TG"])
 async def TGreqs(message: types.Message):
     url = str(message.get_args())
     from other.tgstat import get_page

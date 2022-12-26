@@ -17,7 +17,7 @@ class Database:
         with self.connection.cursor() as cursor:
             create = """CREATE TABLE IF NOT EXISTS users
                         (id INT PRIMARY KEY AUTO_INCREMENT,
-                        telegram_id INT UNIQUE NOT NULL ,
+                        telegram_id BIGINT UNIQUE NOT NULL ,
                         full_name TEXT,
                         username TEXT,
                         pay_end TEXT,
@@ -97,10 +97,11 @@ class Database:
             cursor.execute(create)
             self.connection.commit()
 
-    def create_user(self, telegram_id: int, full_name: str, username: str, pay_end):
+    def create_user(self, telegram_id, full_name: str, username: str, pay_end):
+        print(telegram_id)
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''INSERT IGNORE INTO users (telegram_id, full_name, username,pay_end) VALUES(%s,%s,%s,%s) ''', (telegram_id, full_name, username, pay_end))
+                'INSERT IGNORE INTO users (telegram_id, full_name, username, pay_end) VALUES(%s, %s, %s, %s)', (telegram_id, full_name, username, pay_end))
             self.connection.commit()
 
     def add_keyword(self, telegram_id: int, word: str):
@@ -268,22 +269,23 @@ class Database:
         unex = unex_words
         kids = ', '.join(['%s'] * len(key))
         uids = ', '.join(['%s'] * len(unex))
+        print(key, unex, kids, uids)
         with self.connection.cursor() as cursor:
-            cursor.execute(
-                f"""SELECT telegram_id
-                        FROM users WHERE id IN
-                        (SELECT user_id FROM users_keywords WHERE keyword_id
-                        IN
-                        (SELECT id FROM keywords WHERE word IN ({kids})))""", key)
-            uid = cursor.fetchall()
-            sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({}))) ".format(
-                kids)
-            cursor.execute(sql, key)
+            # cursor.execute(
+            #     """SELECT telegram_id
+            #             FROM users WHERE id IN
+            #             (SELECT user_id FROM users_keywords WHERE keyword_id
+            #             IN
+            #             (SELECT id FROM keywords WHERE word IN (%s)))""", (key,))
+            # uid = cursor.fetchall()
+            sql = f"SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({kids})))"
+            print(key, kids)
+            uid = cursor.execute(sql, (key))
             key = cursor.fetchall()
             if unex != []:
                 sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({})))".format(
                     uids)
-                cursor.execute(sql, unex)
+                cursor.execute(sql, (unex,))
 
                 unex = cursor.fetchall()
                 users = [i for i in uid if i not in unex]
@@ -305,8 +307,9 @@ class Database:
 
     def get_status(self, telegram_id):
         with self.connection.cursor() as cursor:
+            print(telegram_id)
             cursor.execute(
-                f'SELECT is_all_chats FROM users WHERE telegram_id={telegram_id}')
+                'SELECT is_all_chats FROM users WHERE telegram_id=(%s)', (telegram_id,))
             is_subs = cursor.fetchone()[0]
             return is_subs
 
@@ -325,7 +328,7 @@ class Database:
     def is_pay(self, telegram_id):
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''SELECT pay_end FROM users WHERE telegram_id=%s''', telegram_id)
+                '''SELECT pay_end FROM users WHERE telegram_id=(%s)''', (telegram_id,))
             pay_end = cursor.fetchone()[0]
             """По хорошему
             переписать на проверку на
@@ -335,7 +338,7 @@ class Database:
     def add_admin(self, username):
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''INSERT IGNORE INTO admins(username) VALUES (%s)''', username)
+                '''INSERT IGNORE INTO admins(username) VALUES (%s)''', (username,))
             self.connection.commit()
 
     def is_admin(self, username):
