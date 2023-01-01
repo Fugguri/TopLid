@@ -106,3 +106,14 @@ async def main_menu(message: types.Message):
 
 Обычно такими словами являются нецензурные слова или фразы, а также слова и фразы ваших конкурентов""",
         reply_markup=start_keyboard())
+
+
+@ dp.callback_query_handler(lambda call: "t.me/" in call.data)
+async def remove_word(call: types.CallbackQuery):
+    click_left = db.click_left(call.from_user.id)
+    if click_left > 0:
+        db.click_use(call.from_user.id)
+        click_left = db.click_left(call.from_user.id)
+        await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data)
+    else:
+        await call.message.reply(text="Ваши запросы на ссылки кончились, пополните счет.")

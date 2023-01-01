@@ -46,14 +46,14 @@ def chats_list_(telegram_id: int):
     all_chats = KeyboardButton(text="Мои чаты")
     add_chat = KeyboardButton(text="Добавить новый чат")
     back_to_main_menu = KeyboardButton(text="В главное меню")
+    parse_message = KeyboardButton(text="Поиск по чатам(в разработке)")
     delete_chat = KeyboardButton(text="Удалить все чаты")
     keyboard.add(all_chats, add_chat).add(delete_chat)
     if db.get_status(telegram_id) == 1:
-        print(2)
         keyboard.add(KeyboardButton(text="Собирать из моих чатов"))
     else:
-        print(3)
         keyboard.add(KeyboardButton(text="Собирать из всех чатов"))
+    keyboard.add(parse_message)
     keyboard.add(back_to_main_menu)
     return keyboard
 
@@ -102,13 +102,16 @@ def links(message=None, chat_id=None, user=None):
     keyboard = InlineKeyboardMarkup(row_width=1)
     if chat_id is None:
         chat = f"https://t.me/joinchat/{db.get_chat_link(chat_id)}"
-        keyboard.add(InlineKeyboardButton(text="Чат", url=chat))
+        keyboard.add(InlineKeyboardButton(
+            text="Чат", callback_data=chat))
     else:
         chat = f"https://t.me/{chat_id}"
-        keyboard.add(InlineKeyboardButton(text="Чат", url=chat))
+        keyboard.add(InlineKeyboardButton(
+            text="Чат", callback_data=chat))
     if message:
-        keyboard.add(InlineKeyboardButton(text="Сообщение", url=message))
+        keyboard.add(InlineKeyboardButton(text="Сообщение",
+                                          callback_data=message))
     if "None" not in user:
         keyboard.add(InlineKeyboardButton(
-            text="Ответить", url=user))
+            text="Ответить", callback_data=user))
     return keyboard

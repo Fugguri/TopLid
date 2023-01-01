@@ -1,0 +1,794 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Пароль: SW.BAND
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Пароль: David-pickaway-matchy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+🐍 [ENG] Библия Python | Все, что вам нужно для программирования на Python (2020)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Python Programming - Multithreading, OOP, NumPy and Pandas 2022
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Этичный хакинг. Практическое руководство по взлому.
+Software Engineering for Absolute Beginners
+🐍 Python разработка - с нуля до профессионала. Python 3 (2022)
+
+
+
+
+
+🐍 [ENG] Библия Python | Все, что вам нужно для программирования на Python (2020)
+🐍 Устройство и применение библиотек dry-python на практике (middle+) (2021)
+🐍 [ENG] The Complete Python Pro Bootcamp for Data Science and AI
+🐍 Автоматизация тестирования+Программирование на Python с нуля (2022)
+Микросервисы на Python (asyncio, starlette) + RabbitMQ
+Паттерны разработки на Python
+Practical Python Data Wrangling and Data Quality
+Python Flask с нуля. CRUD операции в веб приложении (2022)
+Python Programming - Multithreading, OOP, NumPy and Pandas 2022
+[ENG] Django 4 and Python Full-Stack Developer Masterclass (2022)
+
+
+Математика на Python
+Python + Django: с нуля до коммерческих приложений
+PyTorch Pocket Reference
+Data Mining for Business Analytics
+
+Разработка Telegram ботов на Pyrogram Python
+Python True Book
+
+
+
+
+Fluent Python: Clear, Concise, and Effective Programming
+
+
+Python для программирования криптовалют
+Написание лайфхаков на Python
+Python for Professionals: Learning Python as a Second Language
+Python и DevOps: Ключ к автоматизации Linux
+
+
+
+
+
+
+
+
+
+
+
+
+
+Объектно-ориентированное программирование на Python (2022)
+Object-Oriented Python: Master OOP by Building Games and GUIs (2021)
+Python. Справочник. Полное описание языка, 3-е издание
+Real-World Python: A Hacker's Guide to Solving Problems with Code
+Data Science Bookcamp: Five real-world Python projects
+Глубокое обучение с fastai и PyTorch. Минимум формул, минимум кода, максимум эффективности
+Coding with Python: A Simple And Straightforward Guide For Beginners To Learn Fast Programming With Python
+Behavioral Data Analysis with R and Python
+Разработка геоприложений на языке Python
+Building Versatile Mobile Apps with Python and REST
+Monetizing Machine Learning
+Python for Algorithmic Trading
+Однострочники Python: лаконичный и содержательный код
+Python Machine Learning By Example - 2020
+Mastering Python Networking
+Типизированный Python для профессиональной разработки
+Изучение сложных систем с помощью Python
+Регулярные выражения. 3-е издание
+Математика на Python
+Expert Python Programming
+Math for Programmers 3D graphics, machine learning, and simulations with Python
+Python: Penetration Testing for Developers
+Python Testing with pytest
+Competitive Programming in Python: 128 Algorithms to Develop your Coding Skills — Christoph Dürr, Jill-Jênn Vie
+TensorFlow 2 Pocket Reference
+
+PDF форма сконвертирован с epub формата. Предпочтительнее в epub читать.
+
+Практическая статистика для специалистов Data Science
+Учимся программировать с примерами на Python
+Основы Python. Научитесь мыслить как программист
+Эволюционные нейросети на языке Python
+Генетические алгоритмы на Python
+Python Workbook: Learn Python in one day and Learn It Well
+Основы искусственного интеллекта в примерах на Python
+Построение систем машинного обучения на языке Python
+Python for DevOps Learn Ruthlessly Effective Automation
+Python для детей. Самоучитель по программированию
+Black_Hat_Python_Программирование_для_хакеров_и_пентестеров_
+Create GUI Applications with Python & Qt5
+Real-World Python: A Hacker's Guide to Solving Problems with Code - 2020
+Python Notes for Professionals (en)
+Learn Python programming - 2020
+Глубокое обучение на Python — Франсуа Шолле
+Байесовский анализ на Python (ru)
+Practical Python Data Visualization (en)
+Создание сайтов на Python (ru)
+Ontologies with Python (en)
+Mastering Large Datasets with Python (en)
+Изучаем Python том 2 (ru)
+Изучаем Python том 1 (ru)
+Python Programming for Hackers and Pentesters (en)
+Effective Python (en)
+Beginners Guide to Python Programming Language: A Crash Course to Mastering Python in One Hour
+Python на примерах – Васильев А. Н.
+Python: Искусственный интеллект, большие данные и облачные вычисления — Дейтел Пол, Дейтел Харви
+Python for Algorithmic Trading
+Elements of Programmirg Intenriews in Python

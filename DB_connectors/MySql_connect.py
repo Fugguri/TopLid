@@ -21,7 +21,8 @@ class Database:
                         full_name TEXT,
                         username TEXT,
                         pay_end TEXT,
-                        is_all_chats INT DEFAULT 1
+                        is_all_chats INT DEFAULT 1,
+                        click_left INT NOT NULL DEFAULT 0
                         );"""
             cursor.execute(create)
             self.connection.commit()
@@ -98,11 +99,30 @@ class Database:
             self.connection.commit()
 
     def create_user(self, telegram_id, full_name: str, username: str, pay_end):
-        print(telegram_id)
         with self.connection.cursor() as cursor:
             cursor.execute(
                 'INSERT IGNORE INTO users (telegram_id, full_name, username, pay_end) VALUES(%s, %s, %s, %s)', (telegram_id, full_name, username, pay_end))
             self.connection.commit()
+
+    def click_use(self, telegram_id,):
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                'UPDATE users SET click_left = click_left - 1 WHERE telegram_id =(%s)', (telegram_id,))
+            self.connection.commit()
+
+    def click_add(self, amount: int, username,):
+        with self.connection.cursor() as cursor:
+            sql = 'UPDATE users SET click_left = (%s) WHERE username = %s'
+            cursor.execute(
+                sql, (amount, username))
+            self.connection.commit()
+
+    def click_left(self, telegram_id):
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                'SELECT click_left FROM users WHERE telegram_id=(%s)', (telegram_id,))
+            clicks = cursor.fetchone()[0]
+            return clicks
 
     def add_keyword(self, telegram_id: int, word: str):
         with self.connection.cursor() as cursor:
@@ -269,26 +289,15 @@ class Database:
         unex = unex_words
         kids = ', '.join(['%s'] * len(key))
         uids = ', '.join(['%s'] * len(unex))
-        print(key, unex, kids, uids)
         with self.connection.cursor() as cursor:
-            # cursor.execute(
-            #     """SELECT telegram_id
-            #             FROM users WHERE id IN
-            #             (SELECT user_id FROM users_keywords WHERE keyword_id
-            #             IN
-            #             (SELECT id FROM keywords WHERE word IN (%s)))""", (key,))
-            # uid = cursor.fetchall()
             sql = f"SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({kids})))"
-            print(key, kids)
-            uid = cursor.execute(sql, (key))
+            cursor.execute(sql, (key))
             key = cursor.fetchall()
             if unex != []:
-                sql = "SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({})))".format(
-                    uids)
-                cursor.execute(sql, (unex,))
-
+                usql = f"SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({uids})))"
+                cursor.execute(usql, (unex))
                 unex = cursor.fetchall()
-                users = [i for i in uid if i not in unex]
+                users = [i for i in key if i not in unex]
                 return [i[0] for i in users]
             else:
                 return [i[0] for i in key]
@@ -307,7 +316,6 @@ class Database:
 
     def get_status(self, telegram_id):
         with self.connection.cursor() as cursor:
-            print(telegram_id)
             cursor.execute(
                 'SELECT is_all_chats FROM users WHERE telegram_id=(%s)', (telegram_id,))
             is_subs = cursor.fetchone()[0]
@@ -351,6 +359,13 @@ class Database:
         with self.connection.cursor() as cursor:
             chat = cursor.execute(
                 "SELECT chat FROM chats WHERE chat_num=%s", chat_id)
+            chat = cursor.fetchone()[0]
+            return chat
+
+    def get_chat_id(self, title):
+        with self.connection.cursor() as cursor:
+            chat = cursor.execute(
+                "SELECT chat_num FROM chats WHERE chat_title=(%s)", title)
             chat = cursor.fetchone()[0]
             return chat
 

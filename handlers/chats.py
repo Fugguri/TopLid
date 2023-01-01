@@ -10,6 +10,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 
 class AddChat(StatesGroup):
     chat = State()
+    messages = State()
 
 
 '''Чаты !!!'''
@@ -29,9 +30,9 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из всех чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
+        db.set_status(message.from_user.id, 1)
         await message.answer(text="Вы переключились на нашу базу чатов",
                              reply_markup=chats_list_(message.from_user.id))
-        db.set_status(message.from_user.id, 1)
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
@@ -40,9 +41,9 @@ async def all_chat_acces(message: types.Message):
 @ dp.message_handler(Text(equals="Собирать из моих чатов"))
 async def all_chat_acces(message: types.Message):
     if db.is_pay(message.from_user.id):
+        db.set_status(message.from_user.id, 0)
         await message.answer(text="Вы переключились собственный список чатов",
                              reply_markup=chats_list_(message.from_user.id))
-        db.set_status(message.from_user.id, 0)
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
@@ -80,13 +81,62 @@ async def remove_chat(call: types.CallbackQuery):
                               reply_markup=chats_key(keywords))
 
 
-@ dp.message_handler(Text(equals="Назад"), state=AddChat.chat)
+@ dp.message_handler(Text(equals="Назад"), state=AddChat)
 async def add_word(message: types.Message, state: State):
     await state.finish()
     await message.answer(text='Бот выполняет поиск по ключевым словам.\n'
                          'Вы можете задать / удалить слова и фразы, по которым будет осуществляться поиск в чатах в пункте меню\n"Добавить новые слова" ниже\n\n'
                          'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
                          reply_markup=chats_list_(message.from_user.id))
+
+
+@ dp.message_handler(Text(equals="Поиск по чатам(в разработке)"))
+async def add_word(message: types.Message, state: State):
+    await AddChat.messages.set()
+    keywords = db.all_user_chats(message.from_user.id)
+    await message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
+
+
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))), state=AddChat.messages)
+async def remove_chat(callback: types.CallbackQuery):
+    text = (callback["message"]["reply_markup"]["inline_keyboard"])
+    text = [i[0]['text'] for i in text if callback.data in i[0]['text']][0]
+    print(text)
+    await callback.message.answer(text='После сбора и обработки данных вам будет выслан файл с данными сообщений', reply_markup=back())
+    chat_id = db.get_chat_id(text)
+    await get_message_histore_by_keywords(chat_id)
+
+    with open(f"{chat_id}.txt", "rb") as w:
+        await callback.message.answer_document(document=w)
+        bot.send_message()
+
+
+async def get_message_histore_by_keywords(chat_id):
+    from HearBot2 import clients
+
+    for client in clients:
+        print("try")
+        async with client:
+            try:
+                client.loop.run_until_complete(await mes(chat_id, client))
+                sleep(10)
+                return
+            except:
+                pass
+
+
+async def mes(chat_id, client):
+    getmessage = client.iter_messages(chat_id)
+    print("try")
+    with open(f"{chat_id}.txt", "w") as w:
+        async for message in getmessage:
+            if message.message != None and str(message.date)[:-15] != "2022-12-20":
+                print(str(message.date)[:-15])
+                mes = message.message + \
+                    str(message.date)[:-15] + \
+                    "\n -------------------------------- \n"
+                w.write(mes)
+        return
 
 
 @ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))), state=AddChat.chat)
@@ -110,7 +160,7 @@ async def remove_chat(call: types.CallbackQuery):
 @ dp.message_handler(state=AddChat.chat)
 async def add_word(message: types.Message):
     await bot.send_message(chat_id=5593323077, text=f'/request {str(message.text)} {message.from_user.id}')
-    await sleep(1)
+    await sleep(1.5)
     chats = db.all_user_chats(message.from_user.id)
     await message.answer(
         text="Ваши чаты. Добавленный чат отобразится через время, после того как бот вступит в чат.\nЧтобы удалить нажмите на название чата", reply_markup=chats_key(chats))

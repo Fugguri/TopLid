@@ -1,0 +1,654 @@
+Here it is: Fugguri Bot @FugguriBot.
+What do you want to do with the bot?
+
+Sorry, the image dimensions are invalid. Must be 640x360.
+
+Please send a photo or a GIF.
+
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180, 640x360 or 960x540 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Клуб с уникальными инвеcтициоными предложениями
+Description picture: 🖼 has a description photo
+Botpic: 🚫 no botpic
+Commands: 1 command
+Клуб с уникальными инвеcтициоными предложениями
+OK. Send me the new description for the bot. People will see this description when they open a chat with your bot, in a block titled 'What can this bot do?'.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Клуб с уникальными инвеcтициоными предложениями
+Description picture: 🚫 no description picture
+Botpic: 🚫 no botpic
+Commands: 1 command
+/empty
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180, 640x360 or 960x540 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Нажми старт, чтобы начать.
+Description picture: 🚫 no description picture
+Botpic: 🚫 no botpic
+Commands: 1 command
+Нажми старт, чтобы начать.
+OK. Send me the new description for the bot. People will see this description when they open a chat with your bot, in a block titled 'What can this bot do?'.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Нажми старт, чтобы начать.
+Description picture: 🖼 has a description photo
+Botpic: 🚫 no botpic
+Commands: 1 command
+/mybots
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+Купл.
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+вы
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+вы
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+вы
+You are about to transfer ownership of the bot @eglium_school_bot to Anastasiya Futtur.
+
+After this you won't be able to control the bot anymore. The new owner will get access to the bot messages and other data – and can even delete the bot completely.
+
+Please make sure you don't violate your users' privacy (consider GDPR and other laws). If you are sure please press the button below.
+https://t.me/futtur
+Incorrect format. Please make sure to send either a contact or username.
+futtur
+Please share the new owner's contact or their username.
+You can transfer bot ownership to another Telegram user.
+Написать админу школы @engliumschool
+Позвонить в школу +7(495)220-50-10
+Сайт: https://englium.ru/
+OK. Send me the new 'About' text. People will see this text on the bot's profile page and it will be sent together with a link to your bot when they share it with someone.
+Edit @eglium_school_bot info.
+
+Name: Englium School Bot
+About: Написать админу школы @engliumschool
+Позвонить в школу +7(495)220-50-10
+Сайт: https://englium.ru/
+Description: Здравствуйте!
+Чтобы начать, нажмите кнопку Запустить
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+/mybots
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+text
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+text
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+чат
+Edit @CryptoMind_trading_bot info.
+
+Name: CryptoMind trading bot
+About: 🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода.
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+/empty
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180, 640x360 or 960x540 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+Edit @CryptoMind_trading_bot info.
+
+Name: CryptoMind trading bot
+About: 🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода.
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода.
+Sorry, the about info you provided is invalid. It must not exceed 120 characters.
+🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода который требует минимум времени для контроля и отслеживания работы.
+Sorry, the about info you provided is invalid. It must not exceed 120 characters.
+🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода который требует минимум времени для контроля и отслеживания работы. Торговые алгоритмы 🤖БОТа обновляются с 06.2020 , БОТ успешно🚀 проходит медвежий рынок 2022 года.
+Sorry, the about info you provided is invalid. It must not exceed 120 characters.
+🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода который требует минимум времени для контроля и отслеживания работы. Торговые алгоритмы 🤖БОТа обновляются с 06.2020 , БОТ успешно🚀 проходит медвежий рынок 2022 года. 
+
+Ключевая ценность проекта: ежедневный контроль актуальности торговых стратегий командой трейдеров🤓🥸😎. 
+
+📈 Доходность: от 10% до 30% в месяц , зависит от волатильности рынка
+
+Мы берем комиссию 20% ТОЛЬКО С ПРИБЫЛИ‼️, которую вы получаете при торговле ботом, но не больше чем 50 USD в USDT эквиваленте
+OK. Send me the new 'About' text. People will see this text on the bot's profile page and it will be sent together with a link to your bot when they share it with someone.
+Edit @CryptoMind_trading_bot info.
+
+Name: CryptoMind trading bot
+About: 🤖 СryptoMind Trading Bot предназначен для автоматической торговли на криптовалютном рынке и получения пассивного дохода.
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+/empty
+Sorry, the image dimensions are invalid. Must be 640x360.
+
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180, 640x360 or 960x540 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+Success! Profile photo updated. /help
+
+Please send a photo.
+fsd
+OK. Send me the new profile photo for the bot.
+Edit @CryptoMind_trading_bot info.
+
+Name: CryptoMind trading bot
+About: 🚫
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+CryptoMind trading bot
+OK. Send me the new name for your bot.
+Edit @CryptoMind_trading_bot info.
+
+Name: CryptoMind trading bot
+About: 🚫
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+start - Запустить
+OK. Send me a list of commands for your bot. Please use this format:
+
+command1 - Description
+command2 - Another description
+
+Send /empty to keep the list empty.
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+/start - Запустить
+OK. Send me a list of commands for your bot. Please use this format:
+
+command1 - Description
+command2 - Another description
+
+Send /empty to keep the list empty.
+Edit @CryptoMind_trading_bot info.
+
+Name: Crypto Trading Bot
+About: 🚫
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: 1 command
+Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+OK. Send me the new description for the bot. People will see this description when they open a chat with your bot, in a block titled 'What can this bot do?'.
+Edit @CryptoMind_trading_bot info.
+
+Name: Crypto Trading Bot
+About: 🚫
+Description: Вкратце о проекте
+
+👉 сервис БЕСПЛАТЕН, до получение вами первой прибыли 
+👉 доходность 10-30% в месяц, 120-360% в год
+👉проект аккредитован ведущей биржей BINANCE
+👉 БОТ ежесекундно отслеживает ТОП 100 монет из списка CoinMarketCap по 56 параметрам и критериям
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: no commands yet
+
+Please send me the picture as a 'Photo', not as a 'File'.
+
+OK. Send me the new profile photo for the bot.
+Edit @CryptoMind_trading_bot info.
+
+Name: Crypto Trading Bot
+About: 🚫
+Description: 🚫
+Description picture: 🚫 no description picture
+Botpic: 🖼 has a botpic
+Commands: no commands yet
+/mybots
+Done! Congratulations on your new bot. You will find it at t.me/CryptoMind_trading_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+5954088206:AAHffI14WvUqr-D94ZdqoW2LcvW38EiqQQA
+Keep your token secure and store it safely, it can be used by anyone to control your bot.
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+CryptoMind_trading_bot
+Sorry, this username is already taken. Please try something different.
+CryptoMind_trade_bot
+Sorry, this username is already taken. Please try something different.
+Crypto_Trading__bot
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+Crypto Trading Bot
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+/newbot
+Choose a bot from the list below:
+/mybots
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+/newbot
+Done! Congratulations on your new bot. You will find it at t.me/Group_lead_box_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+5751517728:AAHw7xtZfK8eg9YOvyay0b-JD7t7locoleM
+Keep your token secure and store it safely, it can be used by anyone to control your bot.
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+Group_lead_box_bot
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+Group_lead_box_bot
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+/newbot
+Sorry, this username is already taken. Please try something different.
+Lead_Box_bot
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+LeadBox
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+/newbot
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+clear
+Done! Congratulations on your new bot. You will find it at t.me/fuggu_rc_bot. You can now add a description, about section and profile picture for your bot, see /help for a list of commands. By the way, when you've finished creating your cool bot, ping our Bot Support if you want a better username for it. Just make sure the bot is fully operational before you do this.
+
+Use this token to access the HTTP API:
+5977871426:AAEa8zDSnW3CA6BQpRhWe1Jh3NM9SpHiNrk
+Keep your token secure and store it safely, it can be used by anyone to control your bot.
+
+For a description of the Bot API, see this page: https://core.telegram.org/bots/api
+fuggu_rc_bot
+Good. Now let's choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.
+Fuggu RC
+Alright, a new bot. How are we going to call it? Please choose a name for your bot.
+/newbot
+Here is the token for bot Englium School Bot @eglium_school_bot:
+
+5778585276:AAGqbkxZI2Lv5OZqK0WOVOhjWo3oRg04zjk
+start - Запустить
+OK. Send me a list of commands for your bot. Please use this format:
+
+command1 - Description
+command2 - Another description
+
+Send /empty to keep the list empty.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Привет!
+
+Это карьерный бот юридической компании CREDIX⚖️
+
+Пройди небольшой опрос, расскажи о себе и присоединяйся к команде нашего коммерческого департамента ☑️
+Description picture: 🖼 has a description photo
+Botpic: 🚫 no botpic
+Commands: 1 command
+Привет!
+
+Это карьерный бот юридической компании CREDIX⚖️
+
+Пройди небольшой опрос, расскажи о себе и присоединяйся к команде нашего коммерческого департамента ☑️
+OK. Send me the new description for the bot. People will see this description when they open a chat with your bot, in a block titled 'What can this bot do?'.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Привет!
+
+Это карьерный бот юридической компании CREDIX⚖️
+
+Пройди небольшой опрос, расскажи о себе и присоединяйся к команде нашего коммерческого департамента ☑️
+Description picture: 🖼 has a description photo
+Botpic: 🚫 no botpic
+Commands: no commands yet
+
+Please send me the picture as a 'Photo' or as a 'GIF', not as a 'File'.
+ds
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+Success! Description photo updated. /help
+/empty
+OK. Please upload a description photo for the bot, 640x360 pixels. Or a GIF,  320x180 pixels. People will see this photo or GIF when they open a chat with your bot, in a block titled 'What can this bot do?'. Use /empty to remove the current picture.
+OK. Send me the new description for the bot. People will see this description when they open a chat with your bot, in a block titled 'What can this bot do?'.
+Edit @FugguriBot info.
+
+Name: Fugguri Bot
+About: 🚫
+Description: Привет!
+
+Это бот юридической компании CREDIX ⚖️
+
+Пройди небольшой вопрос,
+расскажи о себе и присоединяйся к команде нашего коммерческого департамента☑️
+Description picture: 🖼 has a description photo
+Botpic: 🚫 no botpic
+Commands: no commands yet
+/mybots
+Invalid bot selected.
+description
+Choose a bot to change the about section.
+/setabouttext
+Invalid bot selected.
+description
+Choose a bot to change description.
+/setdescription
+I can help you create and manage Telegram bots. If you're new to the Bot API, please see the manual.
+
+You can control me by sending these commands:
+
+/newbot - create a new bot
+/mybots - edit your bots [beta]
+
+Edit Bots
+/setname - change a bot's name
+/setdescription - change bot description
+/setabouttext - change bot about info
+/setuserpic - change bot profile photo
+/setcommands - change the list of commands
+/deletebot - delete a bot
+
+Bot Settings
+/token - generate authorization token
+/revoke - revoke bot access token
+/setinline - toggle inline mode
+/setinlinegeo - toggle inline location requests
+/setinlinefeedback - change inline feedback settings
+/setjoingroups - can your bot be added to groups?
+/setprivacy - toggle privacy mode in groups
+
+Games
+/mygames - edit your games [beta]
+/newgame - create a new game
+/listgames - get a list of your games
+/editgame - edit a game
+/deletegame - delete an existing game
+/start

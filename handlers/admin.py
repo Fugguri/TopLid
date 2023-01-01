@@ -13,13 +13,15 @@ class Admin(StatesGroup):
     pay = State()
     add_admin = State()
     annul = State()
+    add_click = State()
 
 
 admin_markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
 admin_markup.add(types.KeyboardButton(
     text="Добавить пользователя(оплачен доступ)"))
 admin_markup.add(types.KeyboardButton(
-    text="Добавить администратора"))
+    text="Добавить администратора")).add(types.KeyboardButton(
+        text="Добавить попытки"))
 admin_markup.add(types.KeyboardButton(
     text="Аннулировать подписку"))
 admin_markup.add(types.KeyboardButton(
@@ -51,6 +53,13 @@ async def back(message: types.Message, state: State):
     await message.answer(
         "Введите ник(username) пользователя", reply_markup=back_key)
     await Admin.annul.set()
+
+
+@ dp.message_handler(Text(equals="Добавить попытки"), state=Admin.menu)
+async def back(message: types.Message, state: State):
+    await message.answer(
+        "Введите ник(username) пользователя и количество попыток", reply_markup=back_key)
+    await Admin.add_click.set()
 
 
 @ dp.message_handler(Text(equals="Добавить администратора"), state=Admin.menu)
@@ -105,7 +114,22 @@ async def back(message: types.CallbackQuery):
         db.add_admin(admin)
         await message.answer("Успешно")
     else:
-        print("Вы не администратор")
+        await message.answer("Вы не администратор")
+
+
+@ dp.message_handler(state=Admin.add_click)
+async def add_click(message: types.CallbackQuery):
+    if message.from_user.username in ["fugguri", 'son2421'] or message.from_user.username in db.is_admin(message.from_user.username):
+        command = str(message.text).split(" ")
+        amount = command[1]
+        user = command[0]
+        try:
+            db.click_add(amount, user)
+            await message.answer("Успешно")
+        except:
+            await message.answer("Ошибка")
+    else:
+        await message.answer("Вы не администратор")
 
 
 @ dp.message_handler(state=Admin.annul)

@@ -10,6 +10,9 @@ api_id2 = 26730629
 api_hash2 = 'ecc702d7da5fac793aefc9c77454ae7b'
 phone2 = '+79185530587'
 
+api_id3 = 28584421
+api_hash3 = 'a65b42072ccdfa8301b97ffb497d0388'
+phone3 = '+79502213750'
 
 """Mysql"""
 host = 'localhost'
