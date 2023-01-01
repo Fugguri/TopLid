@@ -218,11 +218,9 @@ async def work(client):
 
 
 async def main():
-    """     WARNING!!!
-    add clients from bottom to top"""
     await asyncio.gather(
+        work(client)
         # work(client3),
-        work(client),
         # work(client2),
     )
 
