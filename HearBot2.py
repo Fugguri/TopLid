@@ -217,7 +217,6 @@ async def work(client):
 
 async def main():
     await asyncio.gather(
-        print(123),
         work(client)
         # work(client3),
         # work(client2),
