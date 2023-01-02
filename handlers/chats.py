@@ -10,9 +10,11 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 
 class AddChat(StatesGroup):
     chat = State()
+    end_date = State()
     messages = State()
 
 
+end_date_message = {}
 '''Чаты !!!'''
 
 
@@ -92,8 +94,17 @@ async def add_word(message: types.Message, state: State):
 
 @ dp.message_handler(Text(equals="Поиск по чатам(в разработке)"))
 async def add_word(message: types.Message, state: State):
+    await AddChat.end_date.set()
+    await message.answer(text='Введите дату, по которую будем собирать данные. Формат YYYY-MM-DD(2020-12-20)')
+
+
+@ dp.message_handler(lambda message: message.text, state=AddChat.end_date)
+async def add_word(message: types.Message, state: State):
     await AddChat.messages.set()
+    print(message.text)
     keywords = db.all_user_chats(message.from_user.id)
+    global end_date_message
+    end_date_message[message.from_user.id] = message.text
     await message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
 
 
@@ -101,41 +112,53 @@ async def add_word(message: types.Message, state: State):
 async def remove_chat(callback: types.CallbackQuery):
     text = (callback["message"]["reply_markup"]["inline_keyboard"])
     text = [i[0]['text'] for i in text if callback.data in i[0]['text']][0]
-    print(text)
     await callback.message.answer(text='После сбора и обработки данных вам будет выслан файл с данными сообщений', reply_markup=back())
     chat_id = db.get_chat_id(text)
-    await get_message_histore_by_keywords(chat_id)
+    user_id = callback.from_user.id
+    await get_message_history_by_keywords(chat_id, user_id)
 
-    with open(f"{chat_id}.txt", "rb") as w:
-        await callback.message.answer_document(document=w)
-        bot.send_message()
+    try:
+        with open(f"chats/{chat_id}.txt", "rb") as w:
+            await callback.message.answer_document(document=w)
+    except:
+        await callback.message.answer(text='Видимо нет сообщений, удовлетворяющих запросу в данном временном промежутке ', reply_markup=back())
 
 
-async def get_message_histore_by_keywords(chat_id):
+async def get_message_history_by_keywords(chat_id, user_id):
     from HearBot2 import clients
-
     for client in clients:
         print("try")
         async with client:
-            try:
-                client.loop.run_until_complete(await mes(chat_id, client))
-                sleep(10)
-                return
-            except:
-                pass
+            # try:
+            await mes(chat_id, client, user_id)
+            break
+            # except:
+            #     print('except')
+    return
 
 
-async def mes(chat_id, client):
+async def mes(chat_id, client, user_id):
     getmessage = client.iter_messages(chat_id)
+    keywords = db.all_words(user_id)
+    unex_words = db.all_unex_words(user_id)
     print("try")
-    with open(f"{chat_id}.txt", "w") as w:
+    with open(f"chats/{chat_id}.txt", "w") as w:
         async for message in getmessage:
-            if message.message != None and str(message.date)[:-15] != "2022-12-20":
-                print(str(message.date)[:-15])
-                mes = message.message + \
-                    str(message.date)[:-15] + \
-                    "\n -------------------------------- \n"
-                w.write(mes)
+            print(str(message.date)[:-15])
+            if message.message != None:
+                key = any(
+                    list(map(lambda x: x in message.message, keywords)))
+                unex = any(
+                    list(map(lambda x: x in message.message, unex_words)))
+                if key and not unex:
+                    mes = "\n"+str(message.date)[:-15] + \
+                        message.message + \
+                        "\n -------------------------------- \n"
+                    w.write(mes)
+            elif str(message.date)[:-15] == end_date_message[user_id].strip():
+                return
+            else:
+                continue
         return
 
 

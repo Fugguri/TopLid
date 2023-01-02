@@ -7,7 +7,7 @@ from asyncio import sleep
 api_id = 28584421
 api_hash = 'a65b42072ccdfa8301b97ffb497d0388'
 phone = '+79502213750'
-timer = 3  # TIME TO WAIT BEFORE NEXT SENDING
+timer = 1  # TIME TO WAIT BEFORE NEXT SENDING
 msgtosend = """Сообщение рассылки"""  # MESSAGE TO SEND
 
 

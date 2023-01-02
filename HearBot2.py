@@ -1,26 +1,22 @@
-from asyncio import sleep
-import time
-from telethon import TelegramClient, events
-from telethon.tl.types import User, Channel, Chat as User, Channel, Chat
-from telethon.events import *
-from DB_connectors.MySql_connect import Database
-from telethon.tl.functions.channels import JoinChannelRequest
-from telethon.tl.functions.messages import ImportChatInviteRequest, ExportChatInviteRequest, CheckChatInviteRequest
-from main import bot
-from keyboards import links
-from config import *
-from telethon.tl.types import MessageActionContactSignUp, UpdateNewMessage
-from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 import asyncio
+from DB_connectors.MySql_connect import Database
+from telethon import TelegramClient, events
+from telethon.tl.functions.channels import JoinChannelRequest
+from telethon.tl.functions.messages import ImportChatInviteRequest
+from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
+from telethon.events import *
 from aiogram.utils.exceptions import BotBlocked
 from pymysql.err import IntegrityError
-
+from keyboards import links
+from config import *
+from main import bot
+from asyncio import sleep
 db = Database('TopLid')
 client = TelegramClient(phone, api_id, api_hash)
 client2 = TelegramClient(phone2, api_id2, api_hash2)
 client3 = TelegramClient(phone3, api_id3, api_hash3)
 clients_id = [5593323077, 248184623]
-clients = [client, client3]
+clients = [client]
 
 
 def main(client):
@@ -102,7 +98,7 @@ async def work(client):
                 telegram_id = message[-1]
                 urls = [i.strip() for i in message[1].split("\n") if i != " "]
                 print(message, telegram_id, urls)
-                for url in message:
+                for url in message[1:-1]:
                     if 'http' in url:
                         url.replace("\n", '')
                         a = await join_chat(message, url, telegram_id, client)
@@ -116,86 +112,86 @@ async def work(client):
             return
 
         async def join_chat(message, url, telegram_id, client):
-            while True:
-                clear_url = str(url).replace('https://t.me/', '').replace("+",
-                                                                          "").replace('joinchat/', "")
+            clear_url = str(url).replace('https://t.me/', '').replace("+",
+                                                                      "").replace('joinchat/', "")
+            try:
+                print("try ChatInvite", clear_url)
+                await client(ImportChatInviteRequest(clear_url))
+                await sleep(30)
+                print("try save")
+                await save(telegram_id, url, clear_url)
+                print("Joined and save", url)
+                return
+            except InviteHashExpiredError as ex:
+                # print(ex)
                 try:
-                    print("try", clear_url)
-                    await client(ImportChatInviteRequest(clear_url))
+                    print("try JoinChannel")
+                    entity = await client.get_entity(clear_url)
+                    await client(JoinChannelRequest(entity))
                     print("try save")
                     await save(telegram_id, url, clear_url)
                     print("Joined and save", url)
                     return
-                except InviteHashExpiredError as ex:
-                    # print(ex)
-                    try:
-                        # print("try")
-                        entity = await client.get_entity(clear_url)
-                        await client(JoinChannelRequest(entity))
-                        await save(telegram_id, url, clear_url)
-                        print("Joined and save", url)
-                        await sleep(30)
-                        return
-                    except ValueError:
-                        print("Ссылка недействительна!")
-                        await bot.send_message(
-                            chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
-                        return
-                    except InviteRequestSentError as er:
-                        print(er, 123)
-                        return
-                    except ChannelsTooMuchError:
-                        await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-                        return
-                    except FloodWaitError as ex:
-                        print(ex)
-                        print("Пересылаю")
-                        me = await client.get_me()
-                        index = clients_id.index(int(me.id)) + 1
-                        print(index)
-                        print(clients_id[index])
-
-                        await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                        await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
-                        return
-                    # except Exception as ex:
-                    #     print(ex)
-                    #     return
-                except (UserAlreadyParticipantError, InviteRequestSentError) as er:
-                    print(er, url)
+                except ValueError:
+                    print("Ссылка недействительна!")
+                    await bot.send_message(
+                        chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
+                    return
+                except InviteRequestSentError as er:
+                    print(er, 123)
+                    return
+                except ChannelsTooMuchError:
+                    await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
                     return
                 except FloodWaitError as ex:
                     print(ex)
                     print("Пересылаю")
                     me = await client.get_me()
-                    index = clients_id.index(me.id) + 1
-                    print(clients_id.index(me.id), index)
+                    index = clients_id.index(int(me.id)) + 1
+                    print(index)
+                    print(clients_id[index])
 
                     await bot.send_message(chat_id=message[-1], text="Пересылаю")
                     await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
                     return
-                except ValueError:
-                    print("Ссылка недействительна!")
-                    await bot.send_message(
-                        chat_id=telegram_id, text=f"Что-то пошло не так {url}")
-                    return
-                except ChannelsTooMuchError:
-                    print("Ограничение количества чатов")
-                    me = await client.get_me()
-                    index = clients_id.index(me.id)
-                    print(clients_id.index(me.id))
-                    await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                    await bot.send_message(chat_id=clients_id[index+1], text=f"/request {url} {message[-1]}")
-                    return
-                except:
-                    me = await client.get_me()
-                    index = clients_id.index(me.id)+1
-                    print(clients_id.index(me.id))
-                    await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                    await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
-                    return
-                finally:
-                    await sleep(5)
+                # except Exception as ex:
+                #     print(ex)
+                #     return
+            except (UserAlreadyParticipantError, InviteRequestSentError) as er:
+                print(er, url)
+                return
+            except FloodWaitError as ex:
+                print(ex)
+                print("Пересылаю")
+                me = await client.get_me()
+                index = clients_id.index(me.id) + 1
+                print(clients_id.index(me.id), index)
+
+                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
+                await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
+                return
+            except ValueError:
+                print("Ссылка недействительна!")
+                await bot.send_message(
+                    chat_id=telegram_id, text=f"Что-то пошло не так {url}")
+                return
+            except ChannelsTooMuchError:
+                print("Ограничение количества чатов")
+                me = await client.get_me()
+                index = clients_id.index(me.id)
+                print(clients_id.index(me.id))
+                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
+                await bot.send_message(chat_id=clients_id[index+1], text=f"/request {url} {message[-1]}")
+                return
+            except:
+                me = await client.get_me()
+                index = clients_id.index(me.id)+1
+                print(clients_id.index(me.id))
+                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
+                await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
+                return
+            finally:
+                await sleep(5)
 
         async def save(telegram_id, url, clear_url):
             while True:
@@ -204,16 +200,16 @@ async def work(client):
                     db.add_chat(telegram_id, clear_url, chat.id, chat.title)
                     print(f"Succes add chat {clear_url}")
                     await sleep(30)
-                    return
+                    break
                 except ValueError as ex:
                     print(ex)
-                    return
                 except IntegrityError:
-                    return
+                    pass
                 except Exception as ex:
                     print(ex)
-                    return
-
+                finally:
+                    await sleep(60)
+            return
         client.add_event_handler(message, events.NewMessage)
         # client.add_event_handler(connect_, events.NewMessage)
         await client.run_until_disconnected()
