@@ -1,7 +1,7 @@
 from asyncio import sleep
 import calendar
-import datetime
-from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
+from datetime import date, timedelta
+from keyboards import words_list, back, chats_list_, chats_key, message_collector_week_range
 from aiogram.dispatcher.filters import Text
 from aiogram import types
 from main import dp, db, bot
@@ -95,7 +95,23 @@ async def add_word(message: types.Message, state: State):
 @ dp.message_handler(Text(equals="Поиск по чатам(в разработке)"))
 async def add_word(message: types.Message, state: State):
     await AddChat.end_date.set()
-    await message.answer(text='Введите дату, по которую будем собирать данные. Формат YYYY-MM-DD(2020-12-20)')
+    await message.answer(text='Введите период за которые будут собраны данные.\nИли введите дату вручную. Формат YYYY-MM-DD (2020-12-20)', reply_markup=message_collector_week_range())
+
+
+@ dp.callback_query_handler(lambda call: 'week' in call.data, state=AddChat.end_date)
+async def remove_chat(callback: types.CallbackQuery):
+    await AddChat.messages.set()
+    keywords = db.all_user_chats(callback.from_user.id)
+    global end_date_message
+    end_date_message[callback.from_user.id] = int(callback.data.replace(
+        " week", "")) * 7
+    print(end_date_message)
+
+    end_date_message = date.today()-timedelta(days=float(
+        end_date_message[callback.from_user.id]))
+    print(end_date_message)
+
+    await callback.message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
 
 
 @ dp.message_handler(lambda message: message.text, state=AddChat.end_date)

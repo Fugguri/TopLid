@@ -4,11 +4,11 @@ from main import db
 
 def start_keyboard():
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-    key_words = KeyboardButton(text="КЛЮЧЕВЫЕ СЛОВА 🎯")
-    unexcept_word = KeyboardButton(text="ИСКЛЮЧАЮЩИЕ СЛОВА🚫")
-    pay = KeyboardButton(text="ОПЛАТА💰")
-    help_ = KeyboardButton(text="ПОМОЩЬ 🆘")
-    chats = KeyboardButton(text="ЧАТЫ🔎")
+    key_words = KeyboardButton(text="Ключевые слова🎯")
+    unexcept_word = KeyboardButton(text="Исключающие слова🚫")
+    pay = KeyboardButton(text="Оплата💰")
+    help_ = KeyboardButton(text="Помощь🆘")
+    chats = KeyboardButton(text="Чаты🔎")
     keyboard.add(key_words, unexcept_word, chats, pay, help_)
     return keyboard
 
@@ -114,4 +114,17 @@ def links(message=None, chat_id=None, user=None):
     if "None" not in user:
         keyboard.add(InlineKeyboardButton(
             text="Ответить", callback_data=user))
+    return keyboard
+
+
+def message_collector_week_range():
+    keyboard = InlineKeyboardMarkup()
+    keyboard.add(InlineKeyboardButton(
+        text=f'Сообщения за 1 неделю', callback_data=f'1 week'))
+    keyboard.add(InlineKeyboardButton(
+        text=f'Сообщения за 2 недели', callback_data=f'2 week'))
+    keyboard.add(InlineKeyboardButton(
+        text=f'Сообщения за 3 недели', callback_data=f'3 week'))
+    keyboard.add(InlineKeyboardButton(
+        text=f'Сообщения за 4 недели', callback_data=f'4 week'))
     return keyboard

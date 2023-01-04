@@ -1,4 +1,3 @@
-import asyncio
 from DB_connectors.MySql_connect import Database
 from telethon import TelegramClient, events
 from telethon.tl.functions.channels import JoinChannelRequest
@@ -11,12 +10,18 @@ from keyboards import links
 from config import *
 from main import bot
 from asyncio import sleep
+import asyncio
+
 db = Database('TopLid')
 client = TelegramClient(phone, api_id, api_hash)
 client2 = TelegramClient(phone2, api_id2, api_hash2)
 client3 = TelegramClient(phone3, api_id3, api_hash3)
+client4 = TelegramClient(phone4, api_id4, api_hash4)
+client5 = TelegramClient(phone5, api_id5, api_hash5)
+client6 = TelegramClient(phone6, api_id6, api_hash6)
+# client7 = TelegramClient(phone7, api_id7, api_hash7)
 clients_id = [5593323077, 248184623]
-clients = [client]
+clients = [client,]
 
 
 def main(client):
@@ -211,15 +216,16 @@ async def work(client):
                     await sleep(60)
             return
         client.add_event_handler(message, events.NewMessage)
-        # client.add_event_handler(connect_, events.NewMessage)
         await client.run_until_disconnected()
 
 
 async def main():
     await asyncio.gather(
-        work(client)
-        # work(client3),
+        work(client),
         # work(client2),
+        work(client4),
+        # work(client5),
+        # work(client6),
     )
 
 

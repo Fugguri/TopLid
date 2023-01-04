@@ -4,7 +4,7 @@ import datetime
 from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
 from aiogram.dispatcher.filters import Text
 from aiogram import types
-from main import dp, db, bot
+from main import dp, db, bot, logger
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
@@ -24,6 +24,7 @@ class AddChat(StatesGroup):
 async def start(message: types.Message):
     start_date = datetime.date.today()  # год, месяц, число
     result_date = start_date - datetime.timedelta(days=1)
+    logger.debug(f'{message.from_user}кнопка старт')
     await message.answer(text="""TopLid_bot помогает искать лидов и заказы  в телеграм по ключевым словам 🔎
 Бот производит поиск по всем чатам и каналам  в Telegram 🔎
 
@@ -41,35 +42,41 @@ async def start(message: types.Message):
 
 @dp.message_handler(lambda message: 'Ссылка на чат' in message.text)
 async def asd(message: types.Message):
+    logger.debug(f'{message.from_user}ссф')
     await bot.send_message(chat_id=248184623, text=message.text)
     # await bot.send_message(chat_id=1358110465, text=str(message.text))
 
 
-@dp.message_handler(Text(equals='ОПЛАТА💰'))
+@dp.message_handler(Text(equals='Оплата💰'))
 async def pay(message: types.Message):
+    logger.debug(f'{message.from_user}оплата')
     await message.answer(text="Для получения доступа \nНапишите @son2421")
 
 
-@dp.message_handler(Text(equals='ПОМОЩЬ 🆘'))
+@dp.message_handler(Text(equals='Помощь🆘'))
 async def help(message: types.Message):
+    logger.debug(f'{message.from_user}помощь')
     await message.answer(text="По всем вопросам @son2421")
 
 
 @dp.message_handler(Text(equals='В главное меню'))
 async def main_menu(message: types.Message):
+    logger.debug(f'{message.from_user}В главное меню')
     await message.answer(text="Вы вернулись в главное меню", reply_markup=start_keyboard())
 
 """Команды"""
 
 
-@ dp.message_handler(Text(equals='ИСКЛЮЧАЮЩИЕ СЛОВА🚫'))
+@ dp.message_handler(Text(equals='Исключающие слова🚫'))
 async def unexcepted_keywords_list(message: types.Message):
+    logger.debug(f'{message.from_user}исключающие слова')
     await message.answer(text="В этом меню вы можете добавить, настроить или удалить исключающие слова",
                          reply_markup=unexcept_keywords_list())
 
 
-@ dp.message_handler(Text(equals=['КЛЮЧЕВЫЕ СЛОВА 🎯', "Назад"]))
+@ dp.message_handler(Text(equals=['Ключевые слова🎯', "Назад"]))
 async def keywords(message: types.Message):
+    logger.debug(f'{message.from_user}Ключевые слова')
     await message.answer(text='''Бот выполняет поиск по ключевым словам в Telegram чатах и каналов. На данный момент в боте база чатов и каналов больше 35000 (Каждый раз база растет)
 
 Здесь вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах.
@@ -78,8 +85,9 @@ async def keywords(message: types.Message):
 Так же если у вас есть своя база чатов и каналов то добавить их можно в меню “Чаты🔎”..''', reply_markup=keywords_list())
 
 
-@ dp.message_handler(Text(equals='ЧАТЫ🔎'))
+@ dp.message_handler(Text(equals='Чаты🔎'))
 async def chat_list(message: types.Message):
+    logger.debug(f'{message.from_user} чаты')
     await message.answer(text='''Тут вы можете добавить свой список чатов и каналов, по которым будет проходить поиск лидов для вас 🎯\nВы можете выбрать чаты из нашей базы или переключиться на свои кнопной "Из базы чатов"''',
                          reply_markup=chats_list_(message.from_user.id))
 
@@ -89,6 +97,7 @@ async def chat_list(message: types.Message):
 
 @ dp.message_handler(commands=["help"])
 async def main_menu(message: types.Message):
+    logger.debug(f'{message.from_user}кнопка хелп')
     await message.answer(
         text="""Как работает сервис:
 

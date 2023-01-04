@@ -14,6 +14,22 @@ api_id3 = 28584421
 api_hash3 = 'a65b42072ccdfa8301b97ffb497d0388'
 phone3 = '+79502213750'
 
+api_id4 = 20727686
+api_hash4 = '947b3a49c4a522d340555cc747d7ef0c'
+phone4 = '+79919205401'
+
+api_id5 = 25080938
+api_hash5 = '704a82f7554add37aba76dc949c88b7b'
+phone5 = '+79882547866'
+
+api_id6 = 21160684
+api_hash6 = 'dad5071b83a2f9aab01f6750b62f0f96'
+phone6 = '+79185186604'
+
+api_id7 = 21160684
+api_hash7 = 'dad5071b83a2f9aab01f6750b62f0f96'
+phone7 = '+79185186604'
+
 """Mysql"""
 host = 'localhost'
 user = 'fugguri'

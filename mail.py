@@ -1,7 +1,4 @@
 from telethon.sync import TelegramClient, events
-from telethon.tl.functions.messages import GetDialogsRequest
-from telethon.tl.types import InputPeerEmpty
-import time
 from asyncio import sleep
 
 api_id = 28584421
