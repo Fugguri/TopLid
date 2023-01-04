@@ -105,11 +105,9 @@ async def remove_chat(callback: types.CallbackQuery):
     global end_date_message
     end_date_message[callback.from_user.id] = int(callback.data.replace(
         " week", "")) * 7
-    print(end_date_message)
-
-    end_date_message = date.today()-timedelta(days=float(
-        end_date_message[callback.from_user.id]))
-    print(end_date_message)
+    end_date_message[callback.from_user.id] = str(date.today()-timedelta(days=float(
+        end_date_message[callback.from_user.id])))
+    print(end_date_message[callback.from_user.id])
 
     await callback.message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
 
@@ -117,7 +115,6 @@ async def remove_chat(callback: types.CallbackQuery):
 @ dp.message_handler(lambda message: message.text, state=AddChat.end_date)
 async def add_word(message: types.Message, state: State):
     await AddChat.messages.set()
-    print(message.text)
     keywords = db.all_user_chats(message.from_user.id)
     global end_date_message
     end_date_message[message.from_user.id] = message.text
@@ -160,7 +157,8 @@ async def mes(chat_id, client, user_id):
     print("try")
     with open(f"chats/{chat_id}.txt", "w") as w:
         async for message in getmessage:
-            print(str(message.date)[:-15])
+            print(str(message.date)[:-15].strip(),
+                  end_date_message[user_id].strip(), str(message.date)[:-15].strip() == end_date_message[user_id].strip())
             if message.message != None:
                 key = any(
                     list(map(lambda x: x in message.message, keywords)))
@@ -171,7 +169,8 @@ async def mes(chat_id, client, user_id):
                         message.message + \
                         "\n -------------------------------- \n"
                     w.write(mes)
-            elif str(message.date)[:-15] == end_date_message[user_id].strip():
+            elif str(message.date)[:-15].strip() <= end_date_message[user_id].strip():
+                print("fdsfsdfsdfsdfsdfsdf\n\n\n\n\n")
                 return
             else:
                 continue
