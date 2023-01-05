@@ -18,10 +18,11 @@ logger.setLevel(logging.DEBUG)
 
 
 db = Database('TopLid')
-client = TelegramClient(phone3, api_id3, api_hash3)
+client = TelegramClient(phone2, api_id2, api_hash2)
 
 
 async def main():
+    client.send_code_request()
     dialogs = await client.get_drafts()
     for chat in dialogs:
         print(chat)

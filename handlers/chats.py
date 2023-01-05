@@ -170,7 +170,6 @@ async def mes(chat_id, client, user_id):
                         "\n -------------------------------- \n"
                     w.write(mes)
             elif str(message.date)[:-15].strip() <= end_date_message[user_id].strip():
-                print("fdsfsdfsdfsdfsdfsdf\n\n\n\n\n")
                 return
             else:
                 continue

@@ -158,9 +158,12 @@ class Database:
 
     def add_chat(self, telegram_id: int, chat: str, chat_num: int = 1, chat_title=str):
         with self.connection.cursor() as cursor:
-            cursor.execute(
-                '''INSERT IGNORE INTO chats(chat,chat_num,chat_title) VALUES(%s,%s,%s)''', (chat, chat_num, chat_title))
-            self.connection.commit()
+            try:
+                cursor.execute(
+                    '''INSERT IGNORE INTO chats(chat,chat_num,chat_title) VALUES(%s,%s,%s)''', (chat, chat_num, chat_title))
+                self.connection.commit()
+            except:
+                pass
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id=(%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]

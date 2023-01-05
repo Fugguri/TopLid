@@ -13,15 +13,17 @@ from asyncio import sleep
 import asyncio
 
 db = Database('TopLid')
-client = TelegramClient(phone, api_id, api_hash)
-client2 = TelegramClient(phone2, api_id2, api_hash2)
-client3 = TelegramClient(phone3, api_id3, api_hash3)
-client4 = TelegramClient(phone4, api_id4, api_hash4)
-client5 = TelegramClient(phone5, api_id5, api_hash5)
-client6 = TelegramClient(phone6, api_id6, api_hash6)
-# client7 = TelegramClient(phone7, api_id7, api_hash7)
-clients_id = [5593323077, 248184623]
-clients = [client,]
+client = TelegramClient(f"sessions/{phone}", api_id, api_hash)
+client2 = TelegramClient(f"sessions/{phone2}", api_id2, api_hash2)
+client3 = TelegramClient(f"sessions/{phone3}", api_id3, api_hash3)
+client4 = TelegramClient(f"sessions/{phone4}", api_id4, api_hash4)
+client5 = TelegramClient(f"sessions/{phone5}", api_id5, api_hash5)
+# client6 = TelegramClient(f"sessions/{phone6}", api_id6, api_hash6)
+# client7 = TelegramClient(f"sessions/{phone7}", api_id7, api_hash7)
+clients_id = [5593323077, 5486075758]
+clients = [
+    TelegramClient(f"{phone}", api_id, api_hash),
+    TelegramClient(f"{phone4}", api_id4, api_hash4)]
 
 
 def main(client):
@@ -170,7 +172,6 @@ async def work(client):
                 print("Пересылаю")
                 me = await client.get_me()
                 index = clients_id.index(me.id) + 1
-                print(clients_id.index(me.id), index)
 
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
                 await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
@@ -204,16 +205,17 @@ async def work(client):
                     chat = await client.get_entity(clear_url)
                     db.add_chat(telegram_id, clear_url, chat.id, chat.title)
                     print(f"Succes add chat {clear_url}")
-                    await sleep(30)
-                    break
+
                 except ValueError as ex:
                     print(ex)
                 except IntegrityError:
-                    pass
+                    print(f"exist {clear_url}")
+
+                    return
                 except Exception as ex:
                     print(ex)
                 finally:
-                    await sleep(60)
+                    await sleep(30)
             return
         client.add_event_handler(message, events.NewMessage)
         await client.run_until_disconnected()
@@ -222,7 +224,7 @@ async def work(client):
 async def main():
     await asyncio.gather(
         work(client),
-        # work(client2),
+        work(client3),
         work(client4),
         # work(client5),
         # work(client6),
