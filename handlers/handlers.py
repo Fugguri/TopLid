@@ -117,12 +117,18 @@ async def main_menu(message: types.Message):
         reply_markup=start_keyboard())
 
 
-@ dp.callback_query_handler(lambda call: "t.me/" in call.data)
+@ dp.callback_query_handler(lambda call: "t.me/" in call.data or "tg://user?id=" in call.data)
 async def remove_word(call: types.CallbackQuery):
     click_left = db.click_left(call.from_user.id)
     if click_left > 0:
-        db.click_use(call.from_user.id)
-        click_left = db.click_left(call.from_user.id)
-        await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data)
+
+        if "t.me/" in call.data:
+            db.click_use(call.from_user.id)
+            click_left = db.click_left(call.from_user.id)
+            await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data)
+        else:
+            click_left = db.click_left(call.from_user.id)
+            await call.message.reply(text=f"""Не получилось сохранить данные отправителя.У пользователя, недостаочно данных для получения ссылки или закрыты личные сообщения.
+\n\nКоличество лидов не уменьшилось.\nОстаток запросов: {click_left}""")
     else:
         await call.message.reply(text="Ваши запросы на ссылки кончились, пополните счет.")

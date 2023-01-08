@@ -1,18 +1,41 @@
 
-2023-01-05💻Приглашаем к сотрудничеству операционистов, мобильных операторов для подработки. 
+2023-01-07Ищу партнера по бизнесу в лице инвестора. В обмен на 20-30% доли с операционным участием и без.
 
-◽️МТС
-◽️Билайн
-◽️Теле2
-◽️YOTA 
-◽️Мегафон
+Сфера: продажа готового бизнеса, привлечение инвестиций, консалтинг в сфере финансов и юриспруденции (due diligence).
 
+Требуется: 2 700 000 руб на упаковку и оборот бизнеса (открытие - развитие)
 
-От нас: постоянные заказы, гарантия анонимности 🤝
- -------------------------------- 
+Гео: Минск, Москва. Два рынка.
 
-2023-01-04Всем привет , есть бригада отделка, шпаклевка , штукатурка и т.д. Звонят работать хотят , а мне предложить не чего . Может смогу помочь кому-нибудь))
- -------------------------------- 
+Фин.модель/CV-бэкграунд/КП по запросу
+IRR 150-300%. BEP 6 месяцев
+Данные отправителя: 
+id: User(id=5575888962, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=6455860734095200516, first_name='Эрнест', last_name='Хемингуэй (РФ)', username='Heminguei', phone=None, photo=UserProfilePhoto(photo_id=5398028873616178812, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\xac\xd3\x8f\xb4\xe0\x0e1\xb6\x8a(\xa0\x0f'), status=UserStatusOnline(expires=datetime.datetime(2023, 1, 7, 13, 47, 4, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-07Ищу инвестора, займ или долевое участие ! Доход от 30% годовых! 
+Бизнес на валдберис 
+Действующий селлер!
+Кто подскажет контакты, от вас привлекаем, тому бонус!
+Данные отправителя: 
+id: User(id=5937148397, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3179271663548876872, first_name='Макс', last_name=None, username=None, phone=None, photo=UserProfilePhoto(photo_id=5269470873130221767, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08c\xd8\x98\xc9\xf3\x1f\xe4\x1d[h\xa2\x8a)\\\xbb\xb3'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 12, 59, 54, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-06Добрый день!! 
+Ищу инвесторов для школы финансовой грамотности от 300 000 руб ❗️❗️❗️
+Данные отправителя: 
+id: User(id=5089033678, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=977656575990836829, first_name='Sokoll', last_name=None, username='sokoll177', phone=None, photo=UserProfilePhoto(photo_id=5256192298834837870, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\xab!\xb7{p#b\x8f\xd7\xe69\xfc(\xa2\x8ai\x01'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-05Ищу инвесторов в производство двигателей для сверхмалых космических аппаратов от 3 млн руб
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-04Ищу инвестора! Займ или долевое участие! Бизнес на валдберис, дейстующий селлер! Доходность от 30%
+Данные отправителя: 
+id: User(id=5937148397, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3179271663548876872, first_name='Макс', last_name=None, username=None, phone=None, photo=UserProfilePhoto(photo_id=5269470873130221767, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08c\xd8\x98\xc9\xf3\x1f\xe4\x1d[h\xa2\x8a)\\\xbb\xb3'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 12, 59, 54, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2023-01-04Всем привет!
 
@@ -23,30 +46,34 @@
 
 Мы разработали крутую франшизу, благодаря которой Вы сэкономите годы жизни и миллионы рублей!
 Опыт в клининге у меня более 9 лет, поэтому большинство подводных камней мне известны…Если готовы развивать клининговую компанию в своём городе - пишите, всё обсудим!
- -------------------------------- 
-
-2023-01-04Привет! Слушай, я знаю отличного бизнес-наставника, лично с ним работала, она мне действительно помогла, давай ссылку кину в ЛС
- -------------------------------- 
+Данные отправителя: 
+id: User(id=1096281594, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-2712400330431123904, first_name='Евгений', last_name='Блинов', username='blinoff89', phone=None, photo=UserProfilePhoto(photo_id=5303375048612101161, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x95\xee\xdc\xde\x1d\xa0d\r\x99\xc7\x18\xeb\x9a(\xa2\x92@\xcf'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 13, 36, 24, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2023-01-04Ищу инвестора, займ или долевое участие ! 
 Бизнес на валдберис 
 Действующий селлер!
- -------------------------------- 
-
-2023-01-03Подскажите кто работал с вендинговые аппаратами(напитки,снэки)? Обслуживания, заправка, ремонт подключение.
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5937148397, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3179271663548876872, first_name='Макс', last_name=None, username=None, phone=None, photo=UserProfilePhoto(photo_id=5269470873130221767, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08c\xd8\x98\xc9\xf3\x1f\xe4\x1d[h\xa2\x8a)\\\xbb\xb3'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 12, 59, 54, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2023-01-03Ищу людей для сотрудничества
 За всеми подробностями в личные сообщения. Всем удачи
- -------------------------------- 
+Данные отправителя: 
+id: User(id=1795463948, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-4255736439488394376, first_name='Anton', last_name=None, username='zerohero_2', phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2023-01-02Ищу тиндер-ассистента. Это девушка 22-25 лет, нужно подбирать анкеты по критериям :) писать @poleine239
- -------------------------------- 
+Данные отправителя: 
+id: User(id=658635361, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=True, attach_menu_enabled=False, access_hash=-8279209873309138513, first_name='Поля,', last_name='Девочка с онлайн-школой❤️\u200d🔥', username='poleine239', phone=None, photo=UserProfilePhoto(photo_id=2828817335940393048, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\xaf\x1f\xfa\xc6\x01?\xdd9\xe9E\x14V\\\xd64?'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=EmojiStatus(document_id=5431447936380706938), usernames=[])
+ - ------------------------------- 
 
 2023-01-02Ищу инвестора, займ или долевое участие ! 
 Бизнес на валдберис 
 Действующий селлер!
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5937148397, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3179271663548876872, first_name='Макс', last_name=None, username=None, phone=None, photo=UserProfilePhoto(photo_id=5269470873130221767, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08c\xd8\x98\xc9\xf3\x1f\xe4\x1d[h\xa2\x8a)\\\xbb\xb3'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 12, 59, 54, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2023-01-02Ищу личного помощника.
 
@@ -66,98 +93,20 @@
  ⁃ работа  на удаленке по московскому часовому поясу
  ⁃  стажировка 14 дней 
  ⁃ оплата фикс + процент
- -------------------------------- 
-
-2022-12-31Если у кого есть работа на праздники, пишите в ЛС
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5123026889, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=8704016655937287940, first_name='Дмитрий Ларионов', last_name=None, username='gs777777777', phone=None, photo=UserProfilePhoto(photo_id=5265056853635742356, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x82\t\xd1]\xd9\x98\xed$\x00W\xd6\x8a(\xa7`?'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 6, 18, 1, 33, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-30Ищу удалённую работу без вложений
- -------------------------------- 
-
-2022-12-29👋Хэй, друг!
-
-Я знаю, что ты уже просто устал искать достойное место, где собираются сообразительные персоны этого города.
-
-✅Именно поэтому у меня есть для тебя решение, где ты будешь праздновать этот Новый 2023 год. А если говорить конкретнее, то предприниматели, бизнесмены и просто роскошные люди собираются 31-го декабря на вечеринке у @oskarskuba в центре города, чтобы окунуться в 70-е года Нью-Йорка, в самый культовый ночной клуб современности - Studio 54. Стразы… Диско… конфетти, звезды, эпатаж и конечно же безудержное веселье без тормозов до самого последнего гостя.
-
-💥Твоё первое чудо 2023 года!
-
-У нас будет работать два танцпола и два контактных бара. За музыку будут отвечать: 
-
-Mihashu
-Kirill Linne
-Vetadisco
-Nodar M (специальный disco set)
-Dyumo
-
-❇️Dress code: коктельные платья, блёстки, стразы и black tai
-
-Адрес: Полтавская 7
-
-❗️Покупай скорее билет, места ограничены!❗️
-
-Полный анонс - https://t.me/edengardennews/324
-
-⬇️За билетами:
-+79217845918
-@oskarskuba
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-29Ищу кто сможет открыть счёт на ооо, альфа банк
 Желательно дистанционно)
- -------------------------------- 
-
-2022-12-29ну если вверх даже пролистать, то видно что  в сообщениях тут пишут много.
-
-В вашем сообщении плохо все: Начиная с "нужно" кому нужно? зачем нужно? 
-
-"Занимаюсь копирайтингом" - заниматься можно чем угодно, вопрос имеется ли у вас опыт в том, чем занимаетесь.
-
-Пишите как будто вам наоборот совсем "не нужно" заработать 3500 до 29 декабря.
-
-Пример:
-
-"Провожу личный челлендж - заработать 50к до Нового года!
-
-В рамках этого готов оказать вам услуги с новогодней скидкой:
-
-- 10 текстов за 3500 рублей
-- установка софта для ....
-- редактирование в Word и Excel объемных документов в короткий срок
-
-В результате моей работы у вас будет - то-то-то
-
-и +100500 в карму за поддержку челленджа"
- -------------------------------- 
-
-2022-12-28👋Хэй, друг!
-
-Я знаю, что ты уже просто устал искать достойное место, где собираются сообразительные персоны этого города.
-
-✅Именно поэтому у меня есть для тебя решение, где ты будешь праздновать этот Новый 2023 год. А если говорить конкретнее, то предприниматели, бизнесмены и просто роскошные люди собираются 31-го декабря на вечеринке у @oskarskuba в центре города, чтобы окунуться в 70-е года Нью-Йорка, в самый культовый ночной клуб современности - Studio 54. Стразы… Диско… конфетти, звезды, эпатаж и конечно же безудержное веселье без тормозов до самого последнего гостя.
-
-💥Твоё первое чудо 2023 года!
-
-У нас будет работать два танцпола и два контактных бара. За музыку будут отвечать: 
-
-Mihashu
-Kirill Linne
-Vetadisco
-Nodar M (специальный disco set)
-Dyumo
-
-❇️Dress code: коктельные платья, блёстки, стразы и black tai
-
-Адрес: Полтавская 7
-
-❗️Покупай скорее билет, места ограничены!❗️
-
-Полный анонс - https://t.me/edengardennews/324
-
-⬇️За билетами:
-+79217845918
-@oskarskuba
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5665563642, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3325674850599642761, first_name='🥩', last_name=None, username=None, phone=None, photo=None, status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 6, 13, 1, 40, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-28Ищу партнера по бизнесу в лице инвестора. В обмен на 20-30% доли с операционным участием и без.
 
@@ -169,18 +118,26 @@ Dyumo
 
 Фин.модель/CV-бэкграунд/КП по запросу
 IRR 150-300%. BEP 6 месяцев
- -------------------------------- 
+Данные отправителя: 
+id: User(id=879233932, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8676003092479190151, first_name='[ Vegas ]Lordig', last_name=None, username='Lord_dig', phone=None, photo=UserProfilePhoto(photo_id=3776280983929726900, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08{\xca\xaa\xd9\x0cKn\x03\x1c\xf4\xa2\x8a(L\xd8'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-27Всем привет🔥 Ищу инвестора/партнера для покупки франшизы тренингов  в СПб. 
 Планирую купить до НГ!
 Нужно 300к, до 140% годовых. Пишите в Лс
- -------------------------------- 
+Данные отправителя: 
+id: User(id=647932008, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=True, attach_menu_enabled=False, access_hash=1519420700175129182, first_name='Ангелина Аничкина | Кэп СК14', last_name=None, username='lina_ani', phone=None, photo=UserProfilePhoto(photo_id=2782846784847849427, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\xa7\xb9\n\xb4m\xc4\x9d\x06h\xa2\x8a6\r\xcf'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 13, 36, 58, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=EmojiStatus(document_id=5839049953497844833), usernames=[])
+ - ------------------------------- 
 
 2022-12-27Ищу инвестора в сеть быстрострижек
- -------------------------------- 
+Данные отправителя: 
+id: User(id=377108877, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-2008926295571139431, first_name='🐺 Дмитрий', last_name='Чат-боты 🐺', username='DimaBloh', phone=None, photo=UserProfilePhoto(photo_id=1619670294202525616, dc_id=2, has_video=True, stripped_thumb=b'\x01\x08\x08m\xb3\xf9\x9cq\x8f\\\xd1E\x14\xd2\xb92v?'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-26Ищу инвесторов в стартап нового стройматериала от 20 млн руб
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-25Всем привет 
 
@@ -196,35 +153,24 @@ IRR 150-300%. BEP 6 месяцев
 Пиши и я вышлю тебе, подробную презентацию про меня и мой проект 
 Вотсап: 89220256603 
 Или же в лс телеграмм
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5937148397, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-3179271663548876872, first_name='Макс', last_name=None, username=None, phone=None, photo=UserProfilePhoto(photo_id=5269470873130221767, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08c\xd8\x98\xc9\xf3\x1f\xe4\x1d[h\xa2\x8a)\\\xbb\xb3'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 12, 59, 54, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-25Ищу инвесторов в производство уникального стройматериала от 20 млн руб, рентабельность 200%
- -------------------------------- 
-
-2022-12-25Молодым мамам 🌺
-Начать год с развития! 
-Консалтинговой компании ООО Территория Бизнес-путь требуется личный Помошник генерального директора. 
-Заинтересованным в дополнительном доходе и профессиональном росте мамам представиться возможность в наступающем году расширить кругозор в бизнес-среде, наработать навыки делового общения в разных кругах предпринимателей, получить возможность профессионального роста под чутким менторством руководителя компании. 
-Основные задачи: 
-1) деловая переписка
-2) ведение календаря встреч 
-3) контроль выполнения задачи
-4) фиксация контактов. 
-Испытательный срок 2 мес. 
-Требования к компетенциям:
-1) желание развиваться 
-2) грамотная речь
-3) навык деловой переписки
-4) коммуникабельность 
-5) желательно наличие диплома о высшем образовании по одной из перечисленных специальностей : бухучёт, экономика, менеджмент, журналистика, госуправления, юриспруденция. 
-Обращаться: В лс
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-24Ищу инвесторов в производство двигателей для сверхмалых космических аппаратов от 3 млн руб
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-24Ищу инвестиции на организацию тренинга личностного роста по уже проверенной франшизе в СПб.
- -------------------------------- 
+Данные отправителя: 
+id: User(id=1583382136, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-4780788487886940455, first_name='Лина', last_name='Поиск ассистента', username='analiliya', phone=None, photo=UserProfilePhoto(photo_id=5339043403385651873, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08X\xee\x0b\xdc\x15\xdcJm\xe34QEKE\x9f'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 11, 25, 44, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-23#ищупартнёра
 
@@ -235,43 +181,32 @@ IRR 150-300%. BEP 6 месяцев
 
 Мы разработали крутую франшизу, благодаря которой Вы сэкономите годы жизни и миллионы рублей!
 Опыт в клининге у меня более 9 лет, поэтому большинство подводных камней мне известны…Если готовы развивать клининговую компанию в своём городе - пишите, всё обсудим!
- -------------------------------- 
-
-2022-12-23Дорогие бизнесмены, у кого сейчас проблема в отношениях, из-за того, что много времени уделяете работе? Поделитесь в личку.
- -------------------------------- 
-
-2022-12-23Ребят, кто думает над продажей своего бизнеса? Есть предложение заработать на продаже вашего бизнеса от 1 до 8 млн. Пишите в лс.
- -------------------------------- 
+Данные отправителя: 
+id: User(id=1096281594, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-2712400330431123904, first_name='Евгений', last_name='Блинов', username='blinoff89', phone=None, photo=UserProfilePhoto(photo_id=5303375048612101161, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x95\xee\xdc\xde\x1d\xa0d\r\x99\xc7\x18\xeb\x9a(\xa2\x92@\xcf'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 7, 13, 36, 24, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-23Добрый день! Ищу организазаторов (и не только) в Петербурге для сотрудничества с гончарной студией и организации корпоративных мероприятий! Срочно) 
 Пожалуйста, пишите в ЛС
- -------------------------------- 
+Данные отправителя: 
+id: User(id=1036693894, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-7281790936374709679, first_name='Tamara', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
-2022-12-22Уважаемые бизнесмены! 
-Я занимаюсь настройкой рекламы в: Яндекс.Директ, VK. 
-Разработкой сайтов на Tilda.
-Если Вы хотите привлечь 100500+ заявок по вкусной цене в свой бизнес обращайтесь сегодня. 
-Зима горячая пора, скоро мест не будет! 
-Опыт: 6 лет
-Отзывы: есть
-Кейсы: есть
-Пишите в лс!
- -------------------------------- 
+2022-12-21Ищу инвестора (ов) для расширения действующего бизнеса - фулфилмента (хранение, упаковка, логистика) для маркетплейсов
+Вход: от 300 тысяч рублей
+Доходность: 36% годовых
+Срок 1 год
+Общая сумма инвестиций: 2,3 млн. руб. (при входе полной суммой, условия обсуждаются индивидуально)
+За подробностями, пишите в личку
+Данные отправителя: 
+id: User(id=5552741868, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8959701749052816684, first_name='Александр Н', last_name=None, username='mehaniknam', phone=None, photo=None, status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 5, 18, 7, 44, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-19Ищу инвесторов в производство уникального квадрацикла, нужно от 6 млн руб
- -------------------------------- 
-
-2022-12-18Всем привет!
-У нас есть персонал,работаем на заводах,РЦ,стройках
-Пишите в личку)
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
 
 2022-12-18Ищу инвесторов в производство двигателей для сверхмалых космических аппаратов от 3 млн руб
- -------------------------------- 
-
-2022-12-16Добрый день! 
-У кого есть прямой выход на покупателя производства/завода (металлообработка). Я говорю о "летающей" заявке, где хотят освоить средства до НГ.
- -------------------------------- 
-
-2022-12-16Добрый день это Александр. Хочу, могу и готов помочь всем нуждающимся) в продаже, покупке квартиры, как вторички, так и новостройки. Нахожусь и работаю в Санкт-Петербурге, однако и по Москве и по некоторым другим регионам тоже помогу. Пишите и звоните! Всем хорошего дня и прекрасных выходных)
- -------------------------------- 
+Данные отправителя: 
+id: User(id=5756540841, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-8386668804931014002, first_name='S', last_name=None, username=None, phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 

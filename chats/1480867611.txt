@@ -1,0 +1,55 @@
+
+2023-01-05Сниму квартиру в Дубай Марина на год до 50к аед
+Данные отправителя: 
+id: User(id=283800178, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=7869486738351839008, first_name='Vladislava', last_name='Belitskaya', username='lavavlada', phone=None, photo=None, status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-04Всем привет
+В поисках квартиры 
+Аренда 
+Студия или 1 bedroom 
+Район 
+Дубай Марина
+JLT
+Или любой другой у метро
+Заезд на длительный срок 
+
+Заранее спасибо за рекомендации
+Данные отправителя: 
+id: User(id=79055479, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=5848453685496899997, first_name='Pavel', last_name='Taptygin', username='PavelTaptygin', phone=None, photo=UserProfilePhoto(photo_id=339540697330853926, dc_id=4, has_video=False, stripped_thumb=b'\x01\x08\x08\x90\xdc*]!.y]\xbe\xd9\xa2\x8a*\x88\xb5\xcf'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 5, 15, 17, 47, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2023-01-04Ищу квартиру на покупку в adress marina mall 1 км, вид на бассейн, не выше 20 этажа. 🌆
+Данные отправителя: 
+id: User(id=908514091, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=6317103234704727043, first_name='Roza', last_name=None, username='Roza_Yussupova', phone=None, photo=UserProfilePhoto(photo_id=3902038309256406957, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x89\x19\xa5pFs\xd0\x0f\xc2\x8a(\xa84\x94\x12v?'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-29Сниму квартиру с сегодня и до 7-8 января, в районе Марина, зал с кухней + спальня, современный ремонт, бюджет до 6000 AED
+Данные отправителя: 
+id: User(id=320577108, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-1254269675299678837, first_name='Эльвира', last_name='Эрнст', username='elvira_ernst', phone=None, photo=UserProfilePhoto(photo_id=1376868195162499056, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x8a\x1bE\x92"\xea\xe0\x82{\x0c\x91E\x14P3'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-28Нужна квартира или вилла на новый год
+Данные отправителя: 
+id: User(id=5367967939, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=8309149648766448485, first_name='Ali', last_name='Safarov', username=None, phone=None, photo=UserProfilePhoto(photo_id=5465524800068895417, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x88\xbc\xa3tl\x19\x97\x19\xda\x1b\x91E\x14V|\xd6('), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 5, 14, 52, 51, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-25Аренда яхт в Дубаи. От бюджетных до люкс моделей. Подробнее в лс
+Данные отправителя: 
+id: User(id=5777937868, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=146502778925653598, first_name='Fishman', last_name=None, username='bookthie1', phone=None, photo=None, status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 4, 15, 50, 41, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-25Всем привет. Ищу квартиру от собственника на месяц. Районы: Марина, jbr, Palm
+Данные отправителя: 
+id: User(id=377831581, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=7090397697837102878, first_name='ELIZA', last_name=None, username='elizabiz', phone=None, photo=UserProfilePhoto(photo_id=1622774284247214012, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\x1aR\xb2\xb2o$\x0e\xf8\x1dh\xa2\x8a\x12\x1d\x8f'), status=UserStatusRecently(), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-13Нужна квартира на месяц или два для двоих девушек. На Марине. Пришлите варианты пожалуйста.
+Данные отправителя: 
+id: User(id=741772136, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=-5947565663834354603, first_name='Маргарита', last_name='Камышева', username='Ritakam_lakshmi', phone=None, photo=UserProfilePhoto(photo_id=3185887065660303311, dc_id=2, has_video=False, stripped_thumb=b'\x01\x08\x08\xac\xa5\x01\x013\xef\xda\x8a(\xa0.\x7f'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 5, 15, 15, 16, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 
+
+2022-12-12Ищу квартиру в Дубае , район особо не важен но и попа мира . Бюджет до 8000дх Оплата каждый месяц на длительный срок . Студии не смотрю ! Однокомнатная ЗАЕЗД ЗАВТРА ИЛИ 14 ДЕКАБРЯ 💜💜💜💜💜💜💜
+Данные отправителя: 
+id: User(id=5531723713, is_self=False, contact=False, mutual_contact=False, deleted=False, bot=False, bot_chat_history=False, bot_nochats=False, verified=False, restricted=False, min=False, bot_inline_geo=False, support=False, scam=False, apply_min_photo=True, fake=False, bot_attach_menu=False, premium=False, attach_menu_enabled=False, access_hash=1320151437351839086, first_name='💜', last_name='💜', username=None, phone=None, photo=UserProfilePhoto(photo_id=6050954277310021166, dc_id=4, has_video=False, stripped_thumb=b'\x01\x08\x08b\xef\x8d\xf0w\x1erN2(\xa2\x8a\x12\xb86\x7f'), status=UserStatusOffline(was_online=datetime.datetime(2023, 1, 5, 6, 9, 18, tzinfo=datetime.timezone.utc)), bot_info_version=None, restriction_reason=[], bot_inline_placeholder=None, lang_code=None, emoji_status=None, usernames=[])
+ - ------------------------------- 

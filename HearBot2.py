@@ -18,12 +18,17 @@ client2 = TelegramClient(f"sessions/{phone2}", api_id2, api_hash2)
 client3 = TelegramClient(f"sessions/{phone3}", api_id3, api_hash3)
 client4 = TelegramClient(f"sessions/{phone4}", api_id4, api_hash4)
 client5 = TelegramClient(f"sessions/{phone5}", api_id5, api_hash5)
-# client6 = TelegramClient(f"sessions/{phone6}", api_id6, api_hash6)
-# client7 = TelegramClient(f"sessions/{phone7}", api_id7, api_hash7)
+client6 = TelegramClient(f"sessions/{phone6}", api_id6, api_hash6)
+client7 = TelegramClient(f"sessions/{phone7}", api_id7, api_hash7)
+client8 = TelegramClient(f"sessions/{phone8}", api_id8, api_hash8)
+client9 = TelegramClient(f"sessions/{phone9}", api_id9, api_hash9)
 clients_id = [5593323077, 5486075758]
 clients = [
-    TelegramClient(f"{phone}", api_id, api_hash),
-    TelegramClient(f"{phone4}", api_id4, api_hash4)]
+    TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
+    TelegramClient(f"sessions_for_bot/{phone4}", api_id4, api_hash4),
+    TelegramClient(f"sessions_for_bot/{phone6}", api_id6, api_hash6),
+    TelegramClient(f"sessions_for_bot/{phone9}", api_id9, api_hash9)
+]
 
 
 def main(client):
@@ -33,7 +38,10 @@ def main(client):
 async def message(event):
     if '/request' not in event.message.to_dict()['message']:
         if event.is_channel or event.is_group:
-            bot_id = event.original_update.message.peer_id.channel_id
+            try:
+                bot_id = event.original_update.message.peer_id.channel_id
+            except:
+                pass
             username = await event.get_sender()
             keywords = db.all_words_()
             unex_words = db.all_unex_words_()
@@ -46,15 +54,12 @@ async def message(event):
                 if word.lower() in event.message.to_dict()['message'].lower():
                     final_unex_words.append(word)
             if final_words != [] and bot_id != 5751517728:
-
                 message_id = event.message.id
                 users = db.mailing_users(final_words, final_unex_words)
-
                 text = f"""{event.message.to_dict()['message']}"""
                 message_link = f't.me/c/{str(event.chat_id)[4:]}/{message_id}'
                 chat_id = int(str(event.chat_id)[4:])
                 for tele_id in users:
-
                     try:
                         if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
                             await bot.send_message(chat_id=tele_id,
@@ -62,26 +67,27 @@ async def message(event):
                                                    reply_markup=links(
                                                        message=message_link,
                                                        chat_id=int(
-                                                           str(event.chat_id)[
+                                                           str(chat_id)[
                                                                4:]),
-                                                       user=f"https://t.me/{username}"))
+                                                       user=f"t.me/{username}"))
                         if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
                             try:
-                                if username.bot == False and username.username:
+                                if username.bot == False and username.username != None:
                                     await bot.send_message(chat_id=tele_id,
                                                            text=text,
                                                            reply_markup=links(
                                                                message=message_link,
                                                                chat_id=int(
-                                                                   str(event.chat_id)[4:]),
+                                                                   str(chat_id)[4:]),
                                                                user=f"t.me/{username.username}"))
-                                # else:
-                                #     await bot.send_message(chat_id=tele_id,
-                                #                            text=text,
-                                #                            reply_markup=links(
-                                #                                message=message_link,
-                                #                                chat_id=f"{username.username}",
-                                #                                user=f"t.me/{username}"))
+                                else:
+                                    await bot.send_message(chat_id=tele_id,
+                                                           text=text,
+                                                           reply_markup=links(
+                                                               message=message_link,
+                                                               chat_id=int(
+                                                                   str(chat_id)[4:]),
+                                                               user=f"tg://user?id={username.id}"))
                             except:
                                 pass
                             await sleep(0.5)
@@ -115,7 +121,6 @@ async def work(client):
                         for url in urls:
                             await join_chat(message, url, telegram_id, client)
                             await sleep(60)
-
             return
 
         async def join_chat(message, url, telegram_id, client):
@@ -202,7 +207,10 @@ async def work(client):
         async def save(telegram_id, url, clear_url):
             while True:
                 try:
-                    chat = await client.get_entity(clear_url)
+                    try:
+                        chat = await client.get_entity(url)
+                    except:
+                        chat = await client.get_entity("telegram.me/joinchat/"+url)
                     db.add_chat(telegram_id, clear_url, chat.id, chat.title)
                     print(f"Succes add chat {clear_url}")
 
@@ -217,6 +225,7 @@ async def work(client):
                 finally:
                     await sleep(30)
             return
+
         client.add_event_handler(message, events.NewMessage)
         await client.run_until_disconnected()
 
@@ -227,11 +236,14 @@ async def main():
         work(client3),
         work(client4),
         # work(client5),
-        # work(client6),
+        work(client6),
+        # work(client7),
+        # work(client8),
+        work(client9),
+
     )
 
 
-# clt2 = Client(client2)
 if __name__ == "__main__":
     print("Клиент запущен")
     asyncio.run(main())

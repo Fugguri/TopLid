@@ -67,8 +67,13 @@ def words_list(words):
 
     try:
         for word in words:
-            button = InlineKeyboardButton(text=word, callback_data=word)
-            keyboard.add(button)
+            if len(word) >= 15:
+                button = InlineKeyboardButton(
+                    text=word, callback_data=word[:20])
+                keyboard.add(button)
+            else:
+                button = InlineKeyboardButton(text=word, callback_data=word)
+                keyboard.add(button)
 
     except Exception as ex:
         print(ex)
@@ -114,6 +119,7 @@ def links(message=None, chat_id=None, user=None):
     if "None" not in user:
         keyboard.add(InlineKeyboardButton(
             text="Ответить", callback_data=user))
+
     return keyboard
 
 
