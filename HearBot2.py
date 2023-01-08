@@ -233,13 +233,13 @@ async def work(client):
 async def main():
     await asyncio.gather(
         work(client),
-        work(client3),
-        work(client4),
-        # work(client5),
-        work(client6),
-        # work(client7),
-        # work(client8),
-        work(client9),
+        # work(client3),
+        # work(client4),
+        # # work(client5),
+        # work(client6),
+        # # work(client7),
+        # # work(client8),
+        # work(client9),
 
     )
 
