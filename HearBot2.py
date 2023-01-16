@@ -48,10 +48,10 @@ async def message(event):
             final_words = []
             final_unex_words = []
             for word in keywords:
-                if word.lower() in event.message.to_dict()['message'].lower():
+                if word.lower()+" " in event.message.to_dict()['message'].lower():
                     final_words.append(word)
             for word in unex_words:
-                if word.lower() in event.message.to_dict()['message'].lower():
+                if word.lower()+" " in event.message.to_dict()['message'].lower():
                     final_unex_words.append(word)
             if final_words != [] and bot_id != 5751517728:
                 message_id = event.message.id
@@ -61,37 +61,73 @@ async def message(event):
                 chat_id = int(str(event.chat_id)[4:])
                 for tele_id in users:
                     try:
-                        if int(str(event.chat_id)[4:]) in db.all_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
-                            await bot.send_message(chat_id=tele_id,
-                                                   text=text,
-                                                   reply_markup=links(
-                                                       message=message_link,
-                                                       chat_id=int(
-                                                           str(chat_id)[
-                                                               4:]),
-                                                       user=f"t.me/{username}"))
+                        if chat_id in db.all_user_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
+                            print(username)
+                            try:
+                                chat_id = db.get_chat_link(chat_id)
+                            except:
+                                chat_id = chat_id
+                            try:
+                                chat_id = db.get_chat_link(chat_id)
+                                await bot.send_message(chat_id=tele_id,
+                                                       text=text,
+                                                       reply_markup=links(
+                                                           message=message_link,
+                                                           chat_id=chat_id,
+                                                           user=f"t.me/{username}"))
+                            except:
+                                await bot.send_message(chat_id=tele_id,
+                                                       text=text,
+                                                       reply_markup=links(
+                                                           message=message_link,
+                                                           chat_id=int(
+                                                               str(chat_id)[
+                                                                   4:]),
+                                                           user=f"t.me/{username}"))
+
                         if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
+
                             try:
                                 if username.bot == False and username.username != None:
-                                    await bot.send_message(chat_id=tele_id,
-                                                           text=text,
-                                                           reply_markup=links(
-                                                               message=message_link,
-                                                               chat_id=int(
-                                                                   str(chat_id)[4:]),
-                                                               user=f"t.me/{username.username}"))
+                                    try:
+                                        chat_id = db.get_chat_link(chat_id)
+                                        await bot.send_message(chat_id=tele_id,
+                                                               text=text,
+                                                               reply_markup=links(
+                                                                   message=message_link,
+                                                                   chat_id=chat_id,
+                                                                   user=f"t.me/{username.username}"))
+                                    except:
+                                        chat_id = chat_id
+                                        await bot.send_message(chat_id=tele_id,
+                                                               text=text,
+                                                               reply_markup=links(
+                                                                   message=message_link,
+                                                                   chat_id=int(
+                                                                       str(chat_id)[4:]),
+                                                                   user=f"t.me/{username.username}"))
                                 else:
-                                    await bot.send_message(chat_id=tele_id,
-                                                           text=text,
-                                                           reply_markup=links(
-                                                               message=message_link,
-                                                               chat_id=int(
-                                                                   str(chat_id)[4:]),
-                                                               user=f"tg://user?id={username.id}"))
+                                    try:
+                                        chat_id = db.get_chat_link(chat_id)
+                                        await bot.send_message(chat_id=tele_id,
+                                                               text=text,
+                                                               reply_markup=links(
+                                                                   message=message_link,
+                                                                   chat_id=chat_id,
+                                                                   user=f"tg://user?id={username.id}"))
+                                    except:
+                                        chat_id = chat_id
+                                        await bot.send_message(chat_id=tele_id,
+                                                               text=text,
+                                                               reply_markup=links(
+                                                                   message=message_link,
+                                                                   chat_id=int(
+                                                                       str(chat_id)[4:]),
+                                                                   user=f"tg://user?id={username.id}"))
                             except:
                                 pass
-                            await sleep(0.5)
                     except BotBlocked:
+                        print("Bot blocked")
                         pass
 
 
@@ -100,7 +136,6 @@ async def work(client):
         me = await client.get_me()
         # clients_id.append(me.id)
         print('Working with', me.first_name, me.last_name)
-        print(clients_id, me.id)
 
         await client.start()
 
@@ -129,7 +164,6 @@ async def work(client):
             try:
                 print("try ChatInvite", clear_url)
                 await client(ImportChatInviteRequest(clear_url))
-                await sleep(30)
                 print("try save")
                 await save(telegram_id, url, clear_url)
                 print("Joined and save", url)
@@ -146,8 +180,8 @@ async def work(client):
                     return
                 except ValueError:
                     print("Ссылка недействительна!")
-                    await bot.send_message(
-                        chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
+                    # await bot.send_message(
+                    #     chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
                     return
                 except InviteRequestSentError as er:
                     print(er, 123)
@@ -179,7 +213,7 @@ async def work(client):
                 index = clients_id.index(me.id) + 1
 
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
+                # await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
                 return
             except ValueError:
                 print("Ссылка недействительна!")
@@ -192,17 +226,15 @@ async def work(client):
                 index = clients_id.index(me.id)
                 print(clients_id.index(me.id))
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                await bot.send_message(chat_id=clients_id[index+1], text=f"/request {url} {message[-1]}")
+                # await bot.send_message(chat_id=clients_id[index+1], text=f"/request {url} {message[-1]}")
                 return
             except:
                 me = await client.get_me()
                 index = clients_id.index(me.id)+1
                 print(clients_id.index(me.id))
                 # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
+                # await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
                 return
-            finally:
-                await sleep(5)
 
         async def save(telegram_id, url, clear_url):
             while True:
@@ -213,12 +245,8 @@ async def work(client):
                         chat = await client.get_entity("telegram.me/joinchat/"+url)
                     db.add_chat(telegram_id, clear_url, chat.id, chat.title)
                     print(f"Succes add chat {clear_url}")
-
                 except ValueError as ex:
                     print(ex)
-                except IntegrityError:
-                    print(f"exist {clear_url}")
-
                     return
                 except Exception as ex:
                     print(ex)
@@ -233,13 +261,13 @@ async def work(client):
 async def main():
     await asyncio.gather(
         work(client),
-        # work(client3),
-        # work(client4),
-        # # work(client5),
-        # work(client6),
-        # # work(client7),
-        # # work(client8),
-        # work(client9),
+        work(client3),
+        work(client4),
+        # work(client5),
+        work(client6),
+        # work(client7),
+        # work(client8),
+        work(client9),
 
     )
 

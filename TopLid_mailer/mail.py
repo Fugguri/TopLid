@@ -6,7 +6,7 @@ api_hash = 'a65b42072ccdfa8301b97ffb497d0388'
 phone = '+79502213750'
 timer = 1  # TIME TO WAIT BEFORE NEXT SENDING
 msgtosend = """Сообщение рассылки"""  # MESSAGE TO SEND
-
+API_TOKEN = "5876350183:AAFMZZMvszFV06f2ZkG6qP5LyY1fpbUNrf4"
 
 client = TelegramClient(phone, api_id, api_hash)
 users_list = []
@@ -54,7 +54,7 @@ async def message(event):
     global message
     for user in users_list:
         await client.send_message(user, message=message)
-        await sleep(3)
+        await sleep(1)
 
 if __name__ == "__main__":
     client.connect()

@@ -66,9 +66,12 @@ async def chatse_list(message: types.Message):
     try:
         await message.answer(text=str(text),
                              reply_markup=chats_key(keywords))
+        print(
+            list(map(lambda x: x[1], db.all_user_chats(message['from']['id']))))
     except:
-        text += '\nУ вас пока нет чатов. Вы можете их добавить нажав на кнопку "Добавить чат"'
+        text += 'Вы можете добавить чаты нажав на кнопку "Добавить чат"\nИли вы еще не добавляли чаты или произошла ощибка, обратитесь в поддержку в случае необходимости. '
         await message.answer(text=str(text))
+        logger.debug(f"{message.from_user} Нет чатов или ошибка в отображении")
 
 
 @ dp.message_handler(Text(equals='Добавить новый чат'))
@@ -78,20 +81,29 @@ async def add_word_menu(message: types.Message):
         await message.answer(text="Введите ссылку на чат", reply_markup=back())
         logger.debug(f"{message.from_user} Добавление чата")
     else:
-        await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
+        await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые чаты
 Подписку можно приобрести по кнопке «оплата 💰»""")
         logger.debug(f"{message.from_user} Ограничение подписки в чатах")
 
 
-@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))))
+# @ dp.callback_query_handler()
+# async def remove_chat(call: types.CallbackQuery):
+#     print(call.data)
+
+
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))))
 async def remove_chat(call: types.CallbackQuery):
-    text = (call["message"]["reply_markup"]["inline_keyboard"])
-    text = [i[0]['text'] for i in text if call.data in i[0]['text']]
-    db.remove_chat(call['from']['id'], text[0])
-    keywords = db.all_user_chats(call['from']['id'])
-    await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
-                              reply_markup=chats_key(keywords))
-    logger.debug(f"{call.from_user} Удаление чата {text}")
+    print(call)
+    try:
+        db.remove_chat(call['from']['id'], call.data)
+        keywords = db.all_user_chats(call['from']['id'])
+        await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
+                                  reply_markup=chats_key(keywords))
+        logger.debug(f"{call.from_user} Удаление чата {call.data}")
+    except:
+        await call.message.answer("Возникла ошибка, просьба сообщить о ней для улушчения качества работы бота.",
+                                  reply_markup=chats_key(keywords))
+        logger.debug(f"{call.from_user} Удаление чата {call.data} Ошибка")
 
 
 @ dp.message_handler(Text(equals="Назад"), state=AddChat)
@@ -109,6 +121,7 @@ async def add_word(message: types.Message, state: State):
     await AddChat.end_date.set()
     logger.debug(f"{message.from_user} Сбор сообщений в чатах")
     await message.answer(text='Введите период за которые будут собраны данные.\nИли введите дату вручную. Формат YYYY-MM-DD (2020-12-20)', reply_markup=message_collector_week_range())
+    await message.answer('Чтобы вернуться в меню нажмите кнопку "Назад"', reply_markup=back())
 
 
 @ dp.callback_query_handler(lambda call: 'week' in call.data, state=AddChat.end_date)
@@ -136,14 +149,13 @@ async def add_word(message: types.Message, state: State):
         f"{message.from_user} Период времени в сборе сообщений из чатов {end_date_message[message.from_user.id]}")
 
 
-@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))), state=AddChat.messages)
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))), state=AddChat.messages)
 async def remove_chat(callback: types.CallbackQuery):
-    text = (callback["message"]["reply_markup"]["inline_keyboard"])
-    text = [i[0]['text'] for i in text if callback.data in i[0]['text']][0]
     await callback.message.answer(text='После сбора и обработки данных вам будет выслан файл с данными сообщений', reply_markup=back())
-    chat_id = db.get_chat_id(text)
+    chat_id = callback.data
     user_id = callback.from_user.id
-    await get_message_history_by_keywords(chat_id, user_id, db, end_date_message)
+    print(chat_id)
+    await get_message_history_by_keywords(chat_id, user_id, db, end_date_message[user_id])
     try:
         with open(f"chats/{chat_id}.txt", "rb") as w:
             await callback.message.answer_document(document=w)
@@ -155,25 +167,32 @@ async def remove_chat(callback: types.CallbackQuery):
             f"{callback.from_user} Нет сообщений в сборе из чатов")
 
 
-@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: x[:20], db.all_user_chats(call['from']['id']))), state=AddChat.chat)
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))), state=AddChat.chat)
 async def remove_chat(call: types.CallbackQuery):
-    text = (call["message"]["reply_markup"]["inline_keyboard"])
-    text = [i[0]['text'] for i in text if call.data in i[0]['text']]
-    db.remove_chat(call['from']['id'], text[0])
-    keywords = db.all_user_chats(call['from']['id'])
-    await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
-                              reply_markup=chats_key(keywords))
-    logger.debug(
-        f"{call.from_user} Удаление чата {text} ")
+    try:
+        db.remove_chat(call['from']['id'], call.data)
+        keywords = db.all_user_chats(call['from']['id'])
+        await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
+                                  reply_markup=chats_key(keywords))
+        logger.debug(f"{call.from_user} Удаление чата {call.data}")
+    except:
+        await call.message.answer("Возникла ошибка, просьба сообщить о ней для улушчения качества работы бота.",
+                                  reply_markup=chats_key(keywords))
+        logger.debug(f"{call.from_user} Удаление чата {call.data} Ошибка")
 
 
-@ dp.callback_query_handler(lambda call: call.text in db.all_user_chats(call['from']['id']), state=AddChat.chat)
-async def remove_chat(call: types.CallbackQuery):
-    keywords = db.remove_chat(call['from']['id'], call.text)
-    await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
-                              reply_markup=words_list(keywords))
-    logger.debug(
-        f"{call.from_user} Удаление чата {call.text}")
+# @ dp.callback_query_handler(lambda call: call.text in db.all_user_chats(call['from']['id']), state=AddChat.chat)
+# async def remove_chat(call: types.CallbackQuery):
+#     try:
+#         db.remove_chat(call['from']['id'], call.data)
+#         keywords = db.all_user_chats(call['from']['id'])
+#         await call.message.answer("Список ваших чатов!\nЧтобы удалить, нажмите на название чата!",
+#                                   reply_markup=chats_key(keywords))
+#         logger.debug(f"{call.from_user} Удаление чата {call.text}")
+#     except:
+#         await call.message.answer("Возникла ошибка, просьба сообщить о ней для улушчения качества работы бота.",
+#                                   reply_markup=chats_key(keywords))
+#         logger.debug(f"{call.from_user} Удаление чата {call.text} Ошибка")
 
 
 @ dp.message_handler(state=AddChat.chat)

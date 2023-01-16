@@ -58,7 +58,7 @@ class Database:
             create = """    CREATE TABLE IF NOT EXISTS users_chats
                     (id INT PRIMARY KEY AUTO_INCREMENT,
                     user_id INT NOT NULL,
-                    chat_id INT UNIQUE NOT NULL,
+                    chat_id INT NOT NULL,
                     FOREIGN KEY(user_id) REFERENCES users(id),
                     FOREIGN KEY(chat_id) REFERENCES chats(id)
                     );
@@ -70,7 +70,7 @@ class Database:
             create = """    CREATE TABLE IF NOT EXISTS users_keywords
                     (id INT PRIMARY KEY AUTO_INCREMENT,
                     user_id INT NOT NULL,
-                    keyword_id INT UNIQUE NOT NULL,
+                    keyword_id INT NOT NULL,
                     FOREIGN KEY(user_id) REFERENCES users(id),
                     FOREIGN KEY(keyword_id) REFERENCES keywords(id)
                     );
@@ -82,7 +82,7 @@ class Database:
             create = """    CREATE TABLE IF NOT EXISTS users_unex_words
                     (id INT PRIMARY KEY AUTO_INCREMENT,
                     user_id INT NOT NULL,
-                    unex_word_id INT UNIQUE NOT NULL,
+                    unex_word_id INT NOT NULL,
                     FOREIGN KEY(user_id) REFERENCES users(id),
                     FOREIGN KEY(unex_word_id) REFERENCES unex_words(id)
                     )"""
@@ -178,15 +178,19 @@ class Database:
             cursor.execute(
                 '''INSERT IGNORE INTO chats(chat,chat_num,chat_title) VALUES(%s,%s,%s)''', (chat, chat_num, chat_title))
             self.connection.commit()
+        with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id=(%s)", (telegram_id,))
             user_id = cursor.fetchone()[0]
+        with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT id FROM chats WHERE chat=(%s)", (chat,))
             keyword_id = cursor.fetchone()[0]
+        with self.connection.cursor() as cursor:
             cursor.execute(
                 'INSERT IGNORE INTO users_chats(user_id, chat_id) VALUES (%s,%s)', (user_id, keyword_id))
             self.connection.commit()
+        with self.connection.cursor() as cursor:
             keywords = cursor.execute(
                 '''SELECT chat_title
                     FROM chats
@@ -211,31 +215,29 @@ class Database:
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''SELECT word
+                '''SELECT word,id
                     FROM keywords
                     WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
             self.connection.close()
-            return [i[0] for i in keywords]
+            return keywords
 
     def all_unex_words(self, telegram_id: int):
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''SELECT word
+                '''SELECT word,id
                     FROM unex_words
                     WHERE id IN (SELECT unex_word_id FROM users_unex_words WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
             self.connection.close()
-            return [i[0] for i in keywords]
+            return keywords
 
-    def all_chats(self, telegram_id: int):
+    def chats_list(self):
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''SELECT chat_num
-                    FROM chats
-                    WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
+                '''SELECT chat FROM chats''')
             keywords = cursor.fetchall()
             self.connection.close()
             return [i[0] for i in keywords]
@@ -244,27 +246,28 @@ class Database:
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                '''SELECT chat_title
+                '''SELECT chat_title,chat_num
                     FROM chats
-                    WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id in (SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
+                    WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id in (SELECT id FROM users WHERE telegram_id=(%s))) 
+                    LIMIT 90;''', (telegram_id,))
             chats = cursor.fetchall()
             self.connection.close()
-            return [i[0] for i in chats]
+            return chats
 
-    def remove_keyword(self, telegram_id: int, keyword: str):
+    def remove_keyword(self, telegram_id: int, id):
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                'DELETE FROM users_keywords WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND keyword_id = (SELECT id FROM keywords WHERE word = (%s))', (telegram_id, keyword))
+                'DELETE FROM users_keywords WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND keyword_id = (SELECT id FROM keywords WHERE id = (%s))', (telegram_id, id))
             self.connection.commit()
 
             keywords = cursor.execute(
-                '''SELECT word
+                '''SELECT word,id
                     FROM keywords
                     WHERE id IN (SELECT keyword_id FROM users_keywords WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
             self.connection.close()
-            return [i[0] for i in keywords]
+            return keywords
 
     def remove_keyword_from_table(self,  keyword: str):
         self.connection.ping()
@@ -274,39 +277,33 @@ class Database:
             self.connection.commit()
             self.connection.close()
 
-    def remove_unex_word(self, telegram_id: int, unex_word: str):
+    def remove_unex_word(self, telegram_id: int, id: str):
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
                 "SELECT id FROM users WHERE telegram_id = (%s)", (telegram_id,))
-            user_id = cursor.fetchone()[0]
+            user_id = cursor.fetchone()
             cursor.execute(
-                "SELECT id FROM unex_words WHERE word = (%s)", (unex_word,))
-            keyword_id = cursor.fetchone()[0]
+                "SELECT id FROM unex_words WHERE id = (%s)", (id,))
+            keyword_id = cursor.fetchone()
             cursor.execute(
                 'DELETE FROM users_unex_words WHERE user_id =%s AND unex_word_id =%s', (user_id, keyword_id))
             self.connection.commit()
             cursor.execute(
-                '''SELECT word
+                '''SELECT word,id
                     FROM unex_words
                     WHERE id IN (SELECT unex_word_id FROM users_unex_words WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
             keywords = cursor.fetchall()
             self.connection.close()
-            return [i[0] for i in keywords]
+            return keywords
 
-    def remove_chat(self, telegram_id: int, chat: str):
+    def remove_chat(self, telegram_id: int, chat_num: str):
         self.connection.ping()
         with self.connection.cursor() as cursor:
             cursor.execute(
-                'DELETE FROM users_chats WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND chat_id = (SELECT id FROM chats WHERE chat_title = (%s))', (telegram_id, chat))
+                'DELETE FROM users_chats WHERE user_id = (SELECT id FROM users WHERE telegram_id = (%s)) AND chat_id = (SELECT id FROM chats WHERE chat_num = (%s))', (telegram_id, chat_num))
             self.connection.commit()
             self.connection.close()
-            # cursor.execute(
-            #     '''SELECT chat
-            #             FROM chats
-            #             WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id =(SELECT id FROM users WHERE telegram_id=(%s))) ''', (telegram_id,))
-            # keywords = cursor.fetchall()
-            # return [i[0] for i in keywords]
 
     def all_words_(self):
         self.connection.ping()

@@ -4,7 +4,7 @@ import datetime
 from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
 from aiogram.dispatcher.filters import Text
 from aiogram import types
-from main import dp, db, bot
+from main import dp, db, bot, logger
 from aiogram.dispatcher.filters.state import State, StatesGroup
 
 
@@ -28,6 +28,8 @@ async def unexcepted_keywords_list(message: types.Message):
     if db.is_pay(message.from_user.id) is False:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
+        logger.debug(
+            f"{message.from_user}Ограничение подписки удалить все ключевые слова")
     else:
         db.delete_all(message.from_user.id, 'users_keywords')
         await message.answer(text="Вы удалили все ключевые слова.\n Не забудьте добавить новые!",
@@ -43,6 +45,8 @@ async def unexcepted_keywords_list(message: types.Message):
     else:
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
+        logger.debug(
+            f"{message.from_user}Ограничение подписки список ключевых слов")
 
 
 @ dp.message_handler(Text(equals='Добавить новое ключевое слово'))
@@ -54,6 +58,8 @@ async def add_word_menu(message: types.Message):
 
         await message.answer(text="""Ваш текущий уровень подписки не позволяет добавить вам новые слова
 Подписку можно приобрести по кнопке «оплата 💰»""")
+        logger.debug(
+            f"{message.from_user}Ограничение подписки добавить ключевые слова")
 
 
 @ dp.message_handler(Text(equals="Назад"), state=AddWord.word)
@@ -65,14 +71,14 @@ async def add_word(message: types.Message, state: State):
                          reply_markup=keywords_list())
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']))
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_words(call['from']['id']))))
 async def remove_word(call: types.CallbackQuery):
     keywords = db.remove_keyword(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
                               reply_markup=words_list(keywords))
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_words(call['from']['id']), state=AddWord.word)
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_words(call['from']['id']))), state=AddWord.word)
 async def remove_word(call: types.CallbackQuery):
     keywords = db.remove_keyword(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",

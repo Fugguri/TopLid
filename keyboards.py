@@ -9,7 +9,19 @@ def start_keyboard():
     pay = KeyboardButton(text="Оплата💰")
     help_ = KeyboardButton(text="Помощь🆘")
     chats = KeyboardButton(text="Чаты🔎")
-    keyboard.add(key_words, unexcept_word, chats, pay, help_)
+    info = KeyboardButton(text="Информация о TopLid_bot")
+    keyboard.add(key_words, unexcept_word, chats, pay, help_, info)
+    return keyboard
+
+
+def info():
+    keyboard = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    keys = KeyboardButton(text="Кейсы")
+    instruction = KeyboardButton(text="Инструкция")
+    feedback = KeyboardButton(text="Отзывы")
+    keyboard.add(keys, instruction, feedback)
+    back_to_main_menu = KeyboardButton(text="В главное меню")
+    keyboard.add(back_to_main_menu)
     return keyboard
 
 
@@ -64,15 +76,15 @@ def isall(telegram_id):
 
 def words_list(words):
     keyboard = InlineKeyboardMarkup(row_width=3)
-
     try:
         for word in words:
             if len(word) >= 15:
                 button = InlineKeyboardButton(
-                    text=word, callback_data=word[:20])
+                    text=word[0], callback_data=word[1])
                 keyboard.add(button)
             else:
-                button = InlineKeyboardButton(text=word, callback_data=word)
+                button = InlineKeyboardButton(
+                    text=word[0], callback_data=word[1])
                 keyboard.add(button)
 
     except Exception as ex:
@@ -86,12 +98,13 @@ def chats_key(words):
 
     try:
         for word in words:
-            if len(word) >= 15:
+            if len(word[0]) >= 15:
                 button = InlineKeyboardButton(
-                    text=word, callback_data=word[:20])
+                    text=word[0][:30], callback_data=word[1])
                 keyboard.add(button)
             else:
-                button = InlineKeyboardButton(text=word, callback_data=word)
+                button = InlineKeyboardButton(
+                    text=word[0], callback_data=word[1])
                 keyboard.add(button)
     except Exception as ex:
         print(ex)

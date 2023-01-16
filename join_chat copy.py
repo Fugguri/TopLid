@@ -4,16 +4,32 @@ from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 from pymysql.err import IntegrityError
 from HearBot2 import clients
-from main import bot, logger
+from main import bot, logger, db
+
+message = """https://t.me/dubaybusiness
+https://t.me/russkie_v_oae
+https://t.me/Real_Life_UAE
+https://t.me/ustupkaspb
+https://t.me/UAE_chat
+https://t.me/biznesuae
+https://t.me/DXBnetworking
+https://t.me/rent_in_dubai
+https://t.me/oae_arenda
+https://t.me/Roomy_Dubai
+https://t.me/chat_dubai
+https://t.me/Dubai_chat
+https://t.me/chatrussianemirates
+https://t.me/chatrudubai
+https://t.me/uae_talk_Dubai"""
 
 
 async def connect_and_url_clean(message, db):
-    telegram_id = message.from_user.id
-    all_chats = db.chats_list()
-    message = message.text.replace("\n", "").replace(",", "").replace(
+    telegram_id = 1358110465
+    message = message.replace("\n", "").replace(",", "").replace(
         " ", '').replace("+", "").replace('joinchat/', "")
     urls = message.split("https://t.me/")
     client_index = 0
+    all_chats = db.chats_list()
     joined_group_count = 0
     logger.debug(f"{urls}, {telegram_id}")
     for url in urls:
@@ -50,11 +66,10 @@ async def connect_and_url_clean(message, db):
                 finally:
                     logger.debug(f"done {url}")
             elif url != "" and url in all_chats:
-                print("exist")
+                print("skip")
                 client = clients[client_index]
                 async with client:
                     await save(telegram_id, url, url, client, db)
-
         else:
             joined_group_count = 0
             logger.debug("Добавлено 4 чата! Тайм- аут 400 секунд")
@@ -68,7 +83,7 @@ async def join_chat(message, url, telegram_id, client, db):
         await client(ImportChatInviteRequest(clear_url))
         await sleep(10)
         logger.debug("try save")
-        await save(telegram_id, url, clear_url, client, db)
+        await save(telegram_id, url, clear_url)
         logger.debug("Joined and save", url)
         return
     except InviteHashExpiredError as ex:
@@ -82,8 +97,8 @@ async def join_chat(message, url, telegram_id, client, db):
             return
         except ValueError:
             logger.debug("Ссылка недействительна!")
-            await bot.send_message(
-                chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
+            # await bot.send_message(
+            #     chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
             return
         except InviteRequestSentError as er:
             logger.debug(er)
@@ -126,3 +141,9 @@ async def save(telegram_id, url, clear_url, client, db):
         except IntegrityError:
             logger.debug(f"exist {clear_url}")
             return
+        finally:
+            await sleep(5)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(connect_and_url_clean(message, db))

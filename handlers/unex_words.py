@@ -60,7 +60,14 @@ async def add_word(message: types.Message):
         text="Ваши исключающие слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))
 
 
-@ dp.callback_query_handler(lambda call: call.data in db.all_unex_words(call['from']['id']), state=AddUnex_Word.word)
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_unex_words(call['from']['id']))))
+async def remove_word(call: types.CallbackQuery):
+    keywords = db.remove_unex_word(call['from']['id'], call.data)
+    await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
+                              reply_markup=words_list(keywords))
+
+
+@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_unex_words(call['from']['id']))), state=AddUnex_Word.word)
 async def remove_word(call: types.CallbackQuery):
     keywords = db.remove_unex_word(call['from']['id'], call.data)
     await call.message.answer("Список ключевых слов!\n Чтобы удалить, нажмите на слово!",
