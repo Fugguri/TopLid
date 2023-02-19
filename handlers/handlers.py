@@ -77,12 +77,15 @@ async def unexcepted_keywords_list(message: types.Message):
 @ dp.message_handler(Text(equals=['Ключевые слова🎯', "Назад"]))
 async def keywords(message: types.Message):
     logger.debug(f'{message.from_user}Ключевые слова')
-    await message.answer(text='''Бот выполняет поиск по ключевым словам в Telegram чатах и каналов. На данный момент в боте база чатов и каналов больше 35000 (Каждый раз база растет)
+    try:
+        await message.answer(text='''Бот выполняет поиск по ключевым словам в Telegram чатах и каналов. На данный момент в боте база чатов и каналов больше 35000 (Каждый раз база растет)
 
 Здесь вы можете задать/удалить слова и фразы, по которым будет осуществляться поиск в чатах.
 
 Для того, чтобы поиск начал работать, не забудьте оплатить подписку по кнопке ОПЛАТА💰
 Так же если у вас есть своя база чатов и каналов то добавить их можно в меню “Чаты🔎”..''', reply_markup=keywords_list())
+    except:
+        pass
 
 
 @ dp.message_handler(Text(equals='Чаты🔎'))
@@ -121,8 +124,15 @@ async def main_menu(message: types.Message):
 async def remove_word(call: types.CallbackQuery):
     click_left = db.click_left(call.from_user.id)
     if click_left > 0:
-
-        if "t.me/" in call.data:
+        if call.data.startswith("chat_"):
+            click_left = db.click_left(call.from_user.id)
+            await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data.replace("chat_", ""))
+        elif call.data.startswith("mes_"):
+            click_left = db.click_left(call.from_user.id)
+            text = f"Остаток запросов: {click_left} \n" + \
+                call.data.replace("mes", "")
+            await call.message.reply(text=text)
+        elif call.data.startswith("t.me/"):
             db.click_use(call.from_user.id)
             click_left = db.click_left(call.from_user.id)
             await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data)

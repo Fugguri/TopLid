@@ -25,18 +25,15 @@ async def main():
     client.send_code_request()
     dialogs = await client.get_drafts()
     for chat in dialogs:
-        print(chat)
         with open(f"chats/{chat.entity.id}.txt", "w") as w:
             # w.write(chat.entity.id)
             # client.get_messages(chat.entity.id, limit=10000)
             getmessage = client.iter_messages(chat.entity.id)
             async for message in getmessage:
                 if message.message != None:
-                    # print(str(message.date)[:-15])
                     mes = message.message + "\n"
-                    print(mes)
                     w.write(mes)
-        print(message.message)
+
 
 # @client.on(events.NewMessage)
 # async def message(event):

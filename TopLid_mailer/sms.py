@@ -14,6 +14,13 @@ gr = "\033[1;32m"
 cy = "\033[1;36m"
 SLEEP_TIME = 30
 
+#!/bin/env python3
+
+re = "\033[1;31m"
+gr = "\033[1;32m"
+cy = "\033[1;36m"
+SLEEP_TIME = 30
+
 
 class main():
 
@@ -23,6 +30,7 @@ class main():
     {re}╔╦╗{cy}┌─┐┌─┐┌─┐┌─┐┬─┐{re}╔═╗
     {re} ║ {cy}├─┐├┤ ├─┘├─┤├┬┘{re}╚═╗
     {re} ╩ {cy}└─┘└─┘┴  ┴ ┴┴└─{re}╚═╝
+    by https://github.com/elizhabs
             """)
 
     def send_sms():

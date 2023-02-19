@@ -5,17 +5,15 @@ from aiogram.dispatcher.filters import Text
 from aiogram import types
 from main import dp, db, bot, logger
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from collect_message_from_chat import get_message_history_by_keywords
+from utils.collect_message_from_chat_client import get_message_history_by_keywords
 from join_chat import connect_and_url_clean
+from .collect_message_from_chat_bot import CollectMessage
 
 
 class AddChat(StatesGroup):
     chat = State()
-    end_date = State()
-    messages = State()
 
 
-end_date_message = {}
 '''Чаты !!!'''
 
 
@@ -66,8 +64,6 @@ async def chatse_list(message: types.Message):
     try:
         await message.answer(text=str(text),
                              reply_markup=chats_key(keywords))
-        print(
-            list(map(lambda x: x[1], db.all_user_chats(message['from']['id']))))
     except:
         text += 'Вы можете добавить чаты нажав на кнопку "Добавить чат"\nИли вы еще не добавляли чаты или произошла ощибка, обратитесь в поддержку в случае необходимости. '
         await message.answer(text=str(text))
@@ -86,14 +82,8 @@ async def add_word_menu(message: types.Message):
         logger.debug(f"{message.from_user} Ограничение подписки в чатах")
 
 
-# @ dp.callback_query_handler()
-# async def remove_chat(call: types.CallbackQuery):
-#     print(call.data)
-
-
 @ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))))
 async def remove_chat(call: types.CallbackQuery):
-    print(call)
     try:
         db.remove_chat(call['from']['id'], call.data)
         keywords = db.all_user_chats(call['from']['id'])
@@ -106,7 +96,7 @@ async def remove_chat(call: types.CallbackQuery):
         logger.debug(f"{call.from_user} Удаление чата {call.data} Ошибка")
 
 
-@ dp.message_handler(Text(equals="Назад"), state=AddChat)
+@ dp.message_handler(Text(equals="Назад"), state=[AddChat, CollectMessage])
 async def add_word(message: types.Message, state: State):
     await state.finish()
     await message.answer(text='Бот выполняет поиск по ключевым словам.\n'
@@ -114,57 +104,6 @@ async def add_word(message: types.Message, state: State):
                          'Для того, чтобы поиск начал работать, не забудьте добавить чаты в меню “Чаты”, в которых нужно отслеживать ключевые слова.',
                          reply_markup=chats_list_(message.from_user.id))
     logger.debug(f"{message.from_user} Назад из добавление чатов")
-
-
-@ dp.message_handler(Text(equals="Поиск по чатам(в разработке)"))
-async def add_word(message: types.Message, state: State):
-    await AddChat.end_date.set()
-    logger.debug(f"{message.from_user} Сбор сообщений в чатах")
-    await message.answer(text='Введите период за которые будут собраны данные.\nИли введите дату вручную. Формат YYYY-MM-DD (2020-12-20)', reply_markup=message_collector_week_range())
-    await message.answer('Чтобы вернуться в меню нажмите кнопку "Назад"', reply_markup=back())
-
-
-@ dp.callback_query_handler(lambda call: 'week' in call.data, state=AddChat.end_date)
-async def remove_chat(callback: types.CallbackQuery):
-    await AddChat.messages.set()
-    keywords = db.all_user_chats(callback.from_user.id)
-    global end_date_message
-    end_date_message[callback.from_user.id] = int(callback.data.replace(
-        " week", "")) * 7
-    end_date_message[callback.from_user.id] = str(date.today()-timedelta(days=float(
-        end_date_message[callback.from_user.id])))
-    await callback.message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
-    logger.debug(
-        f"{callback.from_user} Период времени в сборе сообщений из чатов {end_date_message[callback.from_user.id]}")
-
-
-@ dp.message_handler(lambda message: message.text, state=AddChat.end_date)
-async def add_word(message: types.Message, state: State):
-    await AddChat.messages.set()
-    keywords = db.all_user_chats(message.from_user.id)
-    global end_date_message
-    end_date_message[message.from_user.id] = message.text
-    await message.answer(text='Выберите чат из которого хотите выбрать данные', reply_markup=chats_key(keywords))
-    logger.debug(
-        f"{message.from_user} Период времени в сборе сообщений из чатов {end_date_message[message.from_user.id]}")
-
-
-@ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))), state=AddChat.messages)
-async def remove_chat(callback: types.CallbackQuery):
-    await callback.message.answer(text='После сбора и обработки данных вам будет выслан файл с данными сообщений', reply_markup=back())
-    chat_id = callback.data
-    user_id = callback.from_user.id
-    print(chat_id)
-    await get_message_history_by_keywords(chat_id, user_id, db, end_date_message[user_id])
-    try:
-        with open(f"chats/{chat_id}.txt", "rb") as w:
-            await callback.message.answer_document(document=w)
-            logger.debug(
-                f"{callback.from_user} Отправлен файл в сборе сообщений")
-    except:
-        await callback.message.answer(text='Нет сообщений, удовлетворяющих запросу в данном временном промежутке ', reply_markup=back())
-        logger.debug(
-            f"{callback.from_user} Нет сообщений в сборе из чатов")
 
 
 @ dp.callback_query_handler(lambda call: call.data in list(map(lambda x: str(x[1]), db.all_user_chats(call['from']['id']))), state=AddChat.chat)

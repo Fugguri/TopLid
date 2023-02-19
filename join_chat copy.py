@@ -3,28 +3,22 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 from pymysql.err import IntegrityError
-from HearBot2 import clients
+# from HearBot2 import clients
 from main import bot, logger, db
-
-message = """https://t.me/dubaybusiness
-https://t.me/russkie_v_oae
-https://t.me/Real_Life_UAE
-https://t.me/ustupkaspb
-https://t.me/UAE_chat
-https://t.me/biznesuae
-https://t.me/DXBnetworking
-https://t.me/rent_in_dubai
-https://t.me/oae_arenda
-https://t.me/Roomy_Dubai
-https://t.me/chat_dubai
-https://t.me/Dubai_chat
-https://t.me/chatrussianemirates
-https://t.me/chatrudubai
-https://t.me/uae_talk_Dubai"""
+from config import *
+from telethon import TelegramClient
+clients = [
+    TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
+    TelegramClient(f"sessions_for_bot/{phone4}", api_id4, api_hash4),
+    TelegramClient(f"sessions_for_bot/{phone6}", api_id6, api_hash6),
+    TelegramClient(f"sessions_for_bot/{phone9}", api_id9, api_hash9)
+]
+message = """
+"""
 
 
 async def connect_and_url_clean(message, db):
-    telegram_id = 1358110465
+    telegram_id = 1500906625
     message = message.replace("\n", "").replace(",", "").replace(
         " ", '').replace("+", "").replace('joinchat/', "")
     urls = message.split("https://t.me/")
@@ -132,8 +126,12 @@ async def save(telegram_id, url, clear_url, client, db):
         try:
             try:
                 chat = await client.get_entity(url)
+
             except:
-                chat = await client.get_entity("telegram.me/joinchat/"+url)
+                try:
+                    chat = await client.get_entity("telegram.me/joinchat/"+url)
+                except InviteHashExpiredError:
+                    return
             a = db.add_chat(telegram_id, clear_url, chat.id, chat.title)
             print(a)
             logger.debug(f"Succes add chat {clear_url}")

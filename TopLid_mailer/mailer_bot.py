@@ -22,6 +22,7 @@ async def on_shutdown(_):
 
 if __name__ == "__main__":
     from handlers import dp
+    from mailing import dp
     executor.start_polling(
         dispatcher=dp,
         on_startup=on_startup,

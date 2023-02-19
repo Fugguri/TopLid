@@ -58,7 +58,7 @@ def chats_list_(telegram_id: int):
     all_chats = KeyboardButton(text="Мои чаты")
     add_chat = KeyboardButton(text="Добавить новый чат")
     back_to_main_menu = KeyboardButton(text="В главное меню")
-    parse_message = KeyboardButton(text="Поиск по чатам(в разработке)")
+    parse_message = KeyboardButton(text="Поиск по чатам")
     delete_chat = KeyboardButton(text="Удалить все чаты")
     keyboard.add(all_chats, add_chat).add(delete_chat)
     if db.get_status(telegram_id) == 1:
@@ -68,10 +68,6 @@ def chats_list_(telegram_id: int):
     keyboard.add(parse_message)
     keyboard.add(back_to_main_menu)
     return keyboard
-
-
-def isall(telegram_id):
-    print(1)
 
 
 def words_list(words):
@@ -123,12 +119,12 @@ def links(message=None, chat_id=None, user=None):
         keyboard.add(InlineKeyboardButton(
             text="Чат", callback_data=chat))
     else:
-        chat = f"https://t.me/{chat_id}"
+        chat = "chat_"+chat_id
         keyboard.add(InlineKeyboardButton(
             text="Чат", callback_data=chat))
     if message:
         keyboard.add(InlineKeyboardButton(text="Сообщение",
-                                          callback_data=message))
+                                          callback_data="mes_"+message))
     if "None" not in user:
         keyboard.add(InlineKeyboardButton(
             text="Ответить", callback_data=user))
@@ -139,11 +135,13 @@ def links(message=None, chat_id=None, user=None):
 def message_collector_week_range():
     keyboard = InlineKeyboardMarkup()
     keyboard.add(InlineKeyboardButton(
-        text=f'Сообщения за 1 неделю', callback_data=f'1 week'))
+        text=f'1 неделя', callback_data=f'1 week'), InlineKeyboardButton(
+        text=f'2 недели', callback_data=f'2 week'))
     keyboard.add(InlineKeyboardButton(
-        text=f'Сообщения за 2 недели', callback_data=f'2 week'))
+        text=f'3 недели', callback_data=f'3 week'), InlineKeyboardButton(
+        text=f'4 недели', callback_data=f'4 week'))
     keyboard.add(InlineKeyboardButton(
-        text=f'Сообщения за 3 недели', callback_data=f'3 week'))
+        text="Добавить ключевые слова", callback_data="Добавить ключевые слова"))
     keyboard.add(InlineKeyboardButton(
-        text=f'Сообщения за 4 недели', callback_data=f'4 week'))
+        text="Добавить исключающие слова", callback_data="Добавить исключающие слова"))
     return keyboard

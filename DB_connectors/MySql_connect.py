@@ -254,6 +254,18 @@ class Database:
             self.connection.close()
             return chats
 
+    def all_mail_user_chats(self, telegram_id: int):
+        self.connection.ping()
+        with self.connection.cursor() as cursor:
+            cursor.execute(
+                '''SELECT chat_num
+                    FROM chats
+                    WHERE id IN (SELECT chat_id FROM users_chats WHERE user_id in (SELECT id FROM users WHERE telegram_id=(%s))) 
+                    LIMIT 90;''', (telegram_id,))
+            chats = cursor.fetchall()
+            self.connection.close()
+            return [i[0] for i in chats]
+
     def remove_keyword(self, telegram_id: int, id):
         self.connection.ping()
         with self.connection.cursor() as cursor:
@@ -328,6 +340,7 @@ class Database:
         unex = unex_words
         kids = ', '.join(['%s'] * len(key))
         uids = ', '.join(['%s'] * len(unex))
+
         with self.connection.cursor() as cursor:
             sql = f"SELECT telegram_id FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({kids})))"
             cursor.execute(sql, (key))
@@ -427,6 +440,15 @@ class Database:
             chat = cursor.execute(
                 "SELECT chat_num FROM chats WHERE chat_title=(%s)", title)
             chat = cursor.fetchone()[0]
+            self.connection.close()
+            return chat
+
+    def get_users(self):
+        self.connection.ping()
+        with self.connection.cursor() as cursor:
+            chat = cursor.execute(
+                "SELECT * FROM users")
+            chat = cursor.fetchall()
             self.connection.close()
             return chat
 

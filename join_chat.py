@@ -3,8 +3,16 @@ from telethon.tl.functions.channels import JoinChannelRequest
 from telethon.tl.functions.messages import ImportChatInviteRequest
 from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSentError, FloodWaitError, UserAlreadyParticipantError, ChannelsTooMuchError
 from pymysql.err import IntegrityError
-from HearBot2 import clients
+# from HearBot2 import clients
 from main import bot, logger
+from config import *
+from telethon import TelegramClient
+clients = [
+    TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
+    TelegramClient(f"sessions_for_bot/{phone4}", api_id4, api_hash4),
+    TelegramClient(f"sessions_for_bot/{phone6}", api_id6, api_hash6),
+    TelegramClient(f"sessions_for_bot/{phone9}", api_id9, api_hash9)
+]
 
 
 async def connect_and_url_clean(message, db):
@@ -41,8 +49,8 @@ async def connect_and_url_clean(message, db):
                     async with clients[client_index] as client:
                         await join_chat(message, url, telegram_id, client, db)
                         joined_group_count = 1
-
-                except:
+                except Exception as ex:
+                    logger.debug(f'{ex}, {message.from_user}, {message.text}')
                     client_index += 1
                     async with clients[client_index] as client:
                         await join_chat(message, url, telegram_id, client, db)
@@ -50,7 +58,7 @@ async def connect_and_url_clean(message, db):
                 finally:
                     logger.debug(f"done {url}")
             elif url != "" and url in all_chats:
-                print("exist")
+                logger.debug("EXIST", url)
                 client = clients[client_index]
                 async with client:
                     await save(telegram_id, url, url, client, db)
@@ -118,9 +126,11 @@ async def save(telegram_id, url, clear_url, client, db):
             try:
                 chat = await client.get_entity(url)
             except:
-                chat = await client.get_entity("telegram.me/joinchat/"+url)
+                try:
+                    chat = await client.get_entity("telegram.me/joinchat/"+url)
+                except InviteHashExpiredError:
+                    return
             a = db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-            print(a)
             logger.debug(f"Succes add chat {clear_url}")
             return
         except IntegrityError:

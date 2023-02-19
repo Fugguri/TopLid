@@ -54,7 +54,7 @@ async def message(event):
     global message
     for user in users_list:
         await client.send_message(user, message=message)
-        await sleep(1)
+        await sleep(30)
 
 if __name__ == "__main__":
     client.connect()

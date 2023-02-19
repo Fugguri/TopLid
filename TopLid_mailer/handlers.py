@@ -13,6 +13,8 @@ class Base_state(StatesGroup):
     enter_code = State()
 
 
+phone_code_hash = " текст рассылки"
+text = ""
 client_data = []
 back = types.ReplyKeyboardMarkup(resize_keyboard=True).add(
     types.KeyboardButton("Назад"))
@@ -61,25 +63,11 @@ async def get_dock(message: types.Message, state: State):
     await message.answer(text="Главное меню", reply_markup=keyboard)
 
 
-@dp.callback_query_handler(lambda call: call.data == "Запуск рассылки")
-async def add_base(callback: types.CallbackQuery):
-    with open("clients_data.txt", "r") as file:
-        for i in file.readlines():
-            api_id, api_hash, phone_number = i.split(" ")
-            client = TelegramClient(phone_number, api_id, api_hash)
-            await client.start()
-            receiver = await client.get_input_entity("248184623")
-            print(receiver)
-            # await client.send_message(receiver, "Тестовая рассылка")
-            await client.disconnect()
-        await callback.message.answer("Функция рассылки требует доработки.")
-
-
 @dp.message_handler(commands=["text"])
 async def add_base(message: types.Message):
     global text
     text = message.get_args()
-    await message.answer("Текст рассылки:".format)
+    await message.answer(f"Текст рассылки:{text}")
 
 
 @dp.callback_query_handler(lambda call: call.data == "Добавить аккаунт")
@@ -101,18 +89,22 @@ async def accound_data_handler(message: types.Message):
         client = TelegramClient(phone_number, api_id, api_hash)
         try:
             await Base_state.enter_code.set()
+            global phone_code_hash
             await client.connect()
-            await client.send_code_request(phone_number)
+            if not await client.is_user_authorized():
+                await client.send_code_request(phone_number)
+                phone_code_hash = await client.send_code_request(
+                    phone_number).phone_code_hash
             await message.answer("Запрос кода отправлен на сервер: Введите код из сообщения.Если код не приходит попробуйте другой профиль(Возможны ошибки).")
-
             with open("clients_data.txt", "a") as file:
                 file.write(phone_number + " " +
                            api_id + " " + api_hash+"\n")
+            await client.disconnect()
         except Exception as ex:
-            print(ex)
+            await client.disconnect()
             await message.answer(f"Ошибка {ex}, проверьте данные или подождите")
-
     except Exception as ex:
+        await client.disconnect()
         await message.answer(f"Ошибка {ex}, проверьте данные или подождите")
 
 
@@ -120,13 +112,15 @@ async def accound_data_handler(message: types.Message):
 async def accound_data_handler(message: types.Message):
     await message.answer(f"Код принят, проверяю")
     global client_data
+    global phone_code_hash
     code = message.text
     try:
         phone_number, api_id, api_hash = client_data[0], client_data[1], client_data[2]
-        print(phone_number, code)
         client = TelegramClient(phone_number, api_id, api_hash)
         await client.connect()
-        me = await client.sign_in(phone_number, int(code))
+        me = await client.sign_in(phone_number, int(code), phone_code_hash=phone_code_hash)
         await message.answer(f"Успешно добавлен профиль:{me}")
+        await client.disconnect()
     except Exception as ex:
+        await client.disconnect()
         await message.answer(f"Ошибка {ex}, проверьте данные")

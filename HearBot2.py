@@ -35,97 +35,103 @@ def main(client):
     asyncio.run(work(client))
 
 
+keywords = db.all_words_()
+unex_words = db.all_unex_words_()
+
+
 async def message(event):
+
     if '/request' not in event.message.to_dict()['message']:
         if event.is_channel or event.is_group:
             try:
                 bot_id = event.original_update.message.peer_id.channel_id
             except:
                 pass
+
             username = await event.get_sender()
-            keywords = db.all_words_()
-            unex_words = db.all_unex_words_()
+            group = await event.get_chat()
             final_words = []
             final_unex_words = []
+            lover_message_text = event.message.to_dict()['message'].lower()
+            message_id = event.message.id
+
             for word in keywords:
-                if word.lower()+" " in event.message.to_dict()['message'].lower():
+                if word.lower() + " " in lover_message_text:
                     final_words.append(word)
+
             for word in unex_words:
-                if word.lower()+" " in event.message.to_dict()['message'].lower():
+                if word.lower()+" " in lover_message_text:
                     final_unex_words.append(word)
-            if final_words != [] and bot_id != 5751517728:
-                message_id = event.message.id
+
+            if final_words != []:
+
                 users = db.mailing_users(final_words, final_unex_words)
-                text = f"""{event.message.to_dict()['message']}"""
+                text = f"""{event.message.to_dict()['message']}\n""" +\
+                    "------------------------------\n" +\
+                    """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. Только после этого будет доступна ссылка на сообщение."""
                 message_link = f't.me/c/{str(event.chat_id)[4:]}/{message_id}'
                 chat_id = int(str(event.chat_id)[4:])
+
                 for tele_id in users:
+                    user_status = db.get_status(tele_id)
+                    is_pay = db.is_pay(tele_id)
+                    users_chat = db.all_mail_user_chats(tele_id)
                     try:
-                        if chat_id in db.all_user_chats(tele_id) and db.is_pay(tele_id) and db.get_status(tele_id) == 0:
-                            print(username)
-                            try:
-                                chat_id = db.get_chat_link(chat_id)
-                            except:
-                                chat_id = chat_id
-                            try:
-                                chat_id = db.get_chat_link(chat_id)
-                                await bot.send_message(chat_id=tele_id,
-                                                       text=text,
-                                                       reply_markup=links(
-                                                           message=message_link,
-                                                           chat_id=chat_id,
-                                                           user=f"t.me/{username}"))
-                            except:
-                                await bot.send_message(chat_id=tele_id,
-                                                       text=text,
-                                                       reply_markup=links(
-                                                           message=message_link,
-                                                           chat_id=int(
-                                                               str(chat_id)[
-                                                                   4:]),
-                                                           user=f"t.me/{username}"))
+                        if is_pay:
+                            if user_status == 0 and chat_id in users_chat:
 
-                        if db.get_status(tele_id) == 1 and db.is_pay(tele_id):
+                                if username:
 
-                            try:
-                                if username.bot == False and username.username != None:
                                     try:
-                                        chat_id = db.get_chat_link(chat_id)
+                                        chat_id = "https://t.me/" + \
+                                            db.get_chat_link(chat_id)
+                                    except:
+                                        if group.username != None:
+                                            chat_id = "https://t.me/" + \
+                                                str(group.username)
+                                        else:
+                                            chat_id = "https://t.me/" + \
+                                                str(chat_id)
+                                    finally:
+                                        try:
+                                            usern = "t.me/"+username.username
+                                        except:
+                                            usern = "tg://user?id=" + \
+                                                str(username.id)
                                         await bot.send_message(chat_id=tele_id,
                                                                text=text,
                                                                reply_markup=links(
                                                                    message=message_link,
                                                                    chat_id=chat_id,
-                                                                   user=f"t.me/{username.username}"))
-                                    except:
-                                        chat_id = chat_id
-                                        await bot.send_message(chat_id=tele_id,
-                                                               text=text,
-                                                               reply_markup=links(
-                                                                   message=message_link,
-                                                                   chat_id=int(
-                                                                       str(chat_id)[4:]),
-                                                                   user=f"t.me/{username.username}"))
-                                else:
+                                                                   user=f"{usern}"))
+
+                            if user_status == 1:
+
+                                if username:
+
                                     try:
-                                        chat_id = db.get_chat_link(chat_id)
+                                        chat_id = "https://t.me/" + \
+                                            db.get_chat_link(chat_id)
+                                    except:
+                                        if group.username != None:
+                                            chat_id = "https://t.me/" + \
+                                                str(group.username)
+                                        else:
+                                            chat_id = "https://t.me/" + \
+                                                str(chat_id)
+                                    finally:
+                                        try:
+                                            usern = "t.me/"+username.username
+                                        except:
+                                            usern = "tg://user?id=" + \
+                                                str(username.id)
                                         await bot.send_message(chat_id=tele_id,
                                                                text=text,
                                                                reply_markup=links(
                                                                    message=message_link,
                                                                    chat_id=chat_id,
-                                                                   user=f"tg://user?id={username.id}"))
-                                    except:
-                                        chat_id = chat_id
-                                        await bot.send_message(chat_id=tele_id,
-                                                               text=text,
-                                                               reply_markup=links(
-                                                                   message=message_link,
-                                                                   chat_id=int(
-                                                                       str(chat_id)[4:]),
-                                                                   user=f"tg://user?id={username.id}"))
-                            except:
-                                pass
+                                                                   user=f"{usern}"))
+
                     except BotBlocked:
                         print("Bot blocked")
                         pass
@@ -136,123 +142,7 @@ async def work(client):
         me = await client.get_me()
         # clients_id.append(me.id)
         print('Working with', me.first_name, me.last_name)
-
         await client.start()
-
-        @ client.on(events.NewMessage)
-        async def connect_(event):
-            if '/request' in event.message.to_dict()['message']:
-                message = event.message.to_dict()['message'].split(" ")
-                telegram_id = message[-1]
-                urls = [i.strip() for i in message[1].split("\n") if i != " "]
-                print(message, telegram_id, urls)
-                for url in message[1:-1]:
-                    if 'http' in url:
-                        url.replace("\n", '')
-                        a = await join_chat(message, url, telegram_id, client)
-                        await sleep(60)
-                        return
-                    else:
-                        for url in urls:
-                            await join_chat(message, url, telegram_id, client)
-                            await sleep(60)
-            return
-
-        async def join_chat(message, url, telegram_id, client):
-            clear_url = str(url).replace('https://t.me/', '').replace("+",
-                                                                      "").replace('joinchat/', "")
-            try:
-                print("try ChatInvite", clear_url)
-                await client(ImportChatInviteRequest(clear_url))
-                print("try save")
-                await save(telegram_id, url, clear_url)
-                print("Joined and save", url)
-                return
-            except InviteHashExpiredError as ex:
-                # print(ex)
-                try:
-                    print("try JoinChannel")
-                    entity = await client.get_entity(clear_url)
-                    await client(JoinChannelRequest(entity))
-                    print("try save")
-                    await save(telegram_id, url, clear_url)
-                    print("Joined and save", url)
-                    return
-                except ValueError:
-                    print("Ссылка недействительна!")
-                    # await bot.send_message(
-                    #     chat_id=telegram_id, text=f"Ссылка на чат {url} недействительна... Попробуйте другую")
-                    return
-                except InviteRequestSentError as er:
-                    print(er, 123)
-                    return
-                except ChannelsTooMuchError:
-                    await bot.send_message(chat_id=5909883622, text=f"/request {url} {message[-1]}")
-                    return
-                except FloodWaitError as ex:
-                    print(ex)
-                    print("Пересылаю")
-                    me = await client.get_me()
-                    index = clients_id.index(int(me.id)) + 1
-                    print(index)
-                    print(clients_id[index])
-
-                    await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                    await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
-                    return
-                # except Exception as ex:
-                #     print(ex)
-                #     return
-            except (UserAlreadyParticipantError, InviteRequestSentError) as er:
-                print(er, url)
-                return
-            except FloodWaitError as ex:
-                print(ex)
-                print("Пересылаю")
-                me = await client.get_me()
-                index = clients_id.index(me.id) + 1
-
-                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                # await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
-                return
-            except ValueError:
-                print("Ссылка недействительна!")
-                await bot.send_message(
-                    chat_id=telegram_id, text=f"Что-то пошло не так {url}")
-                return
-            except ChannelsTooMuchError:
-                print("Ограничение количества чатов")
-                me = await client.get_me()
-                index = clients_id.index(me.id)
-                print(clients_id.index(me.id))
-                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                # await bot.send_message(chat_id=clients_id[index+1], text=f"/request {url} {message[-1]}")
-                return
-            except:
-                me = await client.get_me()
-                index = clients_id.index(me.id)+1
-                print(clients_id.index(me.id))
-                # await bot.send_message(chat_id=message[-1], text="Пересылаю")
-                # await bot.send_message(chat_id=clients_id[index], text=f"/request {url} {message[-1]}")
-                return
-
-        async def save(telegram_id, url, clear_url):
-            while True:
-                try:
-                    try:
-                        chat = await client.get_entity(url)
-                    except:
-                        chat = await client.get_entity("telegram.me/joinchat/"+url)
-                    db.add_chat(telegram_id, clear_url, chat.id, chat.title)
-                    print(f"Succes add chat {clear_url}")
-                except ValueError as ex:
-                    print(ex)
-                    return
-                except Exception as ex:
-                    print(ex)
-                finally:
-                    await sleep(30)
-            return
 
         client.add_event_handler(message, events.NewMessage)
         await client.run_until_disconnected()

@@ -89,8 +89,6 @@ async def remove_word(call: types.CallbackQuery):
 async def add_word(message: types.Message):
     telegram_id = message.from_user.id,
     db.add_keyword(telegram_id, str(message.text))
-    print(message.text)
     keywords = db.all_words(telegram_id)
-    print(keywords)
     await message.answer(
         text="Ваши ключевые слова\nЧтобы удалить нажми на слово", reply_markup=words_list(keywords))

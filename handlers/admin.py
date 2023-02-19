@@ -3,6 +3,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from keyboards import start_keyboard, keywords_list, unexcept_keywords_list, words_list, back, chats_list_, chats_key
 from aiogram.dispatcher.filters import Text
 from aiogram import types
+from datetime import date
 import datetime
 import calendar
 
@@ -24,6 +25,8 @@ admin_markup.add(types.KeyboardButton(
         text="Добавить попытки"))
 admin_markup.add(types.KeyboardButton(
     text="Аннулировать подписку"))
+admin_markup.add(types.KeyboardButton(
+    text="Отчет"))
 admin_markup.add(types.KeyboardButton(
     text="Назад"))
 
@@ -53,6 +56,24 @@ async def back(message: types.Message, state: State):
     await message.answer(
         "Введите ник(username) пользователя", reply_markup=back_key)
     await Admin.annul.set()
+
+
+@ dp.message_handler(Text(equals="Отчет"), state=Admin.menu)
+async def back(message: types.Message):
+    await message.answer(
+        "Собираю данные")
+    users = db.get_users()
+    with open("report.txt", "w") as report:
+        report.write(
+            "№, telegram_id, full_name, username, pay_end, click_left \n")
+        count = 1
+        for user in users:
+            if str(user[4]) >= str(date.today()):
+                data = f"{count}, {user[1]}, {user[2]}, {user[3]}, {user[4]}, {user[6]} \n"
+                report.write(data)
+                count += 1
+    with open("report.txt", "rb") as report:
+        await message.answer_document(document=report)
 
 
 @ dp.message_handler(Text(equals="Добавить попытки"), state=Admin.menu)

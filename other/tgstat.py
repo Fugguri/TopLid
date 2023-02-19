@@ -27,7 +27,6 @@ def get_page(page, url=None, channel_type=None):
     response.encoding = 'utf-8'
     result = []
     get_channels(response, result)
-
     return result
 
 
@@ -35,11 +34,11 @@ def get_channels(response, result):
     stop_marker = []
     soup = BeautifulSoup(response.text, features="html.parser")
     date = soup.find_all(
-        "div", class_="card ribbon-box border")
-
+        "div", class_="card peer-item-row mb-2 ribbon-box border")
     for links in date:
         link = links.find('a').get('href').replace(
             'https://tgstat.ru/channel/', '').replace('https://tgstat.ru/chat/', '').replace('/stat', "")
+        print(link)
         result.append("https://t.me/"+link.replace("@", "").replace(' ', ""))
         stop_marker.append(link)
     return stop_marker
@@ -53,5 +52,5 @@ def main():
 links = []
 if __name__ == "__main__":
     get_channels(
-        get_page("https://tgstat.ru/ratings/chats/construction?sort=mau"), links)
+        get_page("https://tgstat.ru/ratings/chats/construction?sort=members"), links)
     print(links)

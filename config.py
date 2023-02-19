@@ -1,4 +1,4 @@
-TOKEN_AP = "5751517728:AAHw7xtZfK8eg9YOvyay0b-JD7t7locoleM"
+TOKEN_AP = '5489223512:AAGEuPWc4hI4_qQv-enpwSrtRmZwyRFghZU'
 TOKEN_API = '5962843554:AAGmne4VHop2d_OuxyENsH_mgeYpRmAG8us'
 
 """telegram api tokens"""
