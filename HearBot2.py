@@ -11,7 +11,7 @@ from config import *
 from main import bot
 from asyncio import sleep
 import asyncio
-
+import threading
 db = Database('TopLid')
 client = TelegramClient(f"sessions/{phone}", api_id, api_hash)
 client2 = TelegramClient(f"sessions/{phone2}", api_id2, api_hash2)
@@ -140,26 +140,30 @@ async def message(event):
 async def work(client):
     async with client:
         me = await client.get_me()
-        # clients_id.append(me.id)
         print('Working with', me.first_name, me.last_name)
         await client.start()
-
         client.add_event_handler(message, events.NewMessage)
         await client.run_until_disconnected()
 
 
 async def main():
+    # loop = asyncio.get_event_loop()
+    # client.start()
+    # client3.start()
+    # client4.start()
+    # client6.start()
+    # client9.start()
+    # loop.run_forever()
     await asyncio.gather(
-
         work(client),
-        # work(client3),
-        # work(client4),
-        # # work(client5),
-        # work(client6),
-        # # work(client7),
-        # # work(client8),
-        # work(client9),
-
+        work(client3),
+        work(client4),
+        work(client6),
+        work(client9),
+        # work(client7),
+        # work(client8),
+        # work(client5),
+        return_exceptions=True
     )
 
 
