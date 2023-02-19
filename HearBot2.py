@@ -149,8 +149,9 @@ async def work(client):
 
 
 async def main():
-    print("start")
     await asyncio.gather(
+        print("start")
+
         work(client),
         work(client3),
         work(client4),
