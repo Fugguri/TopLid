@@ -154,7 +154,13 @@ async def main():
     # client6.start()
     # client9.start()
     # loop.run_forever()
-    await asyncio.gather(
+    pass
+
+
+if __name__ == "__main__":
+    print("Клиент запущен")
+    # asyncio.run(main())
+    asyncio.gather(
         work(client),
         work(client3),
         work(client4),
@@ -163,10 +169,4 @@ async def main():
         # work(client7),
         # work(client8),
         # work(client5),
-        return_exceptions=True
     )
-
-
-if __name__ == "__main__":
-    print("Клиент запущен")
-    asyncio.run(main())
