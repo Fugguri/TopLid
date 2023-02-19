@@ -40,7 +40,7 @@ unex_words = db.all_unex_words_()
 
 
 async def message(event):
-
+    print(event.message.to_dict()['message'])
     if '/request' not in event.message.to_dict()['message']:
         if event.is_channel or event.is_group:
             try:
