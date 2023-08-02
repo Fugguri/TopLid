@@ -130,7 +130,7 @@ async def remove_word(call: types.CallbackQuery):
         elif call.data.startswith("mes_"):
             click_left = db.click_left(call.from_user.id)
             text = f"Остаток запросов: {click_left} \n" + \
-                call.data.replace("mes", "")
+                call.data.replace("mes_", "")
             await call.message.reply(text=text)
         elif call.data.startswith("t.me/"):
             db.click_use(call.from_user.id)
@@ -138,7 +138,9 @@ async def remove_word(call: types.CallbackQuery):
             await call.message.reply(text=f"Остаток запросов: {click_left} \n"+call.data)
         else:
             click_left = db.click_left(call.from_user.id)
-            await call.message.reply(text=f"""Не получилось сохранить данные отправителя.У пользователя, недостаочно данных для получения ссылки или закрыты личные сообщения.
-\n\nКоличество лидов не уменьшилось.\nОстаток запросов: {click_left}""")
+            await call.message.reply(text=
+                                     f"""Не получилось сохранить данные отправителя.У пользователя, недостаочно данных для получения ссылки или закрыты личные сообщения.
+\n\nКоличество лидов не уменьшилось.
+\nОстаток запросов: {click_left}""")
     else:
         await call.message.reply(text="Ваши запросы на ссылки кончились, пополните счет.")

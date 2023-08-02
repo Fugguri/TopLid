@@ -9,10 +9,13 @@ from config import *
 from telethon import TelegramClient
 clients = [
     TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
-    TelegramClient(f"sessions_for_bot/{phone4}", api_id4, api_hash4),
-    TelegramClient(f"sessions_for_bot/{phone6}", api_id6, api_hash6),
-    TelegramClient(f"sessions_for_bot/{phone9}", api_id9, api_hash9)
+    TelegramClient(f"sessions_for_bot/{phone2}", api_id2, api_hash2),
+    TelegramClient(f"sessions_for_bot/{phone3}", api_id3, api_hash3),
+    TelegramClient(f"sessions_for_bot/{phone5}", api_id5, api_hash5)
 ]
+# TelegramClient(f"sessions_for_bot/{phone4}", api_id3, api_hash4),
+# TelegramClient(f"sessions_for_bot/{phone6}", api_id4, api_hash6),
+# TelegramClient(f"sessions_for_bot/{phone9}", api_id5, api_hash9)
 
 
 async def connect_and_url_clean(message, db):
@@ -50,7 +53,7 @@ async def connect_and_url_clean(message, db):
                         await join_chat(message, url, telegram_id, client, db)
                         joined_group_count = 1
                 except Exception as ex:
-                    logger.debug(f'{ex}, {message.from_user}, {message.text}')
+                    logger.debug(f'{ex}, {telegram_id}, {message}')
                     client_index += 1
                     async with clients[client_index] as client:
                         await join_chat(message, url, telegram_id, client, db)
@@ -58,7 +61,7 @@ async def connect_and_url_clean(message, db):
                 finally:
                     logger.debug(f"done {url}")
             elif url != "" and url in all_chats:
-                logger.debug("EXIST", url)
+                logger.debug(f"EXIST {url}")
                 client = clients[client_index]
                 async with client:
                     await save(telegram_id, url, url, client, db)

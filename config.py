@@ -5,27 +5,29 @@ TOKEN_API = '5962843554:AAGmne4VHop2d_OuxyENsH_mgeYpRmAG8us'
 api_id = 27044267
 api_hash = 'a7448d0befc9804176b9c917898d923a'
 phone = '+79283529546'
+
 """РАБОТАЕТ"""
 api_id2 = 26730629
 api_hash2 = 'ecc702d7da5fac793aefc9c77454ae7b'
 phone2 = '+79185530587'
 """НЕ ПРИХОДИТ КОД"""
 
-api_id3 = 28584421
-api_hash3 = 'a65b42072ccdfa8301b97ffb497d0388'
-phone3 = '+79502213750'
-""" МОЙ """
+api_id3 = 26451372
+api_hash3 = '8f21107e3933c994fdef526b09eb726a'
+phone3 = '+996998310696'
 """РАБОТАЕТ"""
 
-api_id4 = 20727686
-api_hash4 = '947b3a49c4a522d340555cc747d7ef0c'
-phone4 = '+79919205401'
+api_id4 = 20271098
+api_hash4 = '8952bf63d713a3494659f9522d51e2d6'
+phone4 = '+996553113520'
 """РАБОТАЕТ"""
 
-api_id5 = 25080938
-api_hash5 = '704a82f7554add37aba76dc949c88b7b'
-phone5 = '+79882547866'
+api_id5 = 28921923
+api_hash5 = 'b09d545962c00910788e6b4010573b65'
+phone5 = '+905365931236'
 """НЕ РАБОТАЕТ"""
+
+
 api_id6 = 21160684
 api_hash6 = 'dad5071b83a2f9aab01f6750b62f0f96'
 phone6 = '+79185186604'
@@ -47,6 +49,7 @@ api_hash10 = 'dad5071b83a2f9aab01f6750b62f0f96'
 phone10 = '+79185186604'
 
 """Mysql"""
-host = 'localhost'
+host = '99605bb2fc3e.vps.myjino.ru'
+port = 49394
 user = 'fugguri'
-password = 'Pass_word'
+password = 'Neskazu1'

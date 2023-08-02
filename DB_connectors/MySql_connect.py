@@ -1,5 +1,5 @@
 from datetime import date
-from DB_connectors.config import host, user, password
+from DB_connectors.config import host, user, password, port
 import pymysql
 
 
@@ -8,6 +8,7 @@ class Database:
         self.connection = pymysql.connect(
             host=host,
             user=user,
+            port=port,
             password=password,
             database=db_name,
         )

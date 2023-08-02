@@ -12,6 +12,12 @@ phone2 = '+79185530587'
 
 
 """Mysql"""
-host = 'localhost'
+# host = 'localhost'
+# user = 'fugguri'
+# password = 'Pass_word'
+# port = 49394
+"""Mysql"""
+host = '99605bb2fc3e.vps.myjino.ru'
+port = 49394
 user = 'fugguri'
-password = 'Pass_word'
+password = 'Neskazu1'

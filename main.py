@@ -5,7 +5,7 @@ from DB_connectors.MySql_connect import Database
 import logging
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import logging
-
+import asyncio
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -21,6 +21,14 @@ logger.addHandler(py_handler)
 async def on_startup(_):
     print("Бот запущен")
     logger.debug("Запущен бот!")
+    # from HearBot2 import client, client2, client3, client4, client5, work
+    # await asyncio.gather(
+    #     work(client),
+    #     work(client2),
+    #     work(client5),
+    #     work(client3),
+    #     work(client4),
+    # )
     db.cbdt()
 
 
@@ -30,8 +38,12 @@ async def on_shutdown(_):
 
 if __name__ == "__main__":
     from handlers import dp
-    executor.start_polling(
-        dispatcher=dp,
-        on_startup=on_startup,
-        on_shutdown=on_shutdown
-    )
+    while True:
+        try:
+            executor.start_polling(
+                dispatcher=dp,
+                on_startup=on_startup,
+                on_shutdown=on_shutdown
+            )
+        except:
+            break

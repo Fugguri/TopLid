@@ -181,4 +181,5 @@ async def TGreqs(message: types.Message):
     url = str(message.get_args())
     from other.tgstat import get_page
     text = "\n".join(get_page(1, url))
+    print(text)
     await message.answer(text=text)
