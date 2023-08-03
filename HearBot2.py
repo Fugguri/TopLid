@@ -19,19 +19,6 @@ db = Database('TopLid')
 client = TelegramClient(f"sessions/{phone}", api_id, api_hash)
 client2 = TelegramClient(f"sessions/{phone2}", api_id2, api_hash2)
 client3 = TelegramClient(f"sessions/{phone3}", api_id3, api_hash3)
-client4 = TelegramClient(f"sessions/{phone4}", api_id4, api_hash4)
-client5 = TelegramClient(f"sessions/{phone5}", api_id5, api_hash5)
-client6 = TelegramClient(f"sessions/{phone6}", api_id6, api_hash6)
-client7 = TelegramClient(f"sessions/{phone7}", api_id7, api_hash7)
-client8 = TelegramClient(f"sessions/{phone8}", api_id8, api_hash8)
-client9 = TelegramClient(f"sessions/{phone9}", api_id9, api_hash9)
-# clients = [
-#     TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
-#     TelegramClient(f"sessions_for_bot/{phone2}", api_id2, api_hash2),
-#     TelegramClient(f"sessions_for_bot/{phone4}", api_id4, api_hash4),
-#     TelegramClient(f"sessions_for_bot/{phone6}", api_id6, api_hash6),
-#     TelegramClient(f"sessions_for_bot/{phone9}", api_id9, api_hash9)
-# ]
 
 
 def main(client):
@@ -43,7 +30,9 @@ unex_words = db.all_unex_words_()
 
 
 async def message(event):
-
+    if event.chat_id == 777000:
+        print(event)
+    # print(event.chat_id)
     if event.is_channel or event.is_group:
         try:
             username = await event.get_sender()
@@ -70,6 +59,7 @@ async def message(event):
                 """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. Только после этого будет доступна ссылка на сообщение."""
             message_link = f't.me/c/{str(event.chat_id)[4:]}/{message_id}'
             chat_id = int(str(event.chat_id)[4:])
+
             for tele_id in users:
                 user_status = db.get_status(tele_id)
                 is_pay = db.is_pay(tele_id)
@@ -191,31 +181,29 @@ async def message(event):
 
 async def work(client):
     async with client:
-        me = await client.get_me()
-        print('Working with', me.first_name, me.last_name)
-        await client.start()
-        client.add_event_handler(message, events.NewMessage)
-        await client.run_until_disconnected()
-
+        try:
+            me = await client.get_me()
+            print('Working with', me.first_name, me.last_name,me.phone)
+            await client.start()
+            client.add_event_handler(message, events.NewMessage)
+            await client.run_until_disconnected()
+        except Exception as ex:
+            print(ex)
 
 async def main():
     await asyncio.gather(
         work(client),
         work(client2),
-        # work(client5),
         work(client3),
-        # work(client4),
-        # work(client6),
-        # work(client8),
-        # work(client5),
     )
+    
+
 
 
 if __name__ == "__main__":
     print("Клиент запущен")
-    while True:
         # try:
-        asyncio.run(main())
+    asyncio.run(main())
         # except Exception as ex:
         #     print(ex)
         #     break

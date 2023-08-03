@@ -19,18 +19,15 @@ logger.addHandler(py_handler)
 
 
 async def on_startup(_):
+    from HearBot2 import work, client,client2,client3
     print("Бот запущен")
     logger.debug("Запущен бот!")
-    # from HearBot2 import client, client2, client3, client4, client5, work
-    # await asyncio.gather(
-    #     work(client),
-    #     work(client2),
-    #     work(client5),
-    #     work(client3),
-    #     work(client4),
-    # )
     db.cbdt()
-
+    loop = asyncio.get_event_loop()
+    loop.create_task(work(client))
+    loop.create_task(work(client2))
+    loop.create_task(work(client3))
+    
 
 async def on_shutdown(_):
     print("Бот остановлен")
@@ -38,12 +35,9 @@ async def on_shutdown(_):
 
 if __name__ == "__main__":
     from handlers import dp
-    while True:
-        try:
-            executor.start_polling(
+    executor.start_polling(
                 dispatcher=dp,
                 on_startup=on_startup,
                 on_shutdown=on_shutdown
             )
-        except:
-            break
+
