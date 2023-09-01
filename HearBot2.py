@@ -46,7 +46,7 @@ async def message(event):
     message_text = event.message.to_dict()['message']
     message_link = f't.me/c/{str(event.chat_id)[4:]}/{event.message.id}'
     chat_id = int(str(event.chat_id)[4:])
-    
+    print(chat_id)
     for word in keywords:
         if word.lower() in message_text.lower():
             final_words.append(word)
