@@ -50,9 +50,9 @@ async def message(event):
     for word in keywords:
         if word.lower() in message_text.lower():
             final_words.append(word)
-
-    if final_words == []:
+        if final_words == []:
             return
+
     for word in unex_words:
         if word.lower() in message_text.lower():
                 final_unex_words.append(word)
