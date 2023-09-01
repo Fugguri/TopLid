@@ -25,158 +25,89 @@ def main(client):
     asyncio.run(work(client))
 
 
-keywords = db.all_words_()
-unex_words = db.all_unex_words_()
 
 
 async def message(event):
     if event.chat_id == 777000:
         print(event)
-    # print(event.chat_id)
-    if event.is_channel or event.is_group:
-        try:
-            username = await event.get_sender()
-            group = await event.get_chat()
-        except:
-            pass
-        final_words = []
-        final_unex_words = []
-        lover_message_text = event.message.to_dict()['message'].lower()
-        message_id = event.message.id
+    if not event.is_channel or not event.is_group:    
+        return
+    
+    try:
+        username = await event.get_sender()
+        group = await event.get_chat()
+    except:
+        return
 
-        for word in keywords:
-            if word.lower() in lover_message_text:
-                final_words.append(word)
+    keywords = db.all_words_()
+    unex_words = db.all_unex_words_()
+    final_words = []
+    final_unex_words = []
+    message_text = event.message.to_dict()['message']
+    message_link = f't.me/c/{str(event.chat_id)[4:]}/{event.message.id}'
+    chat_id = int(str(event.chat_id)[4:])
+    
+    for word in keywords:
+        if word.lower() in message_text.lower():
+            final_words.append(word)
 
-        for word in unex_words:
-            if word.lower() in lover_message_text:
+    if final_words == []:
+            return
+    for word in unex_words:
+        if word.lower() in message_text.lower():
                 final_unex_words.append(word)
 
-        if final_words != []:
-            users = db.mailing_users(final_words, final_unex_words)
-            text = f"""{event.message.to_dict()['message']}\n""" +\
-                "------------------------------\n" +\
-                """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. Только после этого будет доступна ссылка на сообщение."""
-            message_link = f't.me/c/{str(event.chat_id)[4:]}/{message_id}'
-            chat_id = int(str(event.chat_id)[4:])
+    users = db.mailing_users(final_words, final_unex_words)
+    text = f"""{message_text}\n""" +\
+        "------------------------------\n" +\
+        """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. 
+Только после этого будет доступна ссылка на сообщение."""
 
-            for tele_id in users:
-                user_status = db.get_status(tele_id)
-                is_pay = db.is_pay(tele_id)
-                users_chat = db.all_mail_user_chats(tele_id)
-                try:
-                    if is_pay and not user_status and chat_id in users_chat:
-                        if username:
-                            try:
-                                chat_id = "https://t.me/" + \
-                                    db.get_chat_link(chat_id)
-                            except:
-                                if group.username != None:
-                                    chat_id = "https://t.me/" + \
-                                        str(group.username)
-                                else:
-                                    chat_id = "https://t.me/" + \
-                                        str(chat_id)
-                            finally:
-                                try:
-                                    usern = "t.me/"+username.username
-                                except:
-                                    usern = "tg://user?id=" + \
-                                        str(username.id)
-                                # try:
-                                await bot.send_message(chat_id=tele_id,
-                                                       text=text,
-                                                       reply_markup=links(
-                                                           message=message_link,
-                                                           chat_id=chat_id,
-                                                           user=f"{usern}"))
-                                # except:
-                                # print(tele_id)
-                            if user_status:
-                                try:
-                                    chat_id = "https://t.me/" + \
-                                        db.get_chat_link(chat_id)
-                                except:
-                                    if group.username != None:
-                                        chat_id = "https://t.me/" + \
-                                            str(group.username)
-                                    else:
-                                        chat_id = "https://t.me/" + \
-                                            str(chat_id)
-                                finally:
-                                    try:
-                                        usern = "t.me/"+username.username
-                                    except:
-                                        usern = "tg://user?id=" + \
-                                            str(username.id)
-                                    # try:
-                                    await bot.send_message(chat_id=tele_id,
-                                                           text=text,
-                                                           reply_markup=links(
-                                                               message=message_link,
-                                                               chat_id=chat_id,
-                                                               user=f"{usern}"))
-                                    # except:
-                                    #     print(tele_id)
-                    if is_pay and user_status:
-                        if username:
-                            try:
-                                chat_id = "https://t.me/" + \
-                                    db.get_chat_link(chat_id)
-                            except:
-                                if group.username != None:
-                                    chat_id = "https://t.me/" + \
-                                        str(group.username)
-                                else:
-                                    chat_id = "https://t.me/" + \
-                                        str(chat_id)
-                            finally:
-                                try:
-                                    usern = "t.me/"+username.username
-                                except:
-                                    usern = "tg://user?id=" + \
-                                        str(username.id)
-                                # try:
-                                await bot.send_message(chat_id=tele_id,
-                                                       text=text,
-                                                       reply_markup=links(
-                                                           message=message_link,
-                                                           chat_id=chat_id,
-                                                           user=f"{usern}"))
-                                # except:
-                                # print(tele_id)
-                            if user_status:
-                                try:
-                                    chat_id = "https://t.me/" + \
-                                        db.get_chat_link(chat_id)
-                                except:
-                                    if group.username != None:
-                                        chat_id = "https://t.me/" + \
-                                            str(group.username)
-                                    else:
-                                        chat_id = "https://t.me/" + \
-                                            str(chat_id)
-                                finally:
-                                    try:
-                                        usern = "t.me/"+username.username
-                                    except:
-                                        usern = "tg://user?id=" + \
-                                            str(username.id)
-                                    # try:
-                                    await bot.send_message(chat_id=tele_id,
-                                                           text=text,
-                                                           reply_markup=links(
-                                                               message=message_link,
-                                                               chat_id=chat_id,
-                                                               user=f"{usern}"))
-                                    # except:
-                                    #     print(tele_id)
-                except MessageIsTooLong:
-                    pass
-                except BotBlocked:
-                    print("Bot blocked by {}".format(chat_id))
-                    pass
-
+    for tele_id in users:
+        is_all_chats = db.get_status(tele_id)
+        is_pay = db.is_pay(tele_id)
+        users_chat = db.all_mail_user_chats(tele_id)
+        if not is_pay:
+            return
+        try:
+            chat_id = "https://t.me/" + db.get_chat_link(chat_id)
+        except:
+            chat_id = "https://t.me/" + str(group.username)
+            if not group.username:
+                chat_id = "https://t.me/" + str(chat_id)
+        try:
+            usern = "t.me/"+username.username
+        except:
+            usern = "tg://user?id=" + str(username.id)
+          
+        if not is_all_chats and chat_id in users_chat:
+            try:
+                await bot.send_message(chat_id=tele_id,
+                                    text=text,
+                                    reply_markup=links(
+                                       message=message_link,
+                                       chat_id=chat_id,
+                                       user=f"{usern}"))
+            except MessageIsTooLong:
+                pass
+            except BotBlocked:
+                print("Bot blocked by {}".format(chat_id))
+                pass
+        if is_all_chats:
+            try:
+                await bot.send_message(chat_id=tele_id,
+                                    text=text,
+                                    reply_markup=links(
+                                       message=message_link,
+                                       chat_id=chat_id,
+                                       user=f"{usern}"))
+            except MessageIsTooLong:
+                return
+            except BotBlocked:
+                print("Bot blocked by {}".format(chat_id))
+                pass
+            except:
+                print(tele_id)
 
 
 async def work(client):

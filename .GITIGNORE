@@ -4,4 +4,4 @@ config.py
 *.session-journal
 **/__pycache__
 __pycache__
-**/logs
+logs/*
