@@ -25,7 +25,56 @@ def main(client):
     asyncio.run(work(client))
 
 
+async def iterate_users_and_send_message(users,group,username,message_text,message_link,chat_id):
+    text = f"""{message_text}\n""" +\
+        "------------------------------\n" +\
+        """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. 
+Только после этого будет доступна ссылка на сообщение."""
+    for tele_id in users:
+        status = db.get_status(tele_id)
+        users_chat = db.all_mail_user_chats(tele_id)
+        is_all_chats = not status and chat_id in users_chat
+        try:
+            chat_id = "https://t.me/" + db.get_chat_link(chat_id)
+        except:
+            chat_id = "https://t.me/" + str(group.username)
+            if not group.username:
+                chat_id = "https://t.me/" + str(chat_id)
+        try:
+            usern = "t.me/"+username.username
+        except:
+            usern = "tg://user?id=" + str(username.id)
+        if is_all_chats:
 
+            try:
+                await bot.send_message(chat_id=tele_id,
+                                    text=text,
+                                    reply_markup=links(
+                                       message=message_link,
+                                       chat_id=chat_id,
+                                       user=f"{usern}"))
+            except MessageIsTooLong:
+                print(users_chat,chat_id)
+            except BotBlocked:
+                print("Bot blocked by {}".format(chat_id))
+            except Exception as ex:
+                print(tele_id,ex)
+            continue
+        if status:
+        
+            try:
+                await bot.send_message(chat_id=tele_id,
+                                    text=text,
+                                    reply_markup=links(
+                                    message=message_link,
+                                    chat_id=chat_id,
+                                    user=f"{usern}"))
+            except MessageIsTooLong:
+                return
+            except BotBlocked:
+                print("Bot blocked by {}".format(chat_id))
+            except Exception as ex:
+                print(tele_id,ex)
 
 async def message(event):
     if event.chat_id == 777000:
@@ -56,60 +105,11 @@ async def message(event):
     for word in unex_words:
         if word.lower() in message_text.lower():
                 final_unex_words.append(word)
-
+    
     users = db.mailing_users(final_words, final_unex_words)
-    text = f"""{message_text}\n""" +\
-        "------------------------------\n" +\
-        """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. 
-Только после этого будет доступна ссылка на сообщение."""
-    print(12)
-    for tele_id in users:
-        is_all_chats = db.get_status(tele_id)
-        is_pay = db.is_pay(tele_id)
-        users_chat = db.all_mail_user_chats(tele_id)
-        if not is_pay:
-            return
-        try:
-            chat_id = "https://t.me/" + db.get_chat_link(chat_id)
-        except:
-            chat_id = "https://t.me/" + str(group.username)
-            if not group.username:
-                chat_id = "https://t.me/" + str(chat_id)
-        try:
-            usern = "t.me/"+username.username
-        except:
-            usern = "tg://user?id=" + str(username.id)
-          
-        if not is_all_chats and chat_id in users_chat:
-            try:
-                await bot.send_message(chat_id=tele_id,
-                                    text=text,
-                                    reply_markup=links(
-                                       message=message_link,
-                                       chat_id=chat_id,
-                                       user=f"{usern}"))
-            except MessageIsTooLong:
-                pass
-            except BotBlocked:
-                print("Bot blocked by {}".format(chat_id))
-                pass
-            except Exception as ex:
-                print(tele_id,ex)
-        if is_all_chats:
-            try:
-                await bot.send_message(chat_id=tele_id,
-                                    text=text,
-                                    reply_markup=links(
-                                       message=message_link,
-                                       chat_id=chat_id,
-                                       user=f"{usern}"))
-            except MessageIsTooLong:
-                return
-            except BotBlocked:
-                print("Bot blocked by {}".format(chat_id))
-                pass
-            except Exception as ex:
-                print(tele_id,ex)
+    await iterate_users_and_send_message(users,group,username,message_text,message_link,chat_id)
+    
+
 
 
 async def work(client):
