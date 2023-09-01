@@ -50,8 +50,8 @@ async def message(event):
     for word in keywords:
         if word.lower() in message_text.lower():
             final_words.append(word)
-        if final_words == []:
-            return
+    if final_words == []:
+        return
 
     for word in unex_words:
         if word.lower() in message_text.lower():
@@ -62,7 +62,7 @@ async def message(event):
         "------------------------------\n" +\
         """\nЧтобы получить доступ к сообщению - нужно состоять в группе, или просто войти в группу (чтобы сообщения в группе прогрузились) и выйти. 
 Только после этого будет доступна ссылка на сообщение."""
-
+    print(12)
     for tele_id in users:
         is_all_chats = db.get_status(tele_id)
         is_pay = db.is_pay(tele_id)
