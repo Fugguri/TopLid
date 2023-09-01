@@ -1,5 +1,6 @@
 /venv
 config.py
+sessions/*
 *.session
 *.session-journal
 **/__pycache__
