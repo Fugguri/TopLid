@@ -93,6 +93,8 @@ async def message(event):
             except BotBlocked:
                 print("Bot blocked by {}".format(chat_id))
                 pass
+            except Exception as ex:
+                print(tele_id,ex)
         if is_all_chats:
             try:
                 await bot.send_message(chat_id=tele_id,
@@ -106,8 +108,8 @@ async def message(event):
             except BotBlocked:
                 print("Bot blocked by {}".format(chat_id))
                 pass
-            except:
-                print(tele_id)
+            except Exception as ex:
+                print(tele_id,ex)
 
 
 async def work(client):
