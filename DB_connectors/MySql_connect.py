@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date,datetime
 from DB_connectors.config import host, user, password, port
 import pymysql
 
@@ -341,21 +341,29 @@ class Database:
         unex = unex_words
         kids = ', '.join(['%s'] * len(key))
         uids = ', '.join(['%s'] * len(unex))
-        today =str(date.today())
+        keyU,unexU = [], []
         with self.connection.cursor() as cursor:
-            sql = f"SELECT telegram_id,pay_end FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({kids})))"
-            cursor.execute(sql, (key))
-            key = cursor.fetchall()
+            if key!= []:
+                sql = f"SELECT telegram_id,pay_end FROM users WHERE id IN (SELECT user_id FROM users_keywords WHERE keyword_id IN (SELECT id FROM keywords WHERE word IN ({kids})))"
+                cursor.execute(sql, (key))
+                keyU = cursor.fetchall()
+            else:
+                return []
             if unex != []:
                 usql = f"SELECT telegram_id,pay_end FROM users WHERE id IN (SELECT user_id FROM users_unex_words WHERE unex_word_id IN (SELECT id FROM unex_words WHERE word IN ({uids})))"
                 cursor.execute(usql, (unex))
-                unex = cursor.fetchall()
-                users = [i for i in key if i[0] not in unex and i[1] >=today ]
-                self.connection.close()
-                return [i[0] for i in users]
+                unexU = cursor.fetchall()
             else:
-                self.connection.close()
-                return [i[0] for i in key if i[1] >=today]
+                res = []
+                for u in keyU:
+                    if datetime.strptime(u[1],'%Y-%m-%d') >= datetime.today():
+                        res.append(u[0])
+                return res    
+            res = []
+            for u in keyU:
+                if u not in unexU and datetime.strptime(u[1],'%Y-%m-%d') >= datetime.today():
+                   res.append(u[0])
+            return res             
 
     def add_chat_id(self, chat_id, chat):
         self.connection.ping()
