@@ -87,7 +87,8 @@ async def message(event):
         group = await event.get_chat()
     except:
         return
-
+    if not username:
+        return
     keywords = db.all_words_()
     unex_words = db.all_unex_words_()
     final_words = []
