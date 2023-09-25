@@ -6,3 +6,4 @@ sessions/*
 **/__pycache__
 __pycache__
 logs/*
+config.json

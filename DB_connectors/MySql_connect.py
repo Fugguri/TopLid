@@ -1,10 +1,9 @@
 from datetime import date,datetime
-from DB_connectors.config import host, user, password, port
 import pymysql
 
 
 class Database:
-    def __init__(self, db_name):
+    def __init__(self, db_name,host,user,port,password):
         self.connection = pymysql.connect(
             host=host,
             user=user,

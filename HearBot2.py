@@ -14,11 +14,15 @@ from main import bot
 from asyncio import sleep
 import asyncio
 import threading
+import json 
+
+file = open("config.json", "r")
+config = json.load(file)
 
 db = Database('TopLid')
-client = TelegramClient(f"sessions/{phone}", api_id, api_hash)
-client2 = TelegramClient(f"sessions/{phone2}", api_id2, api_hash2)
-client3 = TelegramClient(f"sessions/{phone3}", api_id3, api_hash3)
+client = TelegramClient(f"sessions/{config['phone']}", config["api_id"], config["api_hash"])
+client2 = TelegramClient(f"sessions/{config['phone2']}", config["api_id2"], config["api_hash2"])
+client3 = TelegramClient(f"sessions/{config['phone3']}", config["api_id3"], config["api_hash3"])
 
 
 def main(client):

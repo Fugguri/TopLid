@@ -1,19 +1,25 @@
 from aiogram import Bot, Dispatcher, executor
-from config import TOKEN_API
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from DB_connectors.MySql_connect import Database
 import logging
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 import logging
 import asyncio
+import json
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
+file = open("config.json", "r")
+config = json.load(file)
+
+
+TOKEN_API = config["TOKEN_API"]
+
 storage = MemoryStorage()
 bot = Bot(TOKEN_API, parse_mode="HTML")
 dp = Dispatcher(bot, storage=storage)
-db = Database("TopLid")
+db = Database("TopLid",config["host"],config["user"],config["port"],config["password"])
 py_handler = logging.FileHandler(f"logs/{__name__}.log", mode='w')
 logger.addHandler(py_handler)
 
