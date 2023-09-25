@@ -13,11 +13,13 @@ file = open("config.json", "r")
 config = json.load(file)
 
 
-
 clients = [
-    TelegramClient(f"sessions/{config['phone']}", config["api_id"], config["api_hash"]),
-    TelegramClient(f"sessions/{config['phone2']}", config["api_id2"], config["api_hash2"]),
-    TelegramClient(f"sessions/{config['phone3']}", config["api_id3"], config["api_hash3"])
+    TelegramClient(
+        f"sessions_for_bot/{config['phone']}", config["api_id"], config["api_hash"]),
+    TelegramClient(
+        f"sessions_for_bot/{config['phone2']}", config["api_id2"], config["api_hash2"]),
+    TelegramClient(
+        f"sessions_for_bot/{config['phone3']}", config["api_id3"], config["api_hash3"])
 ]
 # TelegramClient(f"sessions_for_bot/{phone4}", api_id3, api_hash4),
 # TelegramClient(f"sessions_for_bot/{phone6}", api_id4, api_hash6),

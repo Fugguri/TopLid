@@ -25,6 +25,7 @@ client2 = TelegramClient(f"sessions/{config['phone2']}", config["api_id2"], conf
 client3 = TelegramClient(f"sessions/{config['phone3']}", config["api_id3"], config["api_hash3"])
 
 
+
 def main(client):
     asyncio.run(work(client))
 

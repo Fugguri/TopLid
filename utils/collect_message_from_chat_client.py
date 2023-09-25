@@ -4,10 +4,9 @@ from asyncio import sleep
 
 
 async def get_message_history_by_keywords(chat_id, user_id, db, end_date_message, keywords, unex_words):
-    from HearBot2 import clients
+    from join_chat import clients
     for client in clients:
         print("try")
-
         async with client:
 
             try:
@@ -27,10 +26,8 @@ async def mes(chat_id, client, user_id, db, end_date_message, keywords, unex_wor
     getmessage = client.iter_messages(int(chat_id))
 
     if keywords != None and keywords != []:
-        print(1)
         keywords == keywords
     else:
-        print(2)
         keywords = [i[0] for i in db.all_words(user_id)]
     if unex_words != None and unex_words != []:
         unex_words = unex_words
