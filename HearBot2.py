@@ -9,7 +9,7 @@ from telethon.events import *
 from aiogram.utils.exceptions import BotBlocked
 from pymysql.err import IntegrityError
 from keyboards import links
-from config import *
+
 from main import bot
 from asyncio import sleep
 import asyncio
@@ -19,7 +19,7 @@ import json
 file = open("config.json", "r")
 config = json.load(file)
 
-db = Database('TopLid')
+db = Database("TopLid",config["host"],config["user"],config["port"],config["password"])
 client = TelegramClient(f"sessions/{config['phone']}", config["api_id"], config["api_hash"])
 client2 = TelegramClient(f"sessions/{config['phone2']}", config["api_id2"], config["api_hash2"])
 client3 = TelegramClient(f"sessions/{config['phone3']}", config["api_id3"], config["api_hash3"])

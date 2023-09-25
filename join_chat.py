@@ -5,13 +5,19 @@ from telethon.errors.rpcerrorlist import InviteHashExpiredError, InviteRequestSe
 from pymysql.err import IntegrityError
 # from HearBot2 import clients
 from main import bot, logger
-from config import *
+# from config import *
 from telethon import TelegramClient
+import json
+
+file = open("config.json", "r")
+config = json.load(file)
+
+
+
 clients = [
-    TelegramClient(f"sessions_for_bot/{phone}", api_id, api_hash),
-    TelegramClient(f"sessions_for_bot/{phone2}", api_id2, api_hash2),
-    TelegramClient(f"sessions_for_bot/{phone3}", api_id3, api_hash3),
-    TelegramClient(f"sessions_for_bot/{phone5}", api_id5, api_hash5)
+    TelegramClient(f"sessions/{config['phone']}", config["api_id"], config["api_hash"]),
+    TelegramClient(f"sessions/{config['phone2']}", config["api_id2"], config["api_hash2"]),
+    TelegramClient(f"sessions/{config['phone3']}", config["api_id3"], config["api_hash3"])
 ]
 # TelegramClient(f"sessions_for_bot/{phone4}", api_id3, api_hash4),
 # TelegramClient(f"sessions_for_bot/{phone6}", api_id4, api_hash6),
